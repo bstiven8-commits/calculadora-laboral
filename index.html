@@ -136,28 +136,28 @@ td input{max-width:6rem;text-align:right}
 <div class="wrap">
   <header>
     <h1>CALCULADORA LABORAL</h1>
-    <span class="tag">Seguridad social, vacaciones y liquidaciones · Colombia 2026[cite: 1]</span>
+    <span class="tag">Seguridad social, vacaciones y liquidaciones · Colombia 2026</span>
   </header>
 
   <nav class="tabs" role="tablist" id="tabs"></nav>
 
   <!-- ============ SEGURIDAD SOCIAL ============ -->
   <section id="tab-pila" hidden>
-    <p class="lead">Calcula lo que debes liquidar en tu planilla PILA y guarda cada período. Los valores iniciales son un ejemplo: cámbialos por los tuyos[cite: 1].</p>
+    <p class="lead">Calcula lo que debes liquidar en tu planilla PILA y guarda cada período. Los valores iniciales son un ejemplo: cámbialos por los tuyos.</p>
     <div class="grid2">
       <div class="card">
         <h2>Datos del período</h2>
-        <p class="hint" style="margin-bottom:1rem">Pagas mes vencido: en octubre pagas lo de septiembre[cite: 1].</p>
+        <p class="hint" style="margin-bottom:1rem">Pagas mes vencido: en octubre pagas lo de septiembre.</p>
         <div class="field"><label for="pila-periodo">Período cotizado</label><input type="month" id="pila-periodo"></div>
         <div class="field"><label for="pila-hon">Honorarios del mes (sin IVA)</label><div class="money"><span>$</span><input id="pila-hon" inputmode="numeric" autocomplete="off"></div></div>
-        <div class="field"><label for="pila-costos">Costos y gastos deducibles (opcional)</label><div class="money"><span>$</span><input id="pila-costos" inputmode="numeric" autocomplete="off"></div><span class="hint">Solo si puedes soportarlos. Se restan antes de aplicar el porcentaje[cite: 1].</span></div>
-        <div class="field"><label for="pila-base">Porcentaje sobre el que cotizas</label><input type="number" id="pila-base" min="1" max="100" step="1"><span class="hint">La regla general es 40% de tus ingresos netos[cite: 1].</span></div>
+        <div class="field"><label for="pila-costos">Costos y gastos deducibles (opcional)</label><div class="money"><span>$</span><input id="pila-costos" inputmode="numeric" autocomplete="off"></div><span class="hint">Solo si puedes soportarlos. Se restan antes de aplicar el porcentaje.</span></div>
+        <div class="field"><label for="pila-base">Porcentaje sobre el que cotizas</label><input type="number" id="pila-base" min="1" max="100" step="1"><span class="hint">La regla general es 40% de tus ingresos netos.</span></div>
         <div class="two">
           <div class="field"><label for="pila-arl">ARL</label><select id="pila-arl"></select></div>
           <div class="field"><label for="pila-caja">Caja de compensación</label><select id="pila-caja"><option value="0">No me afilio</option><option value="0.6">0,6% (voluntaria)</option><option value="2">2% (voluntaria)</option></select></div>
         </div>
-        <label class="check" id="arlc-wrap" hidden><input type="checkbox" id="pila-arlc"><span>Mi contratante paga la ARL (obligatorio en riesgo IV y V)[cite: 1]</span></label>
-        <label class="check"><input type="checkbox" id="pila-red" checked><span>Redondear cada aporte a múltiplos de $100 hacia arriba, como hace la PILA[cite: 1]</span></label>
+        <label class="check" id="arlc-wrap" hidden><input type="checkbox" id="pila-arlc"><span>Mi contratante paga la ARL (obligatorio en riesgo IV y V)</span></label>
+        <label class="check"><input type="checkbox" id="pila-red" checked><span>Redondear cada aporte a múltiplos de $100 hacia arriba, como hace la PILA</span></label>
         <div class="btns"><button class="btn" id="pila-save" type="button">Guardar período</button><button class="btn ghost" id="pila-new" type="button" hidden>Nuevo cálculo</button></div>
       </div>
       <div class="card" id="pila-out" aria-live="polite"></div>
@@ -168,7 +168,7 @@ td input{max-width:6rem;text-align:right}
   <section id="tab-hist" hidden>
     <div class="card">
       <div class="btns" style="justify-content:space-between;margin-bottom:.4rem">
-        <div><h2>Historial de pagos</h2><p class="hint">Marca cada período cuando lo pagues. Los meses sin registro aparecen para que no se te pasen[cite: 1].</p></div>
+        <div><h2>Historial de pagos</h2><p class="hint">Marca cada período cuando lo pagues. Los meses sin registro aparecen para que no se te pasen.</p></div>
         <div style="width:8rem"><label class="lbl" for="hist-year" style="display:block;margin-bottom:.2rem">Año</label><select id="hist-year"></select></div>
       </div>
       <div id="hist-sum" class="sumbar"></div>
@@ -180,7 +180,7 @@ td input{max-width:6rem;text-align:right}
 
   <!-- ============ VACACIONES ============ -->
   <section id="tab-vac" hidden>
-    <p class="lead">Para relaciones laborales con contrato. Las vacaciones se causan a razón de 15 días hábiles por año trabajado y se pagan con el salario sin auxilio de transporte[cite: 1].</p>
+    <p class="lead">Para relaciones laborales con contrato. Las vacaciones se causan a razón de 15 días hábiles por año trabajado y se pagan con el salario sin auxilio de transporte.</p>
     <div class="grid2">
       <div class="card">
         <h2>Tus datos</h2>
@@ -200,7 +200,7 @@ td input{max-width:6rem;text-align:right}
 
   <!-- ============ LIQUIDACIÓN ============ -->
   <section id="tab-liq" hidden>
-    <p class="lead">Estimado de la liquidación al terminar un contrato laboral: cesantías, intereses, prima, vacaciones e indemnización cuando aplica[cite: 1].</p>
+    <p class="lead">Estimado de la liquidación al terminar un contrato laboral: cesantías, intereses, prima, vacaciones e indemnización cuando aplica.</p>
     <div class="grid2">
       <div class="card">
         <h2>Datos del contrato</h2>
@@ -209,7 +209,7 @@ td input{max-width:6rem;text-align:right}
           <div class="field"><label for="liq-mot">Motivo de terminación</label><select id="liq-mot"><option value="renuncia">Renuncia</option><option value="mutuo">Mutuo acuerdo</option><option value="justa">Despido con justa causa</option><option value="sinjusta">Despido sin justa causa</option><option value="venc">Vencimiento del plazo</option></select></div>
         </div>
         <div class="field"><label for="liq-sal">Salario mensual básico</label><div class="money"><span>$</span><input id="liq-sal" inputmode="numeric" autocomplete="off"></div></div>
-        <label class="check"><input type="checkbox" id="liq-aux"><span>Recibe auxilio de transporte (hasta 2 salarios mínimos)[cite: 1]</span></label>
+        <label class="check"><input type="checkbox" id="liq-aux"><span>Recibe auxilio de transporte (hasta 2 salarios mínimos)</span></label>
         <div class="two">
           <div class="field"><label for="liq-ini">Fecha de ingreso</label><input type="date" id="liq-ini"></div>
           <div class="field"><label for="liq-fin">Fecha de terminación</label><input type="date" id="liq-fin"></div>
@@ -226,32 +226,32 @@ td input{max-width:6rem;text-align:right}
 
   <!-- ============ HORAS EXTRA ============ -->
   <section id="tab-hex" hidden>
-    <p class="lead">Valor de la hora ordinaria, de cada tipo de recargo y de las horas extra, con la jornada de 42 horas semanales y el recargo dominical del 90% vigentes desde julio de 2026[cite: 1].</p>
+    <p class="lead">Valor de la hora ordinaria, de cada tipo de recargo y de las horas extra, con la jornada de 42 horas semanales y el recargo dominical del 90% vigentes desde julio de 2026.</p>
     <div class="grid2">
       <div class="card">
         <h2>Tu salario</h2>
         <div class="field" style="margin-top:.8rem"><label for="hex-sal">Salario mensual</label><div class="money"><span>$</span><input id="hex-sal" inputmode="numeric" autocomplete="off"></div></div>
-        <div class="field"><label for="hex-hm">Horas ordinarias al mes</label><input type="number" id="hex-hm" min="1" step="1"><span class="hint">42 horas semanales × 30 días ÷ 6 = 210 horas[cite: 1].</span></div>
+        <div class="field"><label for="hex-hm">Horas ordinarias al mes</label><input type="number" id="hex-hm" min="1" step="1"><span class="hint">42 horas semanales × 30 días ÷ 6 = 210 horas.</span></div>
         <div id="hex-base" class="meta"></div>
       </div>
       <div class="card">
         <h2>Horas del mes</h2>
         <div class="tbl"><table><thead><tr><th>Tipo</th><th class="n">Recargo</th><th class="n">Valor hora</th><th class="n">Horas</th><th class="n">A pagar</th></tr></thead><tbody id="hex-rows"></tbody></table></div>
         <div class="total"><span>Total adicional al salario</span><strong id="hex-total">$ 0</strong></div>
-        <p class="hint" style="margin-top:.5rem">En los recargos (nocturno, dominical) el salario ya cubre la hora ordinaria, por eso se paga solo el porcentaje. Las horas extra se pagan completas[cite: 1].</p>
+        <p class="hint" style="margin-top:.5rem">En los recargos (nocturno, dominical) el salario ya cubre la hora ordinaria, por eso se paga solo el porcentaje. Las horas extra se pagan completas.</p>
       </div>
     </div>
   </section>
 
   <!-- ============ CUÁNTO COBRAR ============ -->
   <section id="tab-cob" hidden>
-    <p class="lead">Parte de lo que quieres que te quede cada mes y calcula cuánto debes facturar. Usa el ARL, la caja y el porcentaje que elegiste en la pestaña Seguridad social[cite: 1].</p>
+    <p class="lead">Parte de lo que quieres que te quede cada mes y calcula cuánto debes facturar. Usa el ARL, la caja y el porcentaje que elegiste en la pestaña Seguridad social.</p>
     <div class="grid2">
       <div class="card">
         <h2>Tu meta</h2>
         <div class="field" style="margin-top:.8rem"><label for="cob-net">Dinero que quieres que te quede al mes</label><div class="money"><span>$</span><input id="cob-net" inputmode="numeric" autocomplete="off"></div></div>
-        <div class="field"><label for="cob-cos">Costos mensuales de tu trabajo</label><div class="money"><span>$</span><input id="cob-cos" inputmode="numeric" autocomplete="off"></div><span class="hint">Herramientas, software, transporte. Se restan antes del 40% para el IBC[cite: 1].</span></div>
-        <div class="field"><label for="cob-res">Reserva para tus propias prestaciones (% de lo facturado)</label><input type="number" id="cob-res" min="0" max="60" step="0.5"><span class="hint">Como independiente no recibes prima, cesantías ni vacaciones. Un ahorro cercano a 21,8% equivale a las de un empleado[cite: 1].</span></div>
+        <div class="field"><label for="cob-cos">Costos mensuales de tu trabajo</label><div class="money"><span>$</span><input id="cob-cos" inputmode="numeric" autocomplete="off"></div><span class="hint">Herramientas, software, transporte. Se restan antes del 40% para el IBC.</span></div>
+        <div class="field"><label for="cob-res">Reserva para tus propias prestaciones (% de lo facturado)</label><input type="number" id="cob-res" min="0" max="60" step="0.5"><span class="hint">Como independiente no recibes prima, cesantías ni vacaciones. Un ahorro cercano a 21,8% equivale a las de un empleado.</span></div>
         <div class="two">
           <div class="field"><label for="cob-h">Horas facturables al mes</label><input type="number" id="cob-h" min="1" step="1"></div>
           <div class="field"><label for="cob-d">Días facturables al mes</label><input type="number" id="cob-d" min="1" step="1"></div>
@@ -263,12 +263,12 @@ td input{max-width:6rem;text-align:right}
 
   <!-- ============ PARÁMETROS ============ -->
   <section id="tab-par" hidden>
-    <p class="lead">Valores de referencia de 2026. Cámbialos cuando haya nuevos decretos; todas las calculadoras los usan[cite: 1].</p>
+    <p class="lead">Valores de referencia de 2026. Cámbialos cuando haya nuevos decretos; todas las calculadoras los usan.</p>
     <div class="grid2">
       <div class="card">
         <h2>Valores editables</h2>
-        <div class="field" style="margin-top:.8rem"><label for="par-smmlv">Salario mínimo mensual (SMMLV)</label><div class="money"><span>$</span><input id="par-smmlv" inputmode="numeric" autocomplete="off"></div><span class="hint">Decreto 1469 de 2025[cite: 1].</span></div>
-        <div class="field"><label for="par-aux">Auxilio de transporte</label><div class="money"><span>$</span><input id="par-aux" inputmode="numeric" autocomplete="off"></div><span class="hint">Decreto 1470 de 2025[cite: 1].</span></div>
+        <div class="field" style="margin-top:.8rem"><label for="par-smmlv">Salario mínimo mensual (SMMLV)</label><div class="money"><span>$</span><input id="par-smmlv" inputmode="numeric" autocomplete="off"></div><span class="hint">Decreto 1469 de 2025.</span></div>
+        <div class="field"><label for="par-aux">Auxilio de transporte</label><div class="money"><span>$</span><input id="par-aux" inputmode="numeric" autocomplete="off"></div><span class="hint">Decreto 1470 de 2025.</span></div>
         <div class="two">
           <div class="field"><label for="par-hm">Horas ordinarias al mes</label><input type="number" id="par-hm" min="1" step="1"></div>
           <div class="field"><label for="par-dom">Recargo dominical y festivo (%)</label><input type="number" id="par-dom" min="0" step="1"></div>
@@ -280,8 +280,8 @@ td input{max-width:6rem;text-align:right}
         <h2>Tarifas que usa la app</h2>
         <ul class="ledger" id="par-rates"></ul>
         <div class="notes">
-          <p class="note info">El IBC de un independiente es el 40% de sus ingresos netos mensuales, con piso de 1 SMMLV y tope de 25 SMMLV[cite: 1].</p>
-          <p class="note info">Los plazos de pago de la PILA dependen de los dos últimos dígitos de tu documento. Confírmalos en tu operador[cite: 1].</p>
+          <p class="note info">El IBC de un independiente es el 40% de sus ingresos netos mensuales, con piso de 1 SMMLV y tope de 25 SMMLV.</p>
+          <p class="note info">Los plazos de pago de la PILA dependen de los dos últimos dígitos de tu documento. Confírmalos en tu operador.</p>
         </div>
       </div>
     </div>
@@ -328,7 +328,7 @@ td input{max-width:6rem;text-align:right}
   </section>
 
   <footer class="foot">
-    Referencia informativa basada en la normativa vigente en 2026. Antes de pagar o liquidar, confirma los valores en tu operador PILA, con tu contador o en el Ministerio de Trabajo. Tus registros se guardan en tu cuenta cuando el visor lo permite; si no, quedan en este navegador[cite: 1].
+    Referencia informativa basada en la normativa vigente en 2026. Antes de pagar o liquidar, confirma los valores en tu operador PILA, con tu contador o en el Ministerio de Trabajo. Tus registros se guardan en tu cuenta cuando el visor lo permite; si no, quedan en este navegador.
     <div class="foot-links">
       <button type="button" onclick="go('legal-privacidad')">Política de Privacidad</button>
       <button type="button" onclick="go('legal-terminos')">Términos y Condiciones / Descargo de Responsabilidad</button>
