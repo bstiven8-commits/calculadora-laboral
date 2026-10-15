@@ -305,11 +305,11 @@ td input{max-width:6rem;text-align:right}
   <!-- ============ PÁGINAS LEGALES (MODALES / VISTAS) ============ -->
   <section id="tab-legal-privacidad" hidden>
     <div class="card" style="margin-top:1.5rem">
-      <h2>Política de Privacidad</h2>
-      <p class="lead" style="margin-top:.8rem">En cumplimiento de la normativa de protección de datos, te informamos sobre el tratamiento de la información en esta plataforma.</p>
+      <h2>Política de Privacidad y Publicidad</h2>
+      <p class="lead" style="margin-top:.8rem">En cumplimiento de la normativa de protección de datos y políticas de proveedores publicitarios, te informamos sobre el tratamiento de la información en esta plataforma.</p>
       <div class="notes" style="gap:1rem">
         <p class="note info"><b>Uso de Datos Locales y en la Nube:</b> Los cálculos y el historial de pagos de la PILA se almacenan principalmente de manera local en el almacenamiento de tu navegador (localStorage) para garantizar tu privacidad. Si inicias sesión, se sincronizan de forma segura.</p>
-        <p class="note info"><b>Cookies y Google:</b> Este sitio utiliza herramientas y tecnologías de terceros, incluidas cookies de Google (para análisis de tráfico, rendimiento y servicios publicitarios como Google AdSense). Google puede utilizar cookies para publicar anuncios basados en tus visitas anteriores a este u otros sitios web.</p>
+        <p class="note info"><b>Cookies, Google y Publicidad:</b> Este sitio utiliza herramientas y tecnologías de terceros, incluidas cookies de Google y redes publicitarias (como Google AdSense). Estos proveedores usan cookies para publicar anuncios basados en tus visitas anteriores a este u otros sitios web, permitiendo ofrecer contenido gratuito.</p>
       </div>
       <div style="margin-top:1.2rem"><button class="btn ghost small" type="button" onclick="go('pila')">← Volver a la calculadora</button></div>
     </div>
@@ -330,7 +330,7 @@ td input{max-width:6rem;text-align:right}
   <footer class="foot">
     Referencia informativa basada en la normativa vigente en 2026. Antes de pagar o liquidar, confirma los valores en tu operador PILA, con tu contador o en el Ministerio de Trabajo. Tus registros se guardan en tu cuenta cuando el visor lo permite; si no, quedan en este navegador.
     <div class="foot-links">
-      <button type="button" onclick="go('legal-privacidad')">Política de Privacidad</button>
+      <button type="button" onclick="go('legal-privacidad')">Política de Privacidad y Publicidad</button>
       <button type="button" onclick="go('legal-terminos')">Términos y Condiciones / Descargo de Responsabilidad</button>
     </div>
   </footer>
@@ -421,7 +421,7 @@ function calcLiq(i, P){
     }
   }
   var indem = i.sal / 30 * indemDias;
-  return {base:base, total:total, dCs:dCs, cesantias:cesantias, intereses:intereses, dPr:dPr, prima:prima, dVac:dVac, vacDias:vacDias, vacaciones:vacaciones, indemDias:indemDias, indem:indem,
+  return {base:base, total:total, dCs:dCs, cesantias:cesantias, intereses:intereses, dPr:dPr, prima:prima, dVac:dVac, vacDias:vacaciones, vacaciones:vacaciones, indemDias:indemDias, indem:indem,
     suma: cesantias + intereses + prima + vacaciones + indem};
 }
 function horasTipos(P){
@@ -475,7 +475,7 @@ function horasTipos(P){
   function setMoney(id, n){ $(id).value = n ? Math.round(n).toLocaleString("es-CO") : ""; }
   function nv(id){ var v = parseFloat($(id).value); return isNaN(v) ? 0 : v; }
   document.querySelectorAll(".money input").forEach(function(el){
-    el.addEventListener("input", function(){ var d = el.value.replace(/\D/g, ""); el.value = d ? Number(d).toLocaleString("es-CO") : ""; });
+    el.addEventListener("input", function(){ var d = el.value.replace(/\D/g, ""); el.value = d ? Number(d).toLocaleString("es-CO" ) : ""; });
   });
   function P(){ return S.settings.params; }
   function perfil(){ return S.settings.perfil; }
@@ -489,18 +489,19 @@ function horasTipos(P){
     tabsEl.appendChild(b);
   });
   function go(k){
-    var isLegal = k.indexOf("legal-") === 0;
+    var isLegal = (k === "legal-privacidad" || k === "legal-terminos");
     TABS.forEach(function(t){ 
       var el = $("tab-" + t[0]);
-      if(el) el.hidden = t[0] !== k;
+      if(el) el.hidden = isLegal || (t[0] !== k);
       var tb = $("tb-" + t[0]);
-      if(tb) tb.setAttribute("aria-selected", t[0] === k ? "true" : "false"); 
+      if(tb) tb.setAttribute("aria-selected", (!isLegal && t[0] === k) ? "true" : "false"); 
     });
     var elPriv = $("tab-legal-privacidad"), elTerm = $("tab-legal-terminos");
-    if(elPriv) elPriv.hidden = k !== "legal-privacidad";
-    if(elTerm) elTerm.hidden = k !== "legal-terminos";
+    if(elPriv) elPriv.hidden = (k !== "legal-privacidad");
+    if(elTerm) elTerm.hidden = (k !== "legal-terminos");
 
     try{ history.replaceState(null, "", "#" + k); }catch(e){}
+    window.scrollTo({top: 0, behavior: 'smooth'});
     if(k === "hist") renderHistory();
     if(k === "cob") renderCobrar();
   }
