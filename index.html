@@ -106,6 +106,8 @@ td{padding:.5rem .6rem .5rem 0;border-bottom:1px solid var(--line);vertical-alig
 td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 td input{max-width:6rem;text-align:right}
 .foot{margin-top:2rem;font-size:.78rem;color:var(--muted);max-width:70ch}
+.foot-links{display:flex;flex-wrap:wrap;gap:1rem;margin-top:.6rem}
+.foot-links button{background:none;border:0;color:var(--accent);padding:0;font:inherit;cursor:pointer;text-decoration:underline}
 .empty-state{padding:1.2rem 0;color:var(--muted);font-size:.9rem}
 #toast{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:.8rem max(16px,env(safe-area-inset-right,0px)) calc(.8rem + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));pointer-events:none}
 #toast div{background:var(--ink);color:var(--bg);font-size:.85rem;padding:.55rem .9rem;border-radius:8px;max-width:30rem}
@@ -134,28 +136,28 @@ td input{max-width:6rem;text-align:right}
 <div class="wrap">
   <header>
     <h1>CALCULADORA LABORAL</h1>
-    <span class="tag">Seguridad social, vacaciones y liquidaciones · Colombia 2026</span>
+    <span class="tag">Seguridad social, vacaciones y liquidaciones · Colombia 2026[cite: 1]</span>
   </header>
 
   <nav class="tabs" role="tablist" id="tabs"></nav>
 
   <!-- ============ SEGURIDAD SOCIAL ============ -->
   <section id="tab-pila" hidden>
-    <p class="lead">Calcula lo que debes liquidar en tu planilla PILA y guarda cada período. Los valores iniciales son un ejemplo: cámbialos por los tuyos.</p>
+    <p class="lead">Calcula lo que debes liquidar en tu planilla PILA y guarda cada período. Los valores iniciales son un ejemplo: cámbialos por los tuyos[cite: 1].</p>
     <div class="grid2">
       <div class="card">
         <h2>Datos del período</h2>
-        <p class="hint" style="margin-bottom:1rem">Pagas mes vencido: en octubre pagas lo de septiembre.</p>
+        <p class="hint" style="margin-bottom:1rem">Pagas mes vencido: en octubre pagas lo de septiembre[cite: 1].</p>
         <div class="field"><label for="pila-periodo">Período cotizado</label><input type="month" id="pila-periodo"></div>
         <div class="field"><label for="pila-hon">Honorarios del mes (sin IVA)</label><div class="money"><span>$</span><input id="pila-hon" inputmode="numeric" autocomplete="off"></div></div>
-        <div class="field"><label for="pila-costos">Costos y gastos deducibles (opcional)</label><div class="money"><span>$</span><input id="pila-costos" inputmode="numeric" autocomplete="off"></div><span class="hint">Solo si puedes soportarlos. Se restan antes de aplicar el porcentaje.</span></div>
-        <div class="field"><label for="pila-base">Porcentaje sobre el que cotizas</label><input type="number" id="pila-base" min="1" max="100" step="1"><span class="hint">La regla general es 40% de tus ingresos netos.</span></div>
+        <div class="field"><label for="pila-costos">Costos y gastos deducibles (opcional)</label><div class="money"><span>$</span><input id="pila-costos" inputmode="numeric" autocomplete="off"></div><span class="hint">Solo si puedes soportarlos. Se restan antes de aplicar el porcentaje[cite: 1].</span></div>
+        <div class="field"><label for="pila-base">Porcentaje sobre el que cotizas</label><input type="number" id="pila-base" min="1" max="100" step="1"><span class="hint">La regla general es 40% de tus ingresos netos[cite: 1].</span></div>
         <div class="two">
           <div class="field"><label for="pila-arl">ARL</label><select id="pila-arl"></select></div>
           <div class="field"><label for="pila-caja">Caja de compensación</label><select id="pila-caja"><option value="0">No me afilio</option><option value="0.6">0,6% (voluntaria)</option><option value="2">2% (voluntaria)</option></select></div>
         </div>
-        <label class="check" id="arlc-wrap" hidden><input type="checkbox" id="pila-arlc"><span>Mi contratante paga la ARL (obligatorio en riesgo IV y V)</span></label>
-        <label class="check"><input type="checkbox" id="pila-red"><span>Redondear cada aporte a múltiplos de $100 hacia arriba, como hace la PILA</span></label>
+        <label class="check" id="arlc-wrap" hidden><input type="checkbox" id="pila-arlc"><span>Mi contratante paga la ARL (obligatorio en riesgo IV y V)[cite: 1]</span></label>
+        <label class="check"><input type="checkbox" id="pila-red" checked><span>Redondear cada aporte a múltiplos de $100 hacia arriba, como hace la PILA[cite: 1]</span></label>
         <div class="btns"><button class="btn" id="pila-save" type="button">Guardar período</button><button class="btn ghost" id="pila-new" type="button" hidden>Nuevo cálculo</button></div>
       </div>
       <div class="card" id="pila-out" aria-live="polite"></div>
@@ -166,7 +168,7 @@ td input{max-width:6rem;text-align:right}
   <section id="tab-hist" hidden>
     <div class="card">
       <div class="btns" style="justify-content:space-between;margin-bottom:.4rem">
-        <div><h2>Historial de pagos</h2><p class="hint">Marca cada período cuando lo pagues. Los meses sin registro aparecen para que no se te pasen.</p></div>
+        <div><h2>Historial de pagos</h2><p class="hint">Marca cada período cuando lo pagues. Los meses sin registro aparecen para que no se te pasen[cite: 1].</p></div>
         <div style="width:8rem"><label class="lbl" for="hist-year" style="display:block;margin-bottom:.2rem">Año</label><select id="hist-year"></select></div>
       </div>
       <div id="hist-sum" class="sumbar"></div>
@@ -178,7 +180,7 @@ td input{max-width:6rem;text-align:right}
 
   <!-- ============ VACACIONES ============ -->
   <section id="tab-vac" hidden>
-    <p class="lead">Para relaciones laborales con contrato. Las vacaciones se causan a razón de 15 días hábiles por año trabajado y se pagan con el salario sin auxilio de transporte.</p>
+    <p class="lead">Para relaciones laborales con contrato. Las vacaciones se causan a razón de 15 días hábiles por año trabajado y se pagan con el salario sin auxilio de transporte[cite: 1].</p>
     <div class="grid2">
       <div class="card">
         <h2>Tus datos</h2>
@@ -198,7 +200,7 @@ td input{max-width:6rem;text-align:right}
 
   <!-- ============ LIQUIDACIÓN ============ -->
   <section id="tab-liq" hidden>
-    <p class="lead">Estimado de la liquidación al terminar un contrato laboral: cesantías, intereses, prima, vacaciones e indemnización cuando aplica.</p>
+    <p class="lead">Estimado de la liquidación al terminar un contrato laboral: cesantías, intereses, prima, vacaciones e indemnización cuando aplica[cite: 1].</p>
     <div class="grid2">
       <div class="card">
         <h2>Datos del contrato</h2>
@@ -207,7 +209,7 @@ td input{max-width:6rem;text-align:right}
           <div class="field"><label for="liq-mot">Motivo de terminación</label><select id="liq-mot"><option value="renuncia">Renuncia</option><option value="mutuo">Mutuo acuerdo</option><option value="justa">Despido con justa causa</option><option value="sinjusta">Despido sin justa causa</option><option value="venc">Vencimiento del plazo</option></select></div>
         </div>
         <div class="field"><label for="liq-sal">Salario mensual básico</label><div class="money"><span>$</span><input id="liq-sal" inputmode="numeric" autocomplete="off"></div></div>
-        <label class="check"><input type="checkbox" id="liq-aux"><span>Recibe auxilio de transporte (hasta 2 salarios mínimos)</span></label>
+        <label class="check"><input type="checkbox" id="liq-aux"><span>Recibe auxilio de transporte (hasta 2 salarios mínimos)[cite: 1]</span></label>
         <div class="two">
           <div class="field"><label for="liq-ini">Fecha de ingreso</label><input type="date" id="liq-ini"></div>
           <div class="field"><label for="liq-fin">Fecha de terminación</label><input type="date" id="liq-fin"></div>
@@ -224,32 +226,32 @@ td input{max-width:6rem;text-align:right}
 
   <!-- ============ HORAS EXTRA ============ -->
   <section id="tab-hex" hidden>
-    <p class="lead">Valor de la hora ordinaria, de cada tipo de recargo y de las horas extra, con la jornada de 42 horas semanales y el recargo dominical del 90% vigentes desde julio de 2026.</p>
+    <p class="lead">Valor de la hora ordinaria, de cada tipo de recargo y de las horas extra, con la jornada de 42 horas semanales y el recargo dominical del 90% vigentes desde julio de 2026[cite: 1].</p>
     <div class="grid2">
       <div class="card">
         <h2>Tu salario</h2>
         <div class="field" style="margin-top:.8rem"><label for="hex-sal">Salario mensual</label><div class="money"><span>$</span><input id="hex-sal" inputmode="numeric" autocomplete="off"></div></div>
-        <div class="field"><label for="hex-hm">Horas ordinarias al mes</label><input type="number" id="hex-hm" min="1" step="1"><span class="hint">42 horas semanales × 30 días ÷ 6 = 210 horas.</span></div>
+        <div class="field"><label for="hex-hm">Horas ordinarias al mes</label><input type="number" id="hex-hm" min="1" step="1"><span class="hint">42 horas semanales × 30 días ÷ 6 = 210 horas[cite: 1].</span></div>
         <div id="hex-base" class="meta"></div>
       </div>
       <div class="card">
         <h2>Horas del mes</h2>
         <div class="tbl"><table><thead><tr><th>Tipo</th><th class="n">Recargo</th><th class="n">Valor hora</th><th class="n">Horas</th><th class="n">A pagar</th></tr></thead><tbody id="hex-rows"></tbody></table></div>
         <div class="total"><span>Total adicional al salario</span><strong id="hex-total">$ 0</strong></div>
-        <p class="hint" style="margin-top:.5rem">En los recargos (nocturno, dominical) el salario ya cubre la hora ordinaria, por eso se paga solo el porcentaje. Las horas extra se pagan completas.</p>
+        <p class="hint" style="margin-top:.5rem">En los recargos (nocturno, dominical) el salario ya cubre la hora ordinaria, por eso se paga solo el porcentaje. Las horas extra se pagan completas[cite: 1].</p>
       </div>
     </div>
   </section>
 
   <!-- ============ CUÁNTO COBRAR ============ -->
   <section id="tab-cob" hidden>
-    <p class="lead">Parte de lo que quieres que te quede cada mes y calcula cuánto debes facturar. Usa el ARL, la caja y el porcentaje que elegiste en la pestaña Seguridad social.</p>
+    <p class="lead">Parte de lo que quieres que te quede cada mes y calcula cuánto debes facturar. Usa el ARL, la caja y el porcentaje que elegiste en la pestaña Seguridad social[cite: 1].</p>
     <div class="grid2">
       <div class="card">
         <h2>Tu meta</h2>
         <div class="field" style="margin-top:.8rem"><label for="cob-net">Dinero que quieres que te quede al mes</label><div class="money"><span>$</span><input id="cob-net" inputmode="numeric" autocomplete="off"></div></div>
-        <div class="field"><label for="cob-cos">Costos mensuales de tu trabajo</label><div class="money"><span>$</span><input id="cob-cos" inputmode="numeric" autocomplete="off"></div><span class="hint">Herramientas, software, transporte. Se restan antes del 40% para el IBC.</span></div>
-        <div class="field"><label for="cob-res">Reserva para tus propias prestaciones (% de lo facturado)</label><input type="number" id="cob-res" min="0" max="60" step="0.5"><span class="hint">Como independiente no recibes prima, cesantías ni vacaciones. Un ahorro cercano a 21,8% equivale a las de un empleado.</span></div>
+        <div class="field"><label for="cob-cos">Costos mensuales de tu trabajo</label><div class="money"><span>$</span><input id="cob-cos" inputmode="numeric" autocomplete="off"></div><span class="hint">Herramientas, software, transporte. Se restan antes del 40% para el IBC[cite: 1].</span></div>
+        <div class="field"><label for="cob-res">Reserva para tus propias prestaciones (% de lo facturado)</label><input type="number" id="cob-res" min="0" max="60" step="0.5"><span class="hint">Como independiente no recibes prima, cesantías ni vacaciones. Un ahorro cercano a 21,8% equivale a las de un empleado[cite: 1].</span></div>
         <div class="two">
           <div class="field"><label for="cob-h">Horas facturables al mes</label><input type="number" id="cob-h" min="1" step="1"></div>
           <div class="field"><label for="cob-d">Días facturables al mes</label><input type="number" id="cob-d" min="1" step="1"></div>
@@ -261,12 +263,12 @@ td input{max-width:6rem;text-align:right}
 
   <!-- ============ PARÁMETROS ============ -->
   <section id="tab-par" hidden>
-    <p class="lead">Valores de referencia de 2026. Cámbialos cuando haya nuevos decretos; todas las calculadoras los usan.</p>
+    <p class="lead">Valores de referencia de 2026. Cámbialos cuando haya nuevos decretos; todas las calculadoras los usan[cite: 1].</p>
     <div class="grid2">
       <div class="card">
         <h2>Valores editables</h2>
-        <div class="field" style="margin-top:.8rem"><label for="par-smmlv">Salario mínimo mensual (SMMLV)</label><div class="money"><span>$</span><input id="par-smmlv" inputmode="numeric" autocomplete="off"></div><span class="hint">Decreto 1469 de 2025.</span></div>
-        <div class="field"><label for="par-aux">Auxilio de transporte</label><div class="money"><span>$</span><input id="par-aux" inputmode="numeric" autocomplete="off"></div><span class="hint">Decreto 1470 de 2025.</span></div>
+        <div class="field" style="margin-top:.8rem"><label for="par-smmlv">Salario mínimo mensual (SMMLV)</label><div class="money"><span>$</span><input id="par-smmlv" inputmode="numeric" autocomplete="off"></div><span class="hint">Decreto 1469 de 2025[cite: 1].</span></div>
+        <div class="field"><label for="par-aux">Auxilio de transporte</label><div class="money"><span>$</span><input id="par-aux" inputmode="numeric" autocomplete="off"></div><span class="hint">Decreto 1470 de 2025[cite: 1].</span></div>
         <div class="two">
           <div class="field"><label for="par-hm">Horas ordinarias al mes</label><input type="number" id="par-hm" min="1" step="1"></div>
           <div class="field"><label for="par-dom">Recargo dominical y festivo (%)</label><input type="number" id="par-dom" min="0" step="1"></div>
@@ -278,8 +280,8 @@ td input{max-width:6rem;text-align:right}
         <h2>Tarifas que usa la app</h2>
         <ul class="ledger" id="par-rates"></ul>
         <div class="notes">
-          <p class="note info">El IBC de un independiente es el 40% de sus ingresos netos mensuales, con piso de 1 SMMLV y tope de 25 SMMLV.</p>
-          <p class="note info">Los plazos de pago de la PILA dependen de los dos últimos dígitos de tu documento. Confírmalos en tu operador.</p>
+          <p class="note info">El IBC de un independiente es el 40% de sus ingresos netos mensuales, con piso de 1 SMMLV y tope de 25 SMMLV[cite: 1].</p>
+          <p class="note info">Los plazos de pago de la PILA dependen de los dos últimos dígitos de tu documento. Confírmalos en tu operador[cite: 1].</p>
         </div>
       </div>
     </div>
@@ -300,7 +302,38 @@ td input{max-width:6rem;text-align:right}
     <p>Si un contrato es a término indefinido, la indemnización corresponde a 30 días de salario por el primer año y 20 días adicionales por cada año subsiguiente (si devenga menos de 10 salarios mínimos). Para contratos a término fijo, equivale a los salarios faltantes para cumplir el plazo pactado.</p>
   </div>
 
-  <p class="foot">Referencia informativa basada en la normativa vigente en 2026. Antes de pagar o liquidar, confirma los valores en tu operador PILA, con tu contador o en el Ministerio de Trabajo. Tus registros se guardan en tu cuenta cuando el visor lo permite; si no, quedan en este navegador.</p>
+  <!-- ============ PÁGINAS LEGALES (MODALES / VISTAS) ============ -->
+  <section id="tab-legal-privacidad" hidden>
+    <div class="card" style="margin-top:1.5rem">
+      <h2>Política de Privacidad</h2>
+      <p class="lead" style="margin-top:.8rem">En cumplimiento de la normativa de protección de datos, te informamos sobre el tratamiento de la información en esta plataforma.</p>
+      <div class="notes" style="gap:1rem">
+        <p class="note info"><b>Uso de Datos Locales y en la Nube:</b> Los cálculos y el historial de pagos de la PILA se almacenan principalmente de manera local en el almacenamiento de tu navegador (localStorage) para garantizar tu privacidad. Si inicias sesión, se sincronizan de forma segura.</p>
+        <p class="note info"><b>Cookies y Google:</b> Este sitio utiliza herramientas y tecnologías de terceros, incluidas cookies de Google (para análisis de tráfico, rendimiento y servicios publicitarios como Google AdSense). Google puede utilizar cookies para publicar anuncios basados en tus visitas anteriores a este u otros sitios web.</p>
+      </div>
+      <div style="margin-top:1.2rem"><button class="btn ghost small" type="button" onclick="go('pila')">← Volver a la calculadora</button></div>
+    </div>
+  </section>
+
+  <section id="tab-legal-terminos" hidden>
+    <div class="card" style="margin-top:1.5rem">
+      <h2>Términos, Condiciones y Descargo de Responsabilidad</h2>
+      <p class="lead" style="margin-top:.8rem">Aviso legal importante sobre el uso de las herramientas de cálculo.</p>
+      <div class="notes" style="gap:1rem">
+        <p class="note info"><b>Naturaleza Informativa:</b> Esta aplicación web es una guía de referencia basada en la legislación laboral y de seguridad social vigente en Colombia para el año 2026. Los resultados son estimaciones matemáticas orientativas y no constituyen un dictamen jurídico ni financiero oficial.</p>
+        <p class="note info"><b>Validación Profesional Obligatoria:</b> Antes de realizar pagos formales en operadores PILA, firmar acuerdos de liquidación o tomar decisiones contractuales, <b>debes validar los valores exactos con tu contador, un asesor legal o directamente ante las entidades competentes</b> (Ministerio del Trabajo, UGPP o tu operador autorizado). El creador de esta aplicación no asume responsabilidad por decisiones tomadas con base en estos cálculos automatizados.</p>
+      </div>
+      <div style="margin-top:1.2rem"><button class="btn ghost small" type="button" onclick="go('pila')">← Volver a la calculadora</button></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    Referencia informativa basada en la normativa vigente en 2026. Antes de pagar o liquidar, confirma los valores en tu operador PILA, con tu contador o en el Ministerio de Trabajo. Tus registros se guardan en tu cuenta cuando el visor lo permite; si no, quedan en este navegador[cite: 1].
+    <div class="foot-links">
+      <button type="button" onclick="go('legal-privacidad')">Política de Privacidad</button>
+      <button type="button" onclick="go('legal-terminos')">Términos y Condiciones / Descargo de Responsabilidad</button>
+    </div>
+  </footer>
 </div>
 <div id="toast" aria-live="polite"></div>
 
@@ -456,7 +489,17 @@ function horasTipos(P){
     tabsEl.appendChild(b);
   });
   function go(k){
-    TABS.forEach(function(t){ $("tab-" + t[0]).hidden = t[0] !== k; $("tb-" + t[0]).setAttribute("aria-selected", t[0] === k ? "true" : "false"); });
+    var isLegal = k.indexOf("legal-") === 0;
+    TABS.forEach(function(t){ 
+      var el = $("tab-" + t[0]);
+      if(el) el.hidden = t[0] !== k;
+      var tb = $("tb-" + t[0]);
+      if(tb) tb.setAttribute("aria-selected", t[0] === k ? "true" : "false"); 
+    });
+    var elPriv = $("tab-legal-privacidad"), elTerm = $("tab-legal-terminos");
+    if(elPriv) elPriv.hidden = k !== "legal-privacidad";
+    if(elTerm) elTerm.hidden = k !== "legal-terminos";
+
     try{ history.replaceState(null, "", "#" + k); }catch(e){}
     if(k === "hist") renderHistory();
     if(k === "cob") renderCobrar();
@@ -700,7 +743,8 @@ function horasTipos(P){
 
   // ----- arranque -----
   lsLoad(); seedExamples(); applyPerfilUI(); applyParamsUI();
-  var start = (location.hash || "").replace("#", ""); if(!TABS.some(function(t){ return t[0] === start; })) start = "pila";
+  var start = (location.hash || "").replace("#", ""); 
+  if(!TABS.some(function(t){ return t[0] === start; }) && start !== "legal-privacidad" && start !== "legal-terminos") start = "pila";
   renderAll(); go(start);
 
   (async function cloud(){
