@@ -113,6 +113,10 @@ td input{max-width:6rem;text-align:right}
 #toast div{background:var(--ink);color:var(--bg);font-size:.85rem;padding:.55rem .9rem;border-radius:8px;max-width:30rem}
 #csvbox{width:100%;min-height:7rem;font:400 .78rem var(--mono);margin-top:.6rem}
 
+/* Estilos para modales legales */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;justify-content:center;align-items:center;z-index:999;padding:1rem}
+.modal-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.5rem;max-width:38rem;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 10px 25px rgba(0,0,0,0.2)}
+
 /* Estilos para espacios publicitarios */
 .ad-slot {
   margin-top: 1.2rem;
@@ -142,7 +146,7 @@ td input{max-width:6rem;text-align:right}
   <nav class="tabs" role="tablist" id="tabs"></nav>
 
   <!-- ============ SEGURIDAD SOCIAL ============ -->
-  <section id="tab-pila" hidden>
+  <section id="tab-pila">
     <p class="lead">Calcula lo que debes liquidar en tu planilla PILA y guarda cada período. Los valores iniciales son un ejemplo: cámbialos por los tuyos.</p>
     <div class="grid2">
       <div class="card">
@@ -302,39 +306,40 @@ td input{max-width:6rem;text-align:right}
     <p>Si un contrato es a término indefinido, la indemnización corresponde a 30 días de salario por el primer año y 20 días adicionales por cada año subsiguiente (si devenga menos de 10 salarios mínimos). Para contratos a término fijo, equivale a los salarios faltantes para cumplir el plazo pactado.</p>
   </div>
 
-  <!-- ============ PÁGINAS LEGALES (MODALES / VISTAS) ============ -->
-  <section id="tab-legal-privacidad" hidden>
-    <div class="card" style="margin-top:1.5rem">
-      <h2>Política de Privacidad y Publicidad</h2>
-      <p class="lead" style="margin-top:.8rem">En cumplimiento de la normativa de protección de datos y políticas de proveedores publicitarios, te informamos sobre el tratamiento de la información en esta plataforma.</p>
-      <div class="notes" style="gap:1rem">
-        <p class="note info"><b>Uso de Datos Locales y en la Nube:</b> Los cálculos y el historial de pagos de la PILA se almacenan principalmente de manera local en el almacenamiento de tu navegador (localStorage) para garantizar tu privacidad. Si inicias sesión, se sincronizan de forma segura.</p>
-        <p class="note info"><b>Cookies, Google y Publicidad:</b> Este sitio utiliza herramientas y tecnologías de terceros, incluidas cookies de Google y redes publicitarias (como Google AdSense). Estos proveedores usan cookies para publicar anuncios basados en tus visitas anteriores a este u otros sitios web, permitiendo ofrecer contenido gratuito.</p>
-      </div>
-      <div style="margin-top:1.2rem"><button class="btn ghost small" type="button" onclick="go('pila')">← Volver a la calculadora</button></div>
-    </div>
-  </section>
-
-  <section id="tab-legal-terminos" hidden>
-    <div class="card" style="margin-top:1.5rem">
-      <h2>Términos, Condiciones y Descargo de Responsabilidad</h2>
-      <p class="lead" style="margin-top:.8rem">Aviso legal importante sobre el uso de las herramientas de cálculo.</p>
-      <div class="notes" style="gap:1rem">
-        <p class="note info"><b>Naturaleza Informativa:</b> Esta aplicación web es una guía de referencia basada en la legislación laboral y de seguridad social vigente en Colombia para el año 2026. Los resultados son estimaciones matemáticas orientativas y no constituyen un dictamen jurídico ni financiero oficial.</p>
-        <p class="note info"><b>Validación Profesional Obligatoria:</b> Antes de realizar pagos formales en operadores PILA, firmar acuerdos de liquidación o tomar decisiones contractuales, <b>debes validar los valores exactos con tu contador, un asesor legal o directamente ante las entidades competentes</b> (Ministerio del Trabajo, UGPP o tu operador autorizado). El creador de esta aplicación no asume responsabilidad por decisiones tomadas con base en estos cálculos automatizados.</p>
-      </div>
-      <div style="margin-top:1.2rem"><button class="btn ghost small" type="button" onclick="go('pila')">← Volver a la calculadora</button></div>
-    </div>
-  </section>
-
   <footer class="foot">
     Referencia informativa basada en la normativa vigente en 2026. Antes de pagar o liquidar, confirma los valores en tu operador PILA, con tu contador o en el Ministerio de Trabajo. Tus registros se guardan en tu cuenta cuando el visor lo permite; si no, quedan en este navegador.
     <div class="foot-links">
-      <button type="button" onclick="go('legal-privacidad')">Política de Privacidad y Publicidad</button>
-      <button type="button" onclick="go('legal-terminos')">Términos y Condiciones / Descargo de Responsabilidad</button>
+      <button type="button" id="btn-privacidad">Política de Privacidad y Publicidad</button>
+      <button type="button" id="btn-terminos">Términos y Condiciones / Descargo de Responsabilidad</button>
     </div>
   </footer>
 </div>
+
+<!-- ============ MODALES LEGALES FLOTANTES ============ -->
+<div id="modal-privacidad" class="modal-overlay" hidden>
+  <div class="modal-card">
+    <h2>Política de Privacidad y Publicidad</h2>
+    <p class="lead" style="margin-top:.8rem">En cumplimiento de la normativa de protección de datos y políticas de proveedores publicitarios, te informamos sobre el tratamiento de la información en esta plataforma.</p>
+    <div class="notes" style="gap:1rem">
+      <p class="note info"><b>Uso de Datos Locales y en la Nube:</b> Los cálculos y el historial de pagos de la PILA se almacenan principalmente de manera local en el almacenamiento de tu navegador (localStorage) para garantizar tu privacidad. Si inicias sesión, se sincronizan de forma segura.</p>
+      <p class="note info"><b>Cookies, Google y Publicidad:</b> Este sitio utiliza herramientas y tecnologías de terceros, incluidas cookies de Google y redes publicitarias (como Google AdSense). Estos proveedores usan cookies para publicar anuncios basados en tus visitas anteriores a este u otros sitios web, permitiendo ofrecer contenido gratuito.</p>
+    </div>
+    <div style="margin-top:1.5rem;text-align:right"><button class="btn small" type="button" id="close-privacidad">Cerrar</button></div>
+  </div>
+</div>
+
+<div id="modal-terminos" class="modal-overlay" hidden>
+  <div class="modal-card">
+    <h2>Términos, Condiciones y Descargo de Responsabilidad</h2>
+    <p class="lead" style="margin-top:.8rem">Aviso legal importante sobre el uso de las herramientas de cálculo.</p>
+    <div class="notes" style="gap:1rem">
+      <p class="note info"><b>Naturaleza Informativa:</b> Esta aplicación web es una guía de referencia basada en la legislación laboral y de seguridad social vigente en Colombia para el año 2026. Los resultados son estimaciones matemáticas orientativas y no constituyen un dictamen jurídico ni financiero oficial.</p>
+      <p class="note info"><b>Validación Profesional Obligatoria:</b> Antes de realizar pagos formales en operadores PILA, firmar acuerdos de liquidación o tomar decisiones contractuales, <b>debes validar los valores exactos con tu contador, un asesor legal o directamente ante las entidades competentes</b> (Ministerio del Trabajo, UGPP o tu operador autorizado). El creador de esta aplicación no asume responsabilidad por decisiones tomadas con base en estos cálculos automatizados.</p>
+    </div>
+    <div style="margin-top:1.5rem;text-align:right"><button class="btn small" type="button" id="close-terminos">Cerrar</button></div>
+  </div>
+</div>
+
 <div id="toast" aria-live="polite"></div>
 
 <script>
@@ -421,7 +426,7 @@ function calcLiq(i, P){
     }
   }
   var indem = i.sal / 30 * indemDias;
-  return {base:base, total:total, dCs:dCs, cesantias:cesantias, intereses:intereses, dPr:dPr, prima:prima, dVac:dVac, vacDias:vacaciones, vacaciones:vacaciones, indemDias:indemDias, indem:indem,
+  return {base:base, total:total, dCs:dCs, cesantias:cesantias, intereses:intereses, dPr:dPr, prima:prima, dVac:dVac, vacDias:vacDias, vacaciones:vacaciones, indemDias:indemDias, indem:indem,
     suma: cesantias + intereses + prima + vacaciones + indem};
 }
 function horasTipos(P){
@@ -475,7 +480,7 @@ function horasTipos(P){
   function setMoney(id, n){ $(id).value = n ? Math.round(n).toLocaleString("es-CO") : ""; }
   function nv(id){ var v = parseFloat($(id).value); return isNaN(v) ? 0 : v; }
   document.querySelectorAll(".money input").forEach(function(el){
-    el.addEventListener("input", function(){ var d = el.value.replace(/\D/g, ""); el.value = d ? Number(d).toLocaleString("es-CO" ) : ""; });
+    el.addEventListener("input", function(){ var d = el.value.replace(/\D/g, ""); el.value = d ? Number(d).toLocaleString("es-CO") : ""; });
   });
   function P(){ return S.settings.params; }
   function perfil(){ return S.settings.perfil; }
@@ -489,22 +494,28 @@ function horasTipos(P){
     tabsEl.appendChild(b);
   });
   function go(k){
-    var isLegal = (k === "legal-privacidad" || k === "legal-terminos");
     TABS.forEach(function(t){ 
       var el = $("tab-" + t[0]);
-      if(el) el.hidden = isLegal || (t[0] !== k);
+      if(el) el.hidden = (t[0] !== k);
       var tb = $("tb-" + t[0]);
-      if(tb) tb.setAttribute("aria-selected", (!isLegal && t[0] === k) ? "true" : "false"); 
+      if(tb) tb.setAttribute("aria-selected", (t[0] === k) ? "true" : "false"); 
     });
-    var elPriv = $("tab-legal-privacidad"), elTerm = $("tab-legal-terminos");
-    if(elPriv) elPriv.hidden = (k !== "legal-privacidad");
-    if(elTerm) elTerm.hidden = (k !== "legal-terminos");
-
     try{ history.replaceState(null, "", "#" + k); }catch(e){}
-    window.scrollTo({top: 0, behavior: 'smooth'});
     if(k === "hist") renderHistory();
     if(k === "cob") renderCobrar();
   }
+
+  // Eventos para abrir/cerrar modales legales
+  $("btn-privacidad").addEventListener("click", function(){ $("modal-privacidad").hidden = false; });
+  $("close-privacidad").addEventListener("click", function(){ $("modal-privacidad").hidden = true; });
+  $("btn-terminos").addEventListener("click", function(){ $("modal-terminos").hidden = false; });
+  $("close-terminos").addEventListener("click", function(){ $("modal-terminos").hidden = true; });
+
+  // Cerrar modal al hacer clic fuera de la tarjeta
+  window.addEventListener("click", function(e){
+    if(e.target === $("modal-privacidad")) $("modal-privacidad").hidden = true;
+    if(e.target === $("modal-terminos")) $("modal-terminos").hidden = true;
+  });
 
   // ----- Seguridad social -----
   var arlSel = $("pila-arl");
@@ -745,7 +756,7 @@ function horasTipos(P){
   // ----- arranque -----
   lsLoad(); seedExamples(); applyPerfilUI(); applyParamsUI();
   var start = (location.hash || "").replace("#", ""); 
-  if(!TABS.some(function(t){ return t[0] === start; }) && start !== "legal-privacidad" && start !== "legal-terminos") start = "pila";
+  if(!TABS.some(function(t){ return t[0] === start; })) start = "pila";
   renderAll(); go(start);
 
   (async function cloud(){
