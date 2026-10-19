@@ -7,6 +7,7 @@
 <meta name="description" content="Calcula tu planilla PILA para independientes, vacaciones, liquidación laboral y horas extra en Colombia. Controla tus fechas de pago y lo que te deben.">
 <meta name="google-site-verification" content="7qdNoibKtPxOy219vOG8NfeoOgE4h0JCIF74GzXsZiI">
 <meta name="theme-color" content="#4338CA">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3761150056608968" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&family=JetBrains+Mono:wght@400..600&display=swap">
@@ -1150,7 +1151,7 @@ function mensajeCobro(c, hoy) {
     let list = S.cobros.slice();
     if (cbFilter === "pend") list = list.filter(c => !c.paid);
     if (cbFilter === "pag") list = list.filter(c => c.paid);
-    list.sort((a, b) => (a.paid - b.paid) || (a.paid ? (b.paidOn || "").localeCompare(a.paidOn || "") : (a.vence || "9999").localeCompare(b.vence || "9999")));
+    list.sort((a, b) => (a.paid - b.paid) || (a.paid ? (b.paidOn || "").localeCompare(b.paidOn || "") : (a.vence || "9999").localeCompare(b.vence || "9999")));
     if (!list.length) {
       $("cb-list").innerHTML = '<p class="empty-state">' + (S.cobros.length ? "No hay cobros en esta vista." : "Aún no registras ningún cobro. Anota el primero en el formulario y verás aquí cuánto te deben y qué está vencido.") + '</p>';
       return;
