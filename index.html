@@ -219,6 +219,14 @@ td{padding:.5rem .6rem .5rem 0;border-bottom:1px solid var(--line);vertical-alig
 td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 td input{max-width:6rem;text-align:right}
 
+/* ============ BLOG ESTILO ARTÍCULOS ============ */
+.blog-post{max-width:54ch;margin:0 auto;padding:.5rem 0 2rem}
+.blog-post h2{font:700 1.5rem/1.2 var(--display);margin:1.5rem 0 .5rem;color:var(--ink)}
+.blog-post h3{font:600 1.1rem/1.3 var(--display);margin:1.2rem 0 .4rem;color:var(--accent)}
+.blog-post p{margin-bottom:1rem;color:var(--ink);opacity:.9}
+.blog-post ul{margin:0 0 1rem 1.2rem;padding:0;color:var(--ink);opacity:.9}
+.blog-post li{margin-bottom:.4rem}
+
 /* ============ PIE, DIÁLOGOS, TOAST ============ */
 .ad-slot{margin-top:1.4rem;padding:.8rem;min-height:3rem;background:var(--field);border:1px dashed var(--line);border-radius:12px;text-align:center;font-size:.75rem;color:var(--muted)}
 .seo-faq{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--line)}
@@ -242,7 +250,6 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
       <span class="logo" aria-hidden="true"><svg class="i" width="22" height="22" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M8.5 12h2M13.5 12h2M8.5 16h2M13.5 16h2"/></svg></span>
       <span><h1>Calculadora Laboral</h1><small>Colombia 2026</small></span>
     </a>
-    <a href="horas-extra.html" class="btn ghost small" style="text-decoration:none;">📖 Blog</a>
     <button class="icon-btn" id="theme-btn" type="button" aria-label="Cambiar entre tema claro y oscuro" title="Cambiar tema">
       <svg class="i" width="20" height="20" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/></svg>
     </button>
@@ -423,7 +430,7 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
       <div class="card">
         <h2>Tu salario</h2>
         <div class="field" style="margin-top:.8rem"><label for="hex-sal">Salario mensual</label><div class="money"><span>$</span><input id="hex-sal" inputmode="numeric" autocomplete="off"></div></div>
-        <div class="field"><label for="hex-hm">Horas ordinarias al mes</label><input type="number" id="hex-hm" min="1" step="1"><span class="hint">Déjalo vacío para usar el valor de Ajustes (42 horas semanales × 30 days ÷ 6 = 210).</span></div>
+        <div class="field"><label for="hex-hm">Horas ordinarias al mes</label><input type="number" id="hex-hm" min="1" step="1"><span class="hint">Déjalo vacío para usar el valor de Ajustes (42 horas semanales × 30 días ÷ 6 = 210).</span></div>
         <div id="hex-base" class="meta"></div>
       </div>
       <div class="card">
@@ -450,6 +457,30 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
         </div>
       </div>
       <div class="card" id="cob-out" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ============ BLOG / ARTÍCULOS ============ -->
+  <section id="tab-blog" class="panel" role="tabpanel" aria-labelledby="tb-blog" hidden>
+    <div class="card blog-post">
+      <span class="tag">Guía Laboral Colombia 2026</span>
+      <h2>Cómo calcular la Prima de Servicios en Colombia</h2>
+      <p class="lead">La prima de servicios es una prestación social obligatoria que todo empleador debe pagar a sus trabajadores dependientes. Equivale a 30 días de salario por año, los cuales se dividen en dos pagos semestrales.</p>
+      
+      <h3>¿Cuáles son las fechas límite de pago?</h3>
+      <p>Por ley, la prima se paga en dos contados durante el año:</p>
+      <ul>
+        <li><b>Primer pago:</b> A más tardar el <b>30 de junio</b> de cada año.</li>
+        <li><b>Segundo pago:</b> En los primeros veinte días del mes de <b>diciembre</b> (máximo el <b>20 de diciembre</b>).</li>
+      </ul>
+
+      <h3>¿Cuál es la fórmula de cálculo?</h3>
+      <p>Para calcular la prima de un semestre completo (180 días comerciales), se utiliza la siguiente operación básica:</p>
+      <p><code>Prima = (Salario Base × Días Trabajados en el Semestre) ÷ 360</code></p>
+      <p>Ten en cuenta que para la base de la prima se debe sumar el <b>salario mensual básico más el auxilio de transporte vigente</b> (si el empleado tiene derecho a este último).</p>
+
+      <h3>¿Qué pasa si el trabajador no laboró el semestre completo?</h3>
+      <p>Si el empleado ingresó después del 1 de enero (para el primer semestre) o después del 1 de julio (para el segundo semestre), o si el contrato terminó antes de finalizar dichos periodos, la empresa debe pagar la proporción exacta de los días que efectivamente trabajó durante ese semestre.</p>
     </div>
   </section>
 
@@ -861,10 +892,23 @@ function mensajeCobro(c, hoy) {
     liq: '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/>',
     hex: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>',
     cob: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/>',
+    blog: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
     ajustes: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>'
   };
   const svg = k => '<svg class="i" viewBox="0 0 24 24" aria-hidden="true">' + IC[k] + '</svg>';
-  const TABS = [["inicio", "Inicio"], ["pila", "Seguridad social"], ["hist", "Historial"], ["cobros", "Me deben"], ["sueldo", "Mi sueldo"], ["vac", "Vacaciones"], ["liq", "Liquidación"], ["hex", "Horas extra"], ["cob", "Cuánto cobrar"], ["ajustes", "Ajustes"]];
+  const TABS = [
+    ["inicio", "Inicio"], 
+    ["pila", "Seguridad social"], 
+    ["hist", "Historial"], 
+    ["cobros", "Me deben"], 
+    ["sueldo", "Mi sueldo"], 
+    ["vac", "Vacaciones"], 
+    ["liq", "Liquidación"], 
+    ["hex", "Horas extra"], 
+    ["cob", "Cuánto cobrar"], 
+    ["blog", "Blog"], 
+    ["ajustes", "Ajustes"]
+  ];
   const KEYS = TABS.map(t => t[0]);
   const tabsEl = $("tabs");
   TABS.forEach(t => {
@@ -1000,7 +1044,7 @@ function mensajeCobro(c, hoy) {
     $("pila-paid").hidden = isPaid(per, rec);
     const fact = facturadoEn(per);
     $("pila-fact").innerHTML = fact && fact !== hon
-      ? 'En Me deben tienes <b>' + COP(fact) + '</b> facturados en ' + esc(periodLabel(per)) + '. <button class="btn ghost small" type="button" id="pila-usefact">Usar este valor</button>' : "";
+      ? 'In Me deben tienes <b>' + COP(fact) + '</b> facturados en ' + esc(periodLabel(per)) + '. <button class="btn ghost small" type="button" id="pila-usefact">Usar este valor</button>' : "";
     return c;
   }
   $("pila-fact").addEventListener("click", e => {
@@ -1227,7 +1271,7 @@ function mensajeCobro(c, hoy) {
     if (!a || !b || b < a) { $("vac-out").innerHTML = '<p class="empty-state">Escribe fechas válidas: la fecha final debe ser igual o posterior a la inicial.</p>'; return; }
     const dias = diasInc(a, b), v = calcVac(sal, dias, nv("vac-tom")), plan = nv("vac-plan");
     $("vac-out").innerHTML =
-      '<h2>Vacaciones causadas</h2><p class="meta">' + dias + ' días trabajados (año de 360 days)</p>' +
+      '<h2>Vacaciones causadas</h2><p class="meta">' + dias + ' días trabajados (año de 360 días)</p>' +
       '<ul class="ledger">' +
       '<li><span>Días hábiles causados</span><i class="dots"></i><b>' + NUM(v.causados, 2) + '</b></li>' +
       '<li><span>Menos: ya disfrutados</span><i class="dots"></i><b>' + NUM(nv("vac-tom"), 2) + '</b></li>' +
