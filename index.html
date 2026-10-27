@@ -69,6 +69,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 .logo{flex:none;width:2.4rem;height:2.4rem;border-radius:12px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--hero-a),var(--hero-c))}
 .brand h1{font:700 1.15rem/1.1 var(--display);letter-spacing:-.01em}
 .brand small{display:block;font:500 .68rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:.15rem}
+.top-actions{display:flex;align-items:center;gap:.5rem}
+.blog-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .9rem;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-weight:600;font-size:.85rem;text-decoration:none;cursor:pointer}
+.blog-btn:hover{border-color:var(--accent);background:var(--accent-soft)}
 .icon-btn{flex:none;width:2.5rem;height:2.5rem;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink)}
 .icon-btn:hover{border-color:var(--accent)}
 .tabs{max-width:72rem;margin:0 auto;display:flex;gap:.35rem;overflow-x:auto;padding:.4rem max(16px,env(safe-area-inset-right,0px)) .7rem max(16px,env(safe-area-inset-left,0px));scrollbar-width:none}
@@ -219,13 +222,21 @@ td{padding:.5rem .6rem .5rem 0;border-bottom:1px solid var(--line);vertical-alig
 td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 td input{max-width:6rem;text-align:right}
 
-/* ============ BLOG ESTILO ARTÍCULOS ============ */
-.blog-post{max-width:54ch;margin:0 auto;padding:.5rem 0 2rem}
-.blog-post h2{font:700 1.5rem/1.2 var(--display);margin:1.5rem 0 .5rem;color:var(--ink)}
-.blog-post h3{font:600 1.1rem/1.3 var(--display);margin:1.2rem 0 .4rem;color:var(--accent)}
-.blog-post p{margin-bottom:1rem;color:var(--ink);opacity:.9}
-.blog-post ul{margin:0 0 1rem 1.2rem;padding:0;color:var(--ink);opacity:.9}
-.blog-post li{margin-bottom:.4rem}
+/* ============ BLOG / ARTÍCULOS EN INICIO ============ */
+.blog-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:1rem;margin-top:1.2rem}
+.blog-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.2rem;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:transform .2s ease,border-color .2s ease}
+.blog-card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.blog-card h3{font:700 1.05rem/1.3 var(--display);margin:.4rem 0 .5rem;color:var(--ink)}
+.blog-card p{font-size:.88rem;color:var(--muted);margin-bottom:1rem}
+
+/* ============ DIÁLOGOS DE ARTÍCULOS ============ */
+dialog.blog-dlg{border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--ink);width:calc(100% - 2rem);max-width:44rem;max-height:85vh;padding:2rem;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);overflow-y:auto}
+dialog.blog-dlg::backdrop{background:rgba(10,8,30,.6)}
+.blog-content h2{font:700 1.4rem/1.2 var(--display);margin:1.2rem 0 .4rem;color:var(--ink)}
+.blog-content h3{font:600 1.05rem/1.3 var(--display);margin:1rem 0 .3rem;color:var(--accent)}
+.blog-content p{margin-bottom:.8rem;color:var(--ink);opacity:.9}
+.blog-content ul{margin:0 0 1rem 1.2rem;padding:0;color:var(--ink);opacity:.9}
+.blog-content li{margin-bottom:.3rem}
 
 /* ============ PIE, DIÁLOGOS, TOAST ============ */
 .ad-slot{margin-top:1.4rem;padding:.8rem;min-height:3rem;background:var(--field);border:1px dashed var(--line);border-radius:12px;text-align:center;font-size:.75rem;color:var(--muted)}
@@ -250,9 +261,15 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
       <span class="logo" aria-hidden="true"><svg class="i" width="22" height="22" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M8.5 12h2M13.5 12h2M8.5 16h2M13.5 16h2"/></svg></span>
       <span><h1>Calculadora Laboral</h1><small>Colombia 2026</small></span>
     </a>
-    <button class="icon-btn" id="theme-btn" type="button" aria-label="Cambiar entre tema claro y oscuro" title="Cambiar tema">
-      <svg class="i" width="20" height="20" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/></svg>
-    </button>
+    <div class="top-actions">
+      <button class="blog-btn" type="button" data-dlg="dlg-blog-index">
+        <svg class="i" width="16" height="16" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Blog
+      </button>
+      <button class="icon-btn" id="theme-btn" type="button" aria-label="Cambiar entre tema claro y oscuro" title="Cambiar tema">
+        <svg class="i" width="20" height="20" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/></svg>
+      </button>
+    </div>
   </div>
   <nav class="tabs" role="tablist" id="tabs" aria-label="Secciones de la calculadora"></nav>
 </header>
@@ -273,6 +290,31 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
         <h2>Atajos</h2>
         <div class="quick" id="quick"></div>
         <div class="tip" id="tip"></div>
+      </div>
+    </div>
+
+    <!-- Sección de Artículos del Blog en el Inicio -->
+    <div class="card" style="margin-top:1.5rem">
+      <span class="tag">Guías y Actualidad Laboral</span>
+      <h2>Artículos de Interés</h2>
+      <p class="hint">Conoce en detalle cómo funcionan tus derechos, prestaciones y obligaciones laborales en Colombia.</p>
+      <div class="blog-cards">
+        <div class="blog-card" data-dlg="dlg-cesantias">
+          <div>
+            <span class="tag">Prestaciones</span>
+            <h3>Cómo calcular las Cesantías y los Intereses de Cesantías</h3>
+            <p>Fechas límite de consignación al fondo, fórmulas y qué pasa si tu empleador no paga a tiempo.</p>
+          </div>
+          <span class="btn ghost small" style="align-self:flex-start">Leer artículo →</span>
+        </div>
+        <div class="blog-card" data-dlg="dlg-prima">
+          <div>
+            <span class="tag">Guía Laboral Colombia 2026</span>
+            <h3>Cómo calcular la Prima de Servicios en Colombia</h3>
+            <p>Conoce las fechas límite de pago en junio y diciembre, la fórmula exacta y cómo se calcula si no trabajaste el semestre completo.</p>
+          </div>
+          <span class="btn ghost small" style="align-self:flex-start">Leer artículo →</span>
+        </div>
       </div>
     </div>
   </section>
@@ -460,30 +502,6 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
     </div>
   </section>
 
-  <!-- ============ BLOG / ARTÍCULOS ============ -->
-  <section id="tab-blog" class="panel" role="tabpanel" aria-labelledby="tb-blog" hidden>
-    <div class="card blog-post">
-      <span class="tag">Guía Laboral Colombia 2026</span>
-      <h2>Cómo calcular la Prima de Servicios en Colombia</h2>
-      <p class="lead">La prima de servicios es una prestación social obligatoria que todo empleador debe pagar a sus trabajadores dependientes. Equivale a 30 días de salario por año, los cuales se dividen en dos pagos semestrales.</p>
-      
-      <h3>¿Cuáles son las fechas límite de pago?</h3>
-      <p>Por ley, la prima se paga en dos contados durante el año:</p>
-      <ul>
-        <li><b>Primer pago:</b> A más tardar el <b>30 de junio</b> de cada año.</li>
-        <li><b>Segundo pago:</b> En los primeros veinte días del mes de <b>diciembre</b> (máximo el <b>20 de diciembre</b>).</li>
-      </ul>
-
-      <h3>¿Cuál es la fórmula de cálculo?</h3>
-      <p>Para calcular la prima de un semestre completo (180 días comerciales), se utiliza la siguiente operación básica:</p>
-      <p><code>Prima = (Salario Base × Días Trabajados en el Semestre) ÷ 360</code></p>
-      <p>Ten en cuenta que para la base de la prima se debe sumar el <b>salario mensual básico más el auxilio de transporte vigente</b> (si el empleado tiene derecho a este último).</p>
-
-      <h3>¿Qué pasa si el trabajador no laboró el semestre completo?</h3>
-      <p>Si el empleado ingresó después del 1 de enero (para el primer semestre) o después del 1 de julio (para el segundo semestre), o si el contrato terminó antes de finalizar dichos periodos, la empresa debe pagar la proporción exacta de los días que efectivamente trabajó durante ese semestre.</p>
-    </div>
-  </section>
-
   <!-- ============ AJUSTES ============ -->
   <section id="tab-ajustes" class="panel" role="tabpanel" aria-labelledby="tb-ajustes" hidden>
     <p class="lead">Valores de referencia de 2026, tu fecha de pago, apariencia y copia de seguridad. Todas las calculadoras usan estos valores.</p>
@@ -557,6 +575,75 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
     </div>
   </footer>
 </main>
+
+<!-- ============ DIÁLOGOS DE ARTÍCULOS Y LEGALES ============ -->
+
+<dialog class="blog-dlg" id="dlg-prima" aria-labelledby="dlg-prima-t">
+  <div class="blog-content">
+    <span class="tag">Guía Laboral Colombia 2026</span>
+    <h2 id="dlg-prima-t">Cómo calcular la Prima de Servicios en Colombia</h2>
+    <p class="lead">La prima de servicios es una prestación social obligatoria que todo empleador debe pagar a sus trabajadores dependientes. Equivale a 30 días de salario por año, los cuales se dividen en dos pagos semestrales.</p>
+    
+    <h3>¿Cuáles son las fechas límite de pago?</h3>
+    <p>Por ley, la prima se paga en dos contados durante el año:</p>
+    <ul>
+      <li><b>Primer pago:</b> A más tardar el <b>30 de junio</b> de cada año.</li>
+      <li><b>Segundo pago:</b> En los primeros veinte días del mes de <b>diciembre</b> (máximo el <b>20 de diciembre</b>).</li>
+    </ul>
+
+    <h3>¿Cuál es la fórmula de cálculo?</h3>
+    <p>Para calcular la prima de un semestre completo (180 días comerciales), se utiliza la siguiente operación básica:</p>
+    <p><code>Prima = (Salario Base × Días Trabajados en el Semestre) ÷ 360</code></p>
+    <p>Ten en cuenta que para la base de la prima se debe sumar el <b>salario mensual básico más el auxilio de transporte vigente</b> (si el empleado tiene derecho a este último).</p>
+
+    <h3>¿Qué pasa si el trabajador no laboró el semestre completo?</h3>
+    <p>Si el empleado ingresó después del 1 de enero (para el primer semestre) o después del 1 de julio (para el segundo semestre), o si el contrato terminó antes de finalizar dichos periodos, la empresa debe pagar la proporción exacta de los días que efectivamente trabajó durante ese semestre.</p>
+  </div>
+  <div style="margin-top:2rem;text-align:right"><button class="btn small" type="button" data-close>Cerrar</button></div>
+</dialog>
+
+<dialog class="blog-dlg" id="dlg-cesantias" aria-labelledby="dlg-cesantias-t">
+  <div class="blog-content">
+    <span class="tag">Prestaciones Sociales</span>
+    <h2 id="dlg-cesantias-t">Cómo calcular las Cesantías y los Intereses de Cesantías</h2>
+    <p class="lead">Las cesantías son una prestación social que busca proteger al trabajador cuando queda desempleado, y los intereses sobre las mismas son un rendimiento que el empleador debe pagar directamente al empleado.</p>
+    
+    <h3>¿Cuándo se deben consignar?</h3>
+    <p>El empleador tiene la obligación de consignar el valor acumulado de las cesantías al fondo elegido por el trabajador a más tardar el <b>14 de febrero</b> del año siguiente.</p>
+
+    <h3>Fórmulas de cálculo</h3>
+    <p><b>Cesantías:</b> Se calculan multiplicando el salario base por los días trabajados en el año y dividiendo entre 360.</p>
+    <p><code>Cesantías = (Salario Base × Días Trabajados) ÷ 360</code></p>
+    <p><b>Intereses sobre cesantías:</b> Corresponden al 12% anual sobre el valor de las cesantías acumuladas, calculados proporcionalmente a los días laborados. Se deben pagar directamente al trabajador a más tardar el <b>31 de enero</b> de cada año.</p>
+  </div>
+  <div style="margin-top:2rem;text-align:right"><button class="btn small" type="button" data-close>Cerrar</button></div>
+</dialog>
+
+<dialog class="blog-dlg" id="dlg-blog-index" aria-labelledby="dlg-blog-index-t">
+  <div class="blog-content">
+    <h2 id="dlg-blog-index-t">Blog Laboral Colombia</h2>
+    <p class="lead">Selecciona un artículo para leer la guía completa:</p>
+    <div class="blog-cards" style="margin-top:1rem">
+      <div class="blog-card" style="cursor:pointer" onclick="document.getElementById('dlg-blog-index').close();document.getElementById('dlg-cesantias').showModal();">
+        <div>
+          <span class="tag">Prestaciones</span>
+          <h3>Cómo calcular las Cesantías y los Intereses de Cesantías</h3>
+          <p>Fechas límite, fórmulas y qué pasa si no se paga a tiempo.</p>
+        </div>
+        <span class="btn ghost small" style="align-self:flex-start">Leer artículo</span>
+      </div>
+      <div class="blog-card" style="cursor:pointer" onclick="document.getElementById('dlg-blog-index').close();document.getElementById('dlg-prima').showModal();">
+        <div>
+          <span class="tag">Guía Laboral Colombia 2026</span>
+          <h3>Cómo calcular la Prima de Servicios en Colombia</h3>
+          <p>Fechas límite en junio y diciembre y cálculo proporcional.</p>
+        </div>
+        <span class="btn ghost small" style="align-self:flex-start">Leer artículo</span>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:2rem;text-align:right"><button class="btn small" type="button" data-close>Cerrar</button></div>
+</dialog>
 
 <dialog class="dlg" id="dlg-priv" aria-labelledby="dlg-priv-t">
   <h2 id="dlg-priv-t">Política de Privacidad y Publicidad</h2>
@@ -639,7 +726,6 @@ function solveHonorarios(target, costos, reservePct, perfil, P) {
   return Math.ceil(hi);
 }
 
-// Año comercial de 360 días (30/360), como se liquidan las prestaciones.
 function lastFeb(d) { return d.getMonth() === 1 && d.getDate() === new Date(d.getFullYear(), 2, 0).getDate(); }
 function d360(a, b) {
   let d1 = a.getDate(), d2 = b.getDate();
@@ -704,7 +790,6 @@ function horasTipos(P) {
   ];
 }
 
-// Sueldo de un empleado: lo que le llega y lo que la empresa debe aportar.
 function calcSueldo(i, P) {
   const salBase = i.sal + (i.otros || 0);
   const aux = i.aux ? P.aux : 0;
@@ -730,7 +815,6 @@ function calcSueldo(i, P) {
     costo: salBase + aux + aportes + provisiones, bajoMinimo: salBase < P.smmlv};
 }
 
-// ----- Festivos de Colombia (Ley Emiliani) y plazos de la PILA -----
 function pascua(y) {
   const a = y % 19, b = Math.floor(y / 100), c = y % 100, d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25),
     g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30, i = Math.floor(c / 4), k = c % 4,
@@ -760,7 +844,6 @@ function nEsimoDiaHabil(y, m, n, sabados) {
   }
   return null;
 }
-// Decreto 1990 de 2016: día hábil de vencimiento según los dos últimos dígitos.
 function diaHabilPila(dd) {
   const t = [7, 14, 21, 28, 35, 42, 49, 56, 63, 69, 75, 81, 87, 93, 99];
   for (let i = 0; i < t.length; i++) if (dd <= t[i]) return i + 2;
@@ -774,7 +857,6 @@ function fechaLimitePila(per, dd, sabados) {
   return fecha ? {n, fecha} : null;
 }
 
-// ----- Cobros pendientes -----
 function estadoCobro(c, hoy) {
   if (c.paid) return {k: "pagada", label: "Pagada" + (c.paidOn ? " · " + fechaCorta(parseD(c.paidOn)) : "")};
   const v = parseD(c.vence);
@@ -824,7 +906,6 @@ function mensajeCobro(c, hoy) {
     clearTimeout(toastT); toastT = setTimeout(() => { t.innerHTML = ""; }, 3800);
   }
 
-  /* ----- estado y guardado (localStorage) ----- */
   const LS = "mipila.v1";
   const S = {records: {}, cobros: [], settings: clone(DEF)};
   let storageWarned = false;
@@ -842,7 +923,6 @@ function mensajeCobro(c, hoy) {
   const saveSoon = () => { clearTimeout(saveT); saveT = setTimeout(lsSave, 300); };
   const P = () => S.settings.params;
   const perfil = () => S.settings.perfil;
-  // Un período cuenta como pagado si su registro está marcado o si no es posterior a "estoy al día hasta".
   const isPaid = (per, rec) => {
     if (rec === undefined) rec = S.records["p" + per.replace("-", "")];
     return !!(rec && rec.paid) || (!!S.settings.paidThrough && per <= S.settings.paidThrough);
@@ -854,7 +934,6 @@ function mensajeCobro(c, hoy) {
     renderPila(); renderHistory(); renderHome();
   }
 
-  /* ----- campos ----- */
   const mv = id => Number(($(id).value || "").replace(/\D/g, "")) || 0;
   const nv = id => { const v = parseFloat($(id).value); return isNaN(v) ? 0 : v; };
   const setMoney = (id, n) => { $(id).value = n ? Math.round(n).toLocaleString("es-CO") : ""; };
@@ -871,7 +950,6 @@ function mensajeCobro(c, hoy) {
   }
   fillArl($("pila-arl"), true); fillArl($("sue-arl"), false);
 
-  // Recuerda lo que escribes en las calculadoras entre visitas.
   const PERSIST = ["pila-hon", "pila-costos", "vac-sal", "vac-ini", "vac-tom", "vac-plan", "liq-tipo", "liq-mot", "liq-sal", "liq-aux", "liq-ini", "liq-pact", "liq-vd", "liq-vt", "liq-pend",
     "hex-sal", "hex-hm", "cob-net", "cob-cos", "cob-res", "cob-h", "cob-d", "sue-sal", "sue-var", "sue-aux", "sue-desc", "sue-arl", "sue-exo"];
   function persistInput(id) {
@@ -881,7 +959,6 @@ function mensajeCobro(c, hoy) {
   }
   PERSIST.forEach(id => { $(id).addEventListener("input", () => persistInput(id)); $(id).addEventListener("change", () => persistInput(id)); });
 
-  /* ----- iconos y pestañas ----- */
   const IC = {
     inicio: '<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>',
     pila: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',
@@ -892,7 +969,6 @@ function mensajeCobro(c, hoy) {
     liq: '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7"/>',
     hex: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>',
     cob: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M8 16h2M12 16h2"/>',
-    blog: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
     ajustes: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>'
   };
   const svg = k => '<svg class="i" viewBox="0 0 24 24" aria-hidden="true">' + IC[k] + '</svg>';
@@ -906,7 +982,6 @@ function mensajeCobro(c, hoy) {
     ["liq", "Liquidación"], 
     ["hex", "Horas extra"], 
     ["cob", "Cuánto cobrar"], 
-    ["blog", "Blog"], 
     ["ajustes", "Ajustes"]
   ];
   const KEYS = TABS.map(t => t[0]);
@@ -942,7 +1017,6 @@ function mensajeCobro(c, hoy) {
   }
   window.addEventListener("hashchange", () => { const k = location.hash.slice(1); if (KEYS.indexOf(k) >= 0 && k !== current) go(k); });
 
-  /* ----- tema ----- */
   const mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
   const isDark = () => S.settings.theme === "dark" || (S.settings.theme === "auto" && mq && mq.matches);
   function applyTheme() {
@@ -954,12 +1028,10 @@ function mensajeCobro(c, hoy) {
   $("theme-btn").addEventListener("click", () => { S.settings.theme = isDark() ? "light" : "dark"; applyTheme(); lsSave(); });
   $("aj-tema").addEventListener("change", e => { S.settings.theme = e.target.value; applyTheme(); lsSave(); });
 
-  /* ----- diálogos legales ----- */
   document.querySelectorAll("[data-dlg]").forEach(b => b.addEventListener("click", () => { const d = $(b.dataset.dlg); if (d.showModal) d.showModal(); else d.setAttribute("open", ""); }));
   document.querySelectorAll("dialog [data-close]").forEach(b => b.addEventListener("click", () => b.closest("dialog").close()));
-  document.querySelectorAll("dialog.dlg").forEach(d => d.addEventListener("click", e => { if (e.target === d) d.close(); }));
+  document.querySelectorAll("dialog.dlg, dialog.blog-dlg").forEach(d => d.addEventListener("click", e => { if (e.target === d) d.close(); }));
 
-  /* ----- fecha límite de pago (dígitos de la cédula) ----- */
   const docOk = () => S.settings.doc.length === 2;
   function limite(per) { return docOk() ? fechaLimitePila(per, S.settings.doc, S.settings.sabados) : null; }
   function setDoc(v) {
@@ -976,7 +1048,6 @@ function mensajeCobro(c, hoy) {
   $("aj-sab").addEventListener("change", e => { S.settings.sabados = e.target.checked; lsSave(); renderPila(); renderHome(); });
   $("aj-upto").addEventListener("change", e => setPaidThrough(e.target.value));
 
-  /* ==================== SEGURIDAD SOCIAL ==================== */
   let editingId = null;
   const periodId = v => "p" + v.replace("-", "");
   const periodLabel = v => { const p = v.split("-"); return MESES[+p[1] - 1] + " " + p[0]; };
@@ -1091,7 +1162,6 @@ function mensajeCobro(c, hoy) {
     catch (e) { toast("No pude copiar automáticamente. Selecciona el texto y cópialo."); return false; }
   }
 
-  /* ==================== HISTORIAL ==================== */
   let confirmDel = null;
   function renderHistory() {
     const now = today0(), years = {}; years[now.getFullYear()] = 1;
@@ -1159,7 +1229,6 @@ function mensajeCobro(c, hoy) {
     if (!(await copyText(txt, "CSV copiado."))) { box.value = txt; box.hidden = false; box.focus(); box.select(); }
   });
 
-  /* ==================== ME DEBEN (cobros) ==================== */
   let cbFilter = "pend", cbEdit = null;
   const newId = () => "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   const TIPO = {honorarios: "Honorarios", salario: "Salario o prestaciones", otro: "Otro"};
@@ -1240,7 +1309,6 @@ function mensajeCobro(c, hoy) {
     else if (act === "del-ok") { cbConfirm = null; S.cobros = S.cobros.filter(x => x.id !== id); lsSave(); renderCobros(); renderHome(); renderPila(); toast("Cobro eliminado."); }
   });
 
-  /* ==================== MI SUELDO ==================== */
   let sueAuxTouched = false;
   function renderSueldo() {
     const sal = mv("sue-sal");
@@ -1249,7 +1317,7 @@ function mensajeCobro(c, hoy) {
     const hon = row("Salario básico", "", sal) + (r.salBase - sal ? row("Otros pagos salariales", "", r.salBase - sal) : "") + (r.aux ? row("Auxilio de transporte", "", r.aux) : "");
     const ded = row("Salud", "4% del IBC " + COP(r.ibc), r.salud, "neg") + row("Pensión", "4% del IBC", r.pension, "neg") +
       (r.fsp ? row("Fondo de solidaridad pensional", PCT(r.fspRate) + " del IBC", r.fsp, "neg") : "") + (r.desc ? row("Otros descuentos", "", r.desc, "neg") : "");
-    const emp = row("Pensión", "12%", r.e.pension) + (r.exo ? "" : row("Salud", "8,5%", r.e.salud)) + row("ARL", PCT(ARL[$("sue-arl").value].r), r.e.arl) + row("Caja de compensación", "4%", r.e.caja) +
+    const emp = row("Pensión", "12%", r.e.pension) + (r.exo ? "" : row("Salud", "8,5%", r.e.salud)) + row("ARL", PCT(ARL[$("sue-arl"].value].r), r.e.arl) + row("Caja de compensación", "4%", r.e.caja) +
       (r.exo ? "" : row("SENA", "2%", r.e.sena) + row("ICBF", "3%", r.e.icbf));
     const prov = row("Prima de servicios", "1 mes de salario al año", r.prov.prima) + row("Cesantías", "1 mes de salario al año", r.prov.cesantias) + row("Intereses sobre cesantías", "12% de las cesantías", r.prov.intereses) + row("Vacaciones", "15 días hábiles al año", r.prov.vacaciones);
     $("sue-out").innerHTML =
@@ -1265,7 +1333,6 @@ function mensajeCobro(c, hoy) {
   $("sue-sal").addEventListener("input", () => { if (!sueAuxTouched) { $("sue-aux").checked = mv("sue-sal") > 0 && mv("sue-sal") <= 2 * P().smmlv; persistInput("sue-aux"); } });
   ["sue-sal", "sue-var", "sue-aux", "sue-desc", "sue-arl", "sue-exo"].forEach(id => { $(id).addEventListener("input", renderSueldo); $(id).addEventListener("change", renderSueldo); });
 
-  /* ==================== VACACIONES ==================== */
   function renderVac() {
     const sal = mv("vac-sal"), a = parseD($("vac-ini").value), b = parseD($("vac-fin").value);
     if (!a || !b || b < a) { $("vac-out").innerHTML = '<p class="empty-state">Escribe fechas válidas: la fecha final debe ser igual o posterior a la inicial.</p>'; return; }
@@ -1283,7 +1350,6 @@ function mensajeCobro(c, hoy) {
   }
   ["vac-sal", "vac-ini", "vac-fin", "vac-tom", "vac-plan"].forEach(id => $(id).addEventListener("input", renderVac));
 
-  /* ==================== LIQUIDACIÓN ==================== */
   let auxTouched = false;
   function renderLiq() {
     const tipo = $("liq-tipo").value, mot = $("liq-mot").value, sal = mv("liq-sal");
@@ -1306,7 +1372,6 @@ function mensajeCobro(c, hoy) {
   $("liq-sal").addEventListener("input", () => { if (!auxTouched) { $("liq-aux").checked = mv("liq-sal") > 0 && mv("liq-sal") <= 2 * P().smmlv; persistInput("liq-aux"); } });
   ["liq-tipo", "liq-mot", "liq-sal", "liq-aux", "liq-ini", "liq-fin", "liq-pact", "liq-vd", "liq-vt", "liq-pend"].forEach(id => { $(id).addEventListener("input", renderLiq); $(id).addEventListener("change", renderLiq); });
 
-  /* ==================== HORAS EXTRA ==================== */
   let hexHoras = {};
   function buildHex() {
     $("hex-rows").innerHTML = horasTipos(P()).map(t =>
@@ -1329,7 +1394,6 @@ function mensajeCobro(c, hoy) {
   $("hex-rows").addEventListener("input", e => { const k = e.target.dataset.h; if (!k) return; hexHoras[k] = parseFloat(e.target.value) || 0; S.settings.inputs.hexHoras = JSON.stringify(hexHoras); saveSoon(); updateHex(); });
   ["hex-sal", "hex-hm"].forEach(id => $(id).addEventListener("input", updateHex));
 
-  /* ==================== CUÁNTO COBRAR ==================== */
   function renderCobrar() {
     const net = mv("cob-net"), cos = mv("cob-cos"), res = nv("cob-res"), pf = perfil();
     const H = solveHonorarios(net, cos, res, pf, P());
@@ -1344,7 +1408,6 @@ function mensajeCobro(c, hoy) {
   }
   ["cob-net", "cob-cos", "cob-res", "cob-h", "cob-d"].forEach(id => $(id).addEventListener("input", renderCobrar));
 
-  /* ==================== AJUSTES ==================== */
   function renderParRates() {
     let h = "";
     Object.keys(ARL).forEach(k => { if (k !== "0") h += '<li><span>ARL ' + ARL[k].n + '<small>' + ARL[k].d + '</small></span><i class="dots"></i><b>' + PCT(ARL[k].r) + '</b></li>'; });
@@ -1388,7 +1451,6 @@ function mensajeCobro(c, hoy) {
     location.reload();
   });
 
-  /* ==================== INICIO ==================== */
   const TIPS = [
     "Pagas la PILA mes vencido: en octubre pagas el período de septiembre. Guarda siempre el comprobante de pago.",
     "Si eres independiente no recibes prima, cesantías ni vacaciones. Reserva un porcentaje de cada cobro: mira Cuánto cobrar.",
@@ -1429,7 +1491,6 @@ function mensajeCobro(c, hoy) {
     }
     const h = $("hero"); h.className = "hero" + cls; h.innerHTML = html;
 
-    // indicadores
     const yr = String(hoy.getFullYear());
     const recs = Object.keys(S.records).map(k => S.records[k]);
     const pagadas = recs.filter(r => isPaid(r.period, r) && r.period.slice(0, 4) === yr);
@@ -1438,79 +1499,4 @@ function mensajeCobro(c, hoy) {
     const pendC = S.cobros.filter(c => !c.paid), vencC = pendC.filter(c => estadoCobro(c, hoy).k === "venc");
     const sum = a => a.reduce((s, c) => s + (Number(c.valor) || 0), 0);
     const tile = (l, v, sub, color) => '<div class="tile" style="--tc:' + color + '"><span>' + l + '</span><b>' + v + '</b><small>' + sub + '</small></div>';
-    $("tiles").innerHTML =
-      tile("Seguridad social pagada en " + yr, COP(pagado), pagadas.length + (pagadas.length === 1 ? " planilla con detalle" : " planillas con detalle"), "var(--good)") +
-      tile("Planillas guardadas sin pagar", COP(porPagar.reduce((a, r) => a + amt(r), 0)), porPagar.length + (porPagar.length === 1 ? " período" : " períodos"), "var(--warn)") +
-      tile("Te deben", COP(sum(pendC)), pendC.length + (pendC.length === 1 ? " cobro pendiente" : " cobros pendientes"), "var(--accent)") +
-      tile("Cobros vencidos", COP(sum(vencC)), vencC.length ? vencC.length + (vencC.length === 1 ? " por reclamar" : " por reclamar") : "Todo al día", vencC.length ? "var(--bad)" : "var(--good)");
-
-    // calendario
-    if (!docOk()) $("home-cal").innerHTML = '<p class="empty-state">Agrega tus 2 últimos dígitos de la cédula arriba para ver las fechas de los próximos meses.</p>';
-    else {
-      let p = per, items = "";
-      for (let i = 0; i < 6; i++) {
-        const f = limite(p), r = S.records[periodId(p)];
-        if (f) {
-          const d = diffDays(hoy, f.fecha), chip = isPaid(p, r) ? '<span class="chip good">Pagada</span>' : d < 0 ? '<span class="chip bad">Vencida</span>' : r ? '<span class="chip warn">Guardada</span>' : '<span class="chip">Pendiente</span>';
-          items += '<li><div><b>' + esc(periodLabel(p)) + '</b><br><small>' + esc(fechaLarga(f.fecha)) + ' · día hábil ' + f.n + '</small></div>' + chip + '</li>';
-        }
-        p = addMonths(p, 1);
-      }
-      $("home-cal").innerHTML = '<ul class="cal">' + items + '</ul>';
-    }
-    $("quick").innerHTML = [["pila", "Calcular planilla"], ["cobros", "Registrar un cobro"], ["sueldo", "Mi sueldo neto"], ["liq", "Calcular liquidación"], ["hex", "Horas extra"], ["cob", "Cuánto cobrar"]]
-      .map(q => '<button type="button" data-go="' + q[0] + '">' + svg(q[0]) + '<span>' + q[1] + '</span></button>').join("");
-    const dia = Math.floor(hoy.getTime() / 864e5);
-    $("tip").innerHTML = '<b>Dato útil</b>' + esc(TIPS[dia % TIPS.length]);
-  }
-  $("hero").addEventListener("click", e => {
-    const b = e.target.closest("button"); if (!b) return;
-    if (b.id === "hero-doc-ok") {
-      const v = setDoc($("hero-doc").value);
-      if (!v) { toast("Escribe exactamente 2 dígitos."); return; }
-      renderHome(); renderPila();
-    } else if (b.id === "hero-pay") {
-      const r = S.records[b.dataset.id]; if (!r) return; r.paid = true; r.paidOn = iso(today0()); lsSave(); renderHome(); renderHistory(); toast("¡Planilla marcada como pagada!");
-    } else if (b.id === "hero-edit") editRecord(b.dataset.id);
-    else if (b.id === "hero-calc") { newPeriod(b.dataset.per); go("pila"); window.scrollTo({top: 0}); }
-    else if (b.id === "hero-yes" || b.id === "hero-quick") { setPaidThrough(b.dataset.per); toast("Listo: estás al día hasta " + periodLabel(b.dataset.per) + ". Puedes cambiarlo en Ajustes."); }
-    else if (b.id === "hero-no") { S.settings.asked = true; lsSave(); renderHome(); }
-  });
-  $("hero").addEventListener("keydown", e => { if (e.key === "Enter" && e.target.id === "hero-doc") $("hero-doc-ok").click(); });
-  $("quick").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { go(b.dataset.go); window.scrollTo({top: 0}); } });
-
-  /* ==================== ARRANQUE ==================== */
-  function seedExamples() {
-    const t = today0(), ex = {
-      "pila-hon": "5.000.000", "vac-sal": "3.500.000", "vac-ini": iso(new Date(t.getFullYear() - 1, 2, 1)), "vac-tom": "0", "vac-plan": "15",
-      "liq-sal": "3.500.000", "liq-ini": iso(new Date(t.getFullYear() - 1, 2, 1)), "liq-vd": iso(new Date(t.getFullYear() - 1, 2, 1)), "liq-vt": "0", "liq-pend": "0",
-      "liq-pact": iso(new Date(t.getFullYear() + 1, 2, 1)), "hex-sal": "3.500.000", "cob-net": "4.000.000", "cob-res": "0", "cob-h": "120", "cob-d": "20",
-      "sue-sal": "3.500.000"
-    };
-    Object.keys(ex).forEach(id => { $(id).value = ex[id]; });
-    $("pila-periodo").value = nextPila(); $("vac-fin").value = iso(t); $("liq-fin").value = iso(t);
-    hexHoras = {hed: 4, rn: 10};
-  }
-  function restoreInputs() {
-    const inp = S.settings.inputs || {};
-    PERSIST.forEach(id => {
-      if (!(id in inp)) return;
-      const el = $(id);
-      if (el.type === "checkbox") el.checked = inp[id] === "1"; else el.value = inp[id];
-    });
-    if ("liq-aux" in inp) auxTouched = true;
-    if ("sue-aux" in inp) sueAuxTouched = true;
-    if (inp.hexHoras) { try { hexHoras = JSON.parse(inp.hexHoras) || {}; } catch (e) {} }
-  }
-  function renderAll() { renderPila(); renderHistory(); renderCobros(); renderSueldo(); renderVac(); renderLiq(); updateHex(); renderCobrar(); renderParRates(); renderHome(); }
-
-  lsLoad(); seedExamples(); restoreInputs(); applyPerfilUI(); applyParamsUI(); applyTheme();
-  $("aj-sab").checked = !!S.settings.sabados; $("aj-upto").value = S.settings.paidThrough || ""; setDoc(S.settings.doc);
-  resetCbForm(); buildHex();
-  let start = (location.hash || "").replace("#", ""); if (KEYS.indexOf(start) < 0) start = "inicio";
-  renderAll(); go(start);
-  if (mq && mq.addEventListener) mq.addEventListener("change", applyTheme);
-})();
-</script>
-</body>
-</html>
+    $("tiles").
