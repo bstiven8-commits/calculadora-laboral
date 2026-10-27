@@ -269,7 +269,35 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
       </div>
     </div>
   </section>
+<!-- Sección de Artículos del Blog en el Inicio -->
+    <div class="card" style="margin-top:1.5rem">
+      <span class="tag">Guías y Actualidad Laboral</span>
+      <h2>Artículos de Interés</h2>
+      <p class="hint">Conoce en detalle cómo funcionan tus derechos, prestaciones y obligaciones laborales en Colombia.</p>
+      <div class="blog-cards" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap:1rem; margin-top:1rem;">
+        
+        <!-- Artículo 1: Horas Extra -->
+        <a href="blog/horas-extra.html" class="blog-card" style="text-decoration:none; color:inherit; display:flex; flex-direction:column; justify-content:space-between; background:var(--field); border:1px solid var(--line); border-radius:14px; padding:1.2rem; transition:border-color .2s;">
+          <div>
+            <span class="tag">Jornada Laboral 2026</span>
+            <h3 style="margin:.3rem 0; font-size:1.05rem;">Cómo calcular las Horas Extra y Recargos</h3>
+            <p style="font-size:.88rem; color:var(--muted);">Tarifas de horas diurnas, nocturnas y dominicales actualizadas con la jornada de 42 horas.</p>
+          </div>
+          <span class="btn ghost small" style="align-self:flex-start; margin-top:1rem;">Leer artículo →</span>
+        </a>
 
+        <!-- Artículo 2: Indemnización -->
+        <a href="blog/indemnizacion.html" class="blog-card" style="text-decoration:none; color:inherit; display:flex; flex-direction:column; justify-content:space-between; background:var(--field); border:1px solid var(--line); border-radius:14px; padding:1.2rem; transition:border-color .2s;">
+          <div>
+            <span class="tag">Estabilidad Laboral</span>
+            <h3 style="margin:.3rem 0; font-size:1.05rem;">Indemnización por Despido Sin Justa Causa</h3>
+            <p style="font-size:.88rem; color:var(--muted);">Conoce cómo se calcula para contratos a término indefinido y fijo según la ley colombiana.</p>
+          </div>
+          <span class="btn ghost small" style="align-self:flex-start; margin-top:1rem;">Leer artículo →</span>
+        </a>
+
+      </div>
+    </div>
   <!-- ============ SEGURIDAD SOCIAL ============ -->
   <section id="tab-pila" class="panel" role="tabpanel" aria-labelledby="tb-pila" hidden>
     <p class="lead">Calcula lo que debes liquidar en tu planilla PILA y guarda cada período. Los valores iniciales son un ejemplo: cámbialos por los tuyos.</p>
