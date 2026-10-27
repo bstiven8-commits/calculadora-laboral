@@ -3,8 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Calculadora Laboral - Seguridad Social y Liquidación Colombia</title>
-<meta name="description" content="Calcula tu planilla PILA para independientes, vacaciones, liquidación laboral y horas extra en Colombia. Controla tus fechas de pago y lo que te deben.">
+<title>Calculadora Laboral Colombia 2026 - Seguridad Social y Liquidación</title>
+<meta name="description" content="Calculadora PILA para independientes en Colombia, cálculo de horas extra 2026, vacaciones, liquidación laboral y seguridad social según la normativa vigente.">
+<meta name="keywords" content="calculadora laboral colombia, calcular planilla pila independientes, simulador liquidacion laboral colombia, horas extra colombia 2026">
+<meta name="geo.region" content="CO">
+<meta name="geo.placename" content="Bogotá">
 <meta name="google-site-verification" content="7qdNoibKtPxOy219vOG8NfeoOgE4h0JCIF74GzXsZiI">
 <meta name="theme-color" content="#4338CA">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3761150056608968" crossorigin="anonymous"></script>
@@ -420,7 +423,7 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
       <div class="card">
         <h2>Tu salario</h2>
         <div class="field" style="margin-top:.8rem"><label for="hex-sal">Salario mensual</label><div class="money"><span>$</span><input id="hex-sal" inputmode="numeric" autocomplete="off"></div></div>
-        <div class="field"><label for="hex-hm">Horas ordinarias al mes</label><input type="number" id="hex-hm" min="1" step="1"><span class="hint">Déjalo vacío para usar el valor de Ajustes (42 horas semanales × 30 días ÷ 6 = 210).</span></div>
+        <div class="field"><label for="hex-hm">Horas ordinarias al mes</label><input type="number" id="hex-hm" min="1" step="1"><span class="hint">Déjalo vacío para usar el valor de Ajustes (42 horas semanales × 30 days ÷ 6 = 210).</span></div>
         <div id="hex-base" class="meta"></div>
       </div>
       <div class="card">
@@ -1224,7 +1227,7 @@ function mensajeCobro(c, hoy) {
     if (!a || !b || b < a) { $("vac-out").innerHTML = '<p class="empty-state">Escribe fechas válidas: la fecha final debe ser igual o posterior a la inicial.</p>'; return; }
     const dias = diasInc(a, b), v = calcVac(sal, dias, nv("vac-tom")), plan = nv("vac-plan");
     $("vac-out").innerHTML =
-      '<h2>Vacaciones causadas</h2><p class="meta">' + dias + ' días trabajados (año de 360 días)</p>' +
+      '<h2>Vacaciones causadas</h2><p class="meta">' + dias + ' días trabajados (año de 360 days)</p>' +
       '<ul class="ledger">' +
       '<li><span>Días hábiles causados</span><i class="dots"></i><b>' + NUM(v.causados, 2) + '</b></li>' +
       '<li><span>Menos: ya disfrutados</span><i class="dots"></i><b>' + NUM(nv("vac-tom"), 2) + '</b></li>' +
