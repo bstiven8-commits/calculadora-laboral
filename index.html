@@ -1499,4 +1499,77 @@ function mensajeCobro(c, hoy) {
     const pendC = S.cobros.filter(c => !c.paid), vencC = pendC.filter(c => estadoCobro(c, hoy).k === "venc");
     const sum = a => a.reduce((s, c) => s + (Number(c.valor) || 0), 0);
     const tile = (l, v, sub, color) => '<div class="tile" style="--tc:' + color + '"><span>' + l + '</span><b>' + v + '</b><small>' + sub + '</small></div>';
-    $("tiles").
+    $("tiles").innerHTML =
+      tile("Seguridad social pagada en " + yr, COP(pagado), pagadas.length + (pagadas.length === 1 ? " planilla con detalle" : " planillas con detalle"), "var(--good)") +
+      tile("Planillas guardadas sin pagar", COP(porPagar.reduce((a, r) => a + amt(r), 0)), porPagar.length + (porPagar.length === 1 ? " período" : " períodos"), "var(--warn)") +
+      tile("Te deben", COP(sum(pendC)), pendC.length + (pendC.length === 1 ? " cobro pendiente" : " cobros pendientes"), "var(--accent)") +
+      tile("Cobros vencidos", COP(sum(vencC)), vencC.length ? vencC.length + (vencC.length === 1 ? " por reclamar" : " por reclamar") : "Todo al día", vencC.length ? "var(--bad)" : "var(--good)");
+
+    if (!docOk()) $("home-cal").innerHTML = '<p class="empty-state">Agrega tus 2 últimos dígitos de la cédula arriba para ver las fechas de los próximos meses.</p>';
+    else {
+      let p = per, items = "";
+      for (let i = 0; i < 6; i++) {
+        const f = limite(p), r = S.records[periodId(p)];
+        if (f) {
+          const d = diffDays(hoy, f.fecha), chip = isPaid(p, r) ? '<span class="chip good">Pagada</span>' : d < 0 ? '<span class="chip bad">Vencida</span>' : r ? '<span class="chip warn">Guardada</span>' : '<span class="chip">Pendiente</span>';
+          items += '<li><div><b>' + esc(periodLabel(p)) + '</b><br><small>' + esc(fechaLarga(f.fecha)) + ' · día hábil ' + f.n + '</small></div>' + chip + '</li>';
+        }
+        p = addMonths(p, 1);
+      }
+      $("home-cal").innerHTML = '<ul class="cal">' + items + '</ul>';
+    }
+    $("quick").innerHTML = [["pila", "Calcular planilla"], ["cobros", "Registrar un cobro"], ["sueldo", "Mi sueldo neto"], ["liq", "Calcular liquidación"], ["hex", "Horas extra"], ["cob", "Cuánto cobrar"]]
+      .map(q => '<button type="button" data-go="' + q[0] + '">' + svg(q[0]) + '<span>' + q[1] + '</span></button>').join("");
+    const dia = Math.floor(hoy.getTime() / 864e5);
+    $("tip").innerHTML = '<b>Dato útil</b>' + esc(TIPS[dia % TIPS.length]);
+  }
+  $("hero").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.id === "hero-doc-ok") {
+      const v = setDoc($("hero-doc").value);
+      if (!v) { toast("Escribe exactamente 2 dígitos."); return; }
+      renderHome(); renderPila();
+    } else if (b.id === "hero-pay") {
+      const r = S.records[b.dataset.id]; if (!r) return; r.paid = true; r.paidOn = iso(today0()); lsSave(); renderHome(); renderHistory(); toast("¡Planilla marcada como pagada!");
+    } else if (b.id === "hero-edit") editRecord(b.dataset.id);
+    else if (b.id === "hero-calc") { newPeriod(b.dataset.per); go("pila"); window.scrollTo({top: 0}); }
+    else if (b.id === "hero-yes" || b.id === "hero-quick") { setPaidThrough(b.dataset.per); toast("Listo: estás al día hasta " + periodLabel(b.dataset.per) + ". Puedes cambiarlo en Ajustes."); }
+    else if (b.id === "hero-no") { S.settings.asked = true; lsSave(); renderHome(); }
+  });
+  $("hero").addEventListener("keydown", e => { if (e.key === "Enter" && e.target.id === "hero-doc") $("hero-doc-ok").click(); });
+  $("quick").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { go(b.dataset.go); window.scrollTo({top: 0}); } });
+
+  function seedExamples() {
+    const t = today0(), ex = {
+      "pila-hon": "5.000.000", "vac-sal": "3.500.000", "vac-ini": iso(new Date(t.getFullYear() - 1, 2, 1)), "vac-tom": "0", "vac-plan": "15",
+      "liq-sal": "3.500.000", "liq-ini": iso(new Date(t.getFullYear() - 1, 2, 1)), "liq-vd": iso(new Date(t.getFullYear() - 1, 2, 1)), "liq-vt": "0", "liq-pend": "0",
+      "liq-pact": iso(new Date(t.getFullYear() + 1, 2, 1)), "hex-sal": "3.500.000", "cob-net": "4.000.000", "cob-res": "0", "cob-h": "120", "cob-d": "20",
+      "sue-sal": "3.500.000"
+    };
+    Object.keys(ex).forEach(id => { $(id).value = ex[id]; });
+    $("pila-periodo").value = nextPila(); $("vac-fin").value = iso(t); $("liq-fin").value = iso(t);
+    hexHoras = {hed: 4, rn: 10};
+  }
+  function restoreInputs() {
+    const inp = S.settings.inputs || {};
+    PERSIST.forEach(id => {
+      if (!(id in inp)) return;
+      const el = $(id);
+      if (el.type === "checkbox") el.checked = inp[id] === "1"; else el.value = inp[id];
+    });
+    if ("liq-aux" in inp) auxTouched = true;
+    if ("sue-aux" in inp) sueAuxTouched = true;
+    if (inp.hexHoras) { try { hexHoras = JSON.parse(inp.hexHoras) || {}; } catch (e) {} }
+  }
+  function renderAll() { renderPila(); renderHistory(); renderCobros(); renderSueldo(); renderVac(); renderLiq(); updateHex(); renderCobrar(); renderParRates(); renderHome(); }
+
+  lsLoad(); seedExamples(); restoreInputs(); applyPerfilUI(); applyParamsUI(); applyTheme();
+  $("aj-sab").checked = !!S.settings.sabados; $("aj-upto").value = S.settings.paidThrough || ""; setDoc(S.settings.doc);
+  resetCbForm(); buildHex();
+  let start = (location.hash || "").replace("#", ""); if (KEYS.indexOf(start) < 0) start = "inicio";
+  renderAll(); go(start);
+  if (mq && mq.addEventListener) mq.addEventListener("change", applyTheme);
+})();
+</script>
+</body>
+</html>
