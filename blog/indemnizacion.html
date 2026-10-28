@@ -3,57 +3,176 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Indemnización por Despido Sin Justa Causa en Colombia - Calculadora Laboral</title>
-<meta name="description" content="Conoce cómo se calcula la indemnización por despido sin justa causa para contratos a término indefinido y fijo según la legislación laboral colombiana.">
+<title>Indemnización por despido sin justa causa en Colombia 2026</title>
+<meta name="description" content="Guía práctica sobre cómo se calcula la indemnización por despido sin justa causa en contratos a término indefinido y fijo en Colombia según la normativa vigente.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+<link rel="canonical" href="https://TU-DOMINIO/indemnizacion.html">
+<meta name="theme-color" content="#4338CA">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&family=JetBrains+Mono:wght@400..600&display=swap">
+<script>
+/* Aplica el tema guardado antes de pintar para evitar el parpadeo. */
+try{var t=(JSON.parse(localStorage.getItem("mipila.v1")||"null")||{}).settings;t=t&&t.theme;if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}
+</script>
 <style>
+/* ============ TOKENS (Idénticos al index.html) ============ */
 :root{
-  --bg:#F3F1FA; --surface:#FFFFFF; --ink:#171437; --muted:#5E5B80; --line:#E2DFF0;
+  --bg:#F3F1FA; --surface:#FFFFFF; --field:#F7F6FC; --ink:#171437; --muted:#5E5B80; --line:#E2DFF0;
   --accent:#4338CA; --accent-ink:#FFFFFF; --accent-soft:#E8E6FB;
-  --sans:"Figtree",system-ui,sans-serif; --mono:"JetBrains Mono",monospace;
-  --display:"Bricolage Grotesque","Figtree",sans-serif;
+  --good:#0F7B54; --good-soft:#D8F3E7; --warn:#8A5200; --warn-soft:#FCEBC8; --bad:#B42318; --bad-soft:#FDE2DF;
+  --hero-a:#3B2FD9; --hero-b:#7B3FE4; --hero-c:#C42C77;
+  --display:"Bricolage Grotesque","Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --sans:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --shadow:0 1px 2px rgba(23,20,55,.06),0 10px 28px -14px rgba(23,20,55,.22);
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
-  :root{
-    --bg:#0E0C20; --surface:#171433; --ink:#ECEAFB; --muted:#9E9BC4; --line:#2B2850;
+  :root:not([data-theme="light"]){
+    --bg:#0E0C20; --surface:#171433; --field:#110F28; --ink:#ECEAFB; --muted:#9E9BC4; --line:#2B2850;
     --accent:#9C93FF; --accent-ink:#0E0C20; --accent-soft:#25214F;
+    --hero-a:#2B22A8; --hero-b:#5B2BB8; --hero-c:#A2276B;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.6);
     color-scheme:dark;
   }
 }
+:root[data-theme="dark"]{
+  --bg:#0E0C20; --surface:#171433; --field:#110F28; --ink:#ECEAFB; --muted:#9E9BC4; --line:#2B2850;
+  --accent:#9C93FF; --accent-ink:#0E0C20; --accent-soft:#25214F;
+  --hero-a:#2B22A8; --hero-b:#5B2BB8; --hero-c:#A2276B;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+
+/* ============ BASE ============ */
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--sans)}
-.wrap{max-width:48rem;margin:0 auto;padding:2rem 1rem 4rem}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:2rem;box-shadow:0 4px 20px rgba(0,0,0,.08)}
-.tag{font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-h1{font:700 1.8rem/1.2 var(--display);margin:.5rem 0 1rem;color:var(--ink)}
-h2{font:700 1.2rem/1.3 var(--display);margin:1.5rem 0 .5rem;color:var(--accent)}
-p{margin-bottom:1rem;opacity:.9}
-ul{margin:0 0 1rem 1.2rem;padding:0;opacity:.9}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--sans);-webkit-text-size-adjust:100%}
+h1,h2,h3,p{margin:0}
+h1{font:700 clamp(1.5rem,3.5vw,2.2rem)/1.2 var(--display);letter-spacing:-.02em;margin-bottom:.5rem}
+h2{font:700 1.2rem/1.3 var(--display);margin:1.8rem 0 .6rem}
+p{margin-bottom:1rem;color:var(--muted)}
+strong{color:var(--ink)}
+.wrap{max-width:54rem;margin:0 auto;padding:1.5rem max(16px,env(safe-area-inset-right,0px)) calc(3rem + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+
+/* ============ CABECERA ============ */
+.top{position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top,0px);background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top-in{max-width:72rem;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem max(16px,env(safe-area-inset-right,0px)) .7rem max(16px,env(safe-area-inset-left,0px))}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:inherit;min-width:0}
+.logo{flex:none;width:2.4rem;height:2.4rem;border-radius:12px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--hero-a),var(--hero-c))}
+.brand h1{font:700 1.15rem/1.1 var(--display);letter-spacing:-.01em;margin:0}
+.brand small{display:block;font:500 .68rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:.15rem}
+.icon-btn{flex:none;width:2.5rem;height:2.5rem;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink)}
+.icon-btn:hover{border-color:var(--accent)}
+svg.i{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ============ ARTÍCULO Y CONTENIDO ============ */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.8rem;box-shadow:var(--shadow);margin-top:1.5rem}
+.back{display:inline-flex;align-items:center;gap:.4rem;margin-bottom:1rem;color:var(--accent);text-decoration:none;font-weight:600;font-size:.9rem}
+.back:hover{text-decoration:underline}
+ul{margin:0 0 1rem 1.2rem;color:var(--muted)}
 li{margin-bottom:.4rem}
-.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-weight:600;text-decoration:none;font-size:.9rem;margin-bottom:1.5rem}
-.btn:hover{border-color:var(--accent);background:var(--accent-soft)}
+.formula{background:var(--accent-soft);padding:1rem 1.2rem;border-radius:12px;font-family:var(--mono);font-size:.86rem;color:var(--ink);margin:1.2rem 0;border-left:4px solid var(--accent)}
+
+/* ============ PIE DE PÁGINA ============ */
+.foot{margin-top:2.5rem;font-size:.78rem;color:var(--muted);border-top:1px solid var(--line);padding-top:1.5rem}
 </style>
 </head>
 <body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html">
+      <span class="logo" aria-hidden="true"><svg class="i" width="22" height="22" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M8.5 12h2M13.5 12h2M8.5 16h2M13.5 16h2"/></svg></span>
+      <span><h1>Calculadora Laboral</h1><small>Colombia 2026</small></span>
+    </a>
+    <button class="icon-btn" id="theme-btn" type="button" aria-label="Cambiar tema" title="Cambiar tema">
+      <svg class="i" width="20" height="20" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/></svg></a>
+  </div>
+</header>
+
 <main class="wrap">
-  <a href="../index.html#inicio" class="btn">← Volver a la Calculadora</a>
+  <a class="back" href="index.html">← Volver al inicio y calculadoras</a>
+  
   <article class="card">
-    <span class="tag">Estabilidad Laboral</span>
-    <h1>Indemnización por Despido Sin Justa Causa en Colombia</h1>
-    <p>Cuando un empleador termina un contrato de trabajo de manera unilateral y sin una justa causa legal, está obligado por ley a pagar una indemnización económica al trabajador.</p>
+    <h1>¿Cómo se calcula la indemnización por despido sin justa causa en Colombia?</h1>
+    <p><em>Actualizado a 2026 · Tiempo de lectura: 5 minutos</em></p>
+
+    <p>Uno de los mayores temores para un trabajador dependiente es enfrentarse a la terminación unilateral de su contrato de trabajo por parte del empleador sin que exista una causa justa comprobada. En el sistema laboral colombiano, el Código Sustantivo del Trabajo (CST) protege al empleado mediante el pago de una <strong>indemnización por despido sin justa causa</strong>.</p>
+
+    <p>Esta indemnización no es un regalo ni una bonificación voluntaria; es una compensación obligatoria diseñada para resarcir el daño económico causado por la pérdida abrupta del empleo. A continuación, te explicamos en detalle cómo se aplica según el tipo de contrato.</p>
+
+    <h2>1. Contrato a término indefinido</h2>
+    <p>Para los contratos de duración indefinida, el cálculo de la indemnización varía dependiendo del nivel de ingresos del trabajador al momento del despido:</p>
     
-    <h2>Contrato a Término Indefinido</h2>
     <ul>
-      <li><b>Si ganas menos de 10 salarios mínimos:</b> Tienes derecho a 30 días de salario por el primer año laborado y 20 días adicionales por cada año subsiguiente (con pago proporcional por fracción de año).</li>
-      <li><b>Si ganas 10 o más salarios mínimos:</b> Corresponde a 20 días de salario por el primer año y 15 días adicionales por cada año siguiente.</li>
+      <li><strong>Trabajadores que devengan menos de 10 Salarios Mínimos Mensuales Legales Vigentes (SMMLV):</strong>
+        <ul>
+          <li>Se pagan <strong>30 días de salario</strong> por el primer año de servicio continuo.</li>
+          <li>Se pagan <strong>20 días adicionales de salario</strong> por cada uno de los años siguientes al primero (y proporcionalmente por fracción de año).</li>
+        </ul>
+      </li>
+      <li style="margin-top: .6rem;"><strong>Trabajadores que devengan 10 o más SMMLV:</strong>
+        <ul>
+          <li>Se pagan <strong>20 días de salario</strong> por el primer año de servicio continuo.</li>
+          <li>Se pagan <strong>15 días adicionales de salario</strong> por cada uno de los años siguientes al primero (y proporcionalmente por fracción de año).</li>
+        </ul>
+      </li>
     </ul>
 
-    <h2>Contrato a Término Fijo</h2>
-    <p>La indemnización equivale al valor de los salarios correspondientes al tiempo exacto que falte para cumplirse el plazo pactado en el contrato, estableciendo un piso mínimo de 15 días de salario.</p>
+    <div class="formula">
+      Ejemplo base: Si ganas menos de 10 mínimos y trabajaste 3 años, te corresponden 30 días del primer año + 40 días por los 2 años siguientes = 70 días de salario en total.
+    </div>
+
+    <h2>2. Contrato a término fijo</h2>
+    <p>En los contratos a término fijo, la lógica cambia por completo, ya que las partes pactaron una duración específica desde el principio. Según el artículo 64 del CST, la indemnización equivale a:</p>
+    <ul>
+      <li><strong>El valor de los salarios correspondientes al tiempo que falte para cumplirse el plazo pactado</strong> en el contrato.</li>
+      <li>Por disposición legal, el monto de la indemnización nunca podrá ser inferior a <strong>15 días de salario</strong>.</li>
+    </ul>
+
+    <h2>¿Qué pasa si el empleador no paga la liquidación y la indemnización?</h2>
+    <p>La ley es muy estricta respecto al momento del pago. Al terminar el contrato laboral, el empleador debe pagar inmediatamente los salarios y prestaciones adeudadas. Si se demuestra que hubo mala fe o retención injustificada de estos dineros, el trabajador puede exigir ante un juez laboral el pago de la <strong>indemnización moratoria</strong> (conocida popularmente como "un día de salario por cada día de retraso"), regulada en el artículo 65 del CST.</p>
+
+    <h2>Recomendación final</h2>
+    <p>Antes de firmar cualquier carta de terminación o un acuerdo de liquidación en el que sientas que tus derechos han sido vulnerados, te sugerimos respaldar tus cuentas, revisar tus desprendibles de pago y consultar directamente con un abogado especialista en derecho laboral o acudir al Ministerio del Trabajo para una asesoría formal.</p>
   </article>
+
+  <footer class="foot">
+    Referencia informativa basada en la normativa vigente en 2026. Antes de tomar decisiones jurídicas, confirma los valores con un profesional o en el Ministerio del Trabajo.
+  </footer>
 </main>
+
+<script>
+/* Sincronización del tema oscuro/claro con el resto de la app */
+(function(){
+  var mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  var isDark = function(){ 
+    var t = S_getTheme();
+    return t === "dark" || (t === "auto" && mq && mq.matches); 
+  };
+  function S_getTheme(){
+    try { return (JSON.parse(localStorage.getItem("mipila.v1")||"null")||{}).settings.theme || "auto"; } catch(e){ return "auto"; }
+  }
+  function applyTheme() {
+    var t = S_getTheme(), root = document.documentElement;
+    if (t === "light" || t === "dark") root.setAttribute("data-theme", t); else root.removeAttribute("data-theme");
+    var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = (t === "dark" || (t === "auto" && mq && mq.matches)) ? "#0E0C20" : "#4338CA";
+  }
+  document.getElementById("theme-btn").addEventListener("click", function(){
+    var current = S_getTheme();
+    var next = (current === "dark" ? "light" : "dark");
+    try {
+      var data = JSON.parse(localStorage.getItem("mipila.v1")||"{}");
+      if(!data.settings) data.settings = {};
+      data.settings.theme = next;
+      localStorage.setItem("mipila.v1", JSON.stringify(data));
+    } catch(e){}
+    applyTheme();
+  });
+  applyTheme();
+  if (mq && mq.addEventListener) mq.addEventListener("change", applyTheme);
+})();
+</script>
 </body>
 </html>
