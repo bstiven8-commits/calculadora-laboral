@@ -752,10 +752,10 @@ function calcSueldo(i, P) {
   const salBase = i.sal + (i.otros || 0);
   const aux = i.aux ? P.aux : 0;
   const ibc = Math.round(Math.min(Math.max(salBase, P.smmlv), 25 * P.smmlv));
-  const salud = Math.round(ibc * 0.04), pension = Math.round(ibc * 0.04);
+  const salud = Math.round(ibc * 0.04), pensión = Math.round(ibc * 0.04);
   const fr = fspRate(ibc / P.smmlv), fsp = Math.round(ibc * fr);
   const desc = i.desc || 0;
-  const neto = salBase + aux - salud - pension - fsp - desc;
+  const neto = salBase + aux - salud - pensión - fsp - desc;
   const exo = !!i.exo && salBase < 10 * P.smmlv;
   const e = {
     salud: exo ? 0 : Math.round(ibc * 0.085),
@@ -834,7 +834,7 @@ function mensajeCobro(c, hoy) {
   let cuando = "";
   const v = parseD(c.vence);
   if (v) { const d = diffDays(hoy, v); cuando = d < 0 ? ", que venció el " + fechaCorta(v) : ", con fecha prevista del " + fechaCorta(v); }
-  return saludo + " Te escribo para hacer seguimiento a " + que + " por " + COP(c.valor) + cuando + ". ¿Me confirmas cuándo se realizará? Quedo atento, y gracias por tu ayuda.";
+  return saludo + " Te escribo para hacer seguimiento al pago de " + que + " por " + COP(c.valor) + cuando + ". ¿Me confirmas cuándo se realizará? Quedo atento, y gracias por tu ayuda.";
 }
 // ==END==
 
@@ -1550,11 +1550,11 @@ function mensajeCobro(c, hoy) {
 })();
 </script>
 <script>
-/* Blog en Inicio: Artículos del blog vinculados a archivos HTML estáticos independientes dentro de la carpeta blog. */
+/* Blog en Inicio: Artículos del blog vinculados a archivos HTML estáticos en la raíz. */
 (function () {
   var BLOG = [
     {tag: "Jornada laboral 2026", t: "Cómo calcular las horas extra y recargos", d: "Tarifas diurnas, nocturnas y dominicales con la jornada de 42 horas y el recargo dominical del 90%.", href: "horas-extra.html", ic: "⏱️"},
-    {tag: "Estabilidad laboral", t: "Indemnización por despido sin justa causa", d: "Cómo se calcula en contratos a término indefinido y a término fijo según la ley colombiana.", href: "blog/indemnizacion.html", ic: "⚖️"}
+    {tag: "Estabilidad laboral", t: "Indemnización por despido sin justa causa", d: "Cómo se calcula en contratos a término indefinido y a término fijo según la ley colombiana.", href: "indemnizacion.html", ic: "⚖️"}
   ];
   var box = document.getElementById("blog-home"); if (!box || !BLOG.length) return;
   var $ = function (id) { return document.getElementById(id); };
@@ -1581,7 +1581,7 @@ function mensajeCobro(c, hoy) {
   });
   function tick() { if (!paused && !document.hidden && BLOG.length > 1 && box.offsetParent) show((cur + 1) % BLOG.length); }
   if (!still && BLOG.length > 1) timer = setInterval(tick, 7000);
-  ["mouseenter", "focusin", "touchstart"].forEach(function (ev) { box.addEventListener(ev, function () { paused = true; }, {passive: true}); });
+  ["mouseenter", "focusin", "touchstart"].forEach(function (ev) { box.addEventListener(ev, function () { paused = the; }, {passive: true}); });
   ["mouseleave", "focusout"].forEach(function (ev) { box.addEventListener(ev, function () { paused = false; }); });
   show(0, true);
 })();
