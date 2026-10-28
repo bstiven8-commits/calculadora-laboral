@@ -834,7 +834,7 @@ function mensajeCobro(c, hoy) {
   let cuando = "";
   const v = parseD(c.vence);
   if (v) { const d = diffDays(hoy, v); cuando = d < 0 ? ", que venció el " + fechaCorta(v) : ", con fecha prevista del " + fechaCorta(v); }
-  return saludo + " Te escribo para hacer seguimiento al pago de " + que + " por " + COP(c.valor) + cuando + ". ¿Me confirmas cuándo se realizará? Quedo atento, y gracias por tu ayuda.";
+  return saludo + " Te escribo para hacer seguimiento a " + que + " por " + COP(c.valor) + cuando + ". ¿Me confirmas cuándo se realizará? Quedo atento, y gracias por tu ayuda.";
 }
 // ==END==
 
@@ -1076,7 +1076,7 @@ function mensajeCobro(c, hoy) {
     $("pila-paid").hidden = isPaid(per, rec);
     const fact = facturadoEn(per);
     $("pila-fact").innerHTML = fact && fact !== hon
-      ? 'En Me deben tienes <b>' + COP(fact) + '</b> facturados en ' + esc(periodLabel(per)) + '. <button class="btn ghost small" type="button" id="pila-usefact">Usar este valor</button>' : "";
+      ? 'En Me deben tienes <b>' + COP(fact) + '</b> facturados en ' + esc(periodLabel(per)) + '. <button class="btn ghost small" type="button" id="pila-usefact">Usar هذا valor</button>' : "";
     return c;
   }
   $("pila-fact").addEventListener("click", e => {
@@ -1581,7 +1581,7 @@ function mensajeCobro(c, hoy) {
   });
   function tick() { if (!paused && !document.hidden && BLOG.length > 1 && box.offsetParent) show((cur + 1) % BLOG.length); }
   if (!still && BLOG.length > 1) timer = setInterval(tick, 7000);
-  ["mouseenter", "focusin", "touchstart"].forEach(function (ev) { box.addEventListener(ev, function () { paused = the; }, {passive: true}); });
+  ["mouseenter", "focusin", "touchstart"].forEach(function (ev) { box.addEventListener(ev, function () { paused = true; }, {passive: true}); });
   ["mouseleave", "focusout"].forEach(function (ev) { box.addEventListener(ev, function () { paused = false; }); });
   show(0, true);
 })();
