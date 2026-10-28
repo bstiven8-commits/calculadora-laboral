@@ -834,7 +834,7 @@ function mensajeCobro(c, hoy) {
   let cuando = "";
   const v = parseD(c.vence);
   if (v) { const d = diffDays(hoy, v); cuando = d < 0 ? ", que venció el " + fechaCorta(v) : ", con fecha prevista del " + fechaCorta(v); }
-  return saludo + " Te escribo para hacer seguimiento al pago de " + que + " por " + COP(c.valor) + cuando + ". ¿Me confirmas cuándo se realizará? Quedo atento, y gracias por tu ayuda.";
+  return saludo + " Te escribo para hacer seguimiento a " + que + " por " + COP(c.valor) + cuando + ". ¿Me confirmas cuándo se realizará? Quedo atento, y gracias por tu ayuda.";
 }
 // ==END==
 
@@ -1076,7 +1076,7 @@ function mensajeCobro(c, hoy) {
     $("pila-paid").hidden = isPaid(per, rec);
     const fact = facturadoEn(per);
     $("pila-fact").innerHTML = fact && fact !== hon
-      ? 'En Me deben tienes <b>' + COP(fact) + '</b> facturados en ' + esc(periodLabel(per)) + '. <button class="btn ghost small" type="button" id="pila-usefact">Usar este valor</button>' : "";
+      ? 'En Me deben tienes <b>' + COP(fact) + '</b> facturados en ' + esc(periodLabel(per)) + '. <button class="btn ghost small" type="button" id="pila-usefact">Usar هذا valor</button>' : "";
     return c;
   }
   $("pila-fact").addEventListener("click", e => {
@@ -1277,7 +1277,7 @@ function mensajeCobro(c, hoy) {
     const hon = row("Salario básico", "", sal) + (r.salBase - sal ? row("Otros pagos salariales", "", r.salBase - sal) : "") + (r.aux ? row("Auxilio de transporte", "", r.aux) : "");
     const ded = row("Salud", "4% del IBC " + COP(r.ibc), r.salud, "neg") + row("Pensión", "4% del IBC", r.pension, "neg") +
       (r.fsp ? row("Fondo de solidaridad pensional", PCT(r.fspRate) + " del IBC", r.fsp, "neg") : "") + (r.desc ? row("Otros descuentos", "", r.desc, "neg") : "");
-    const emp = row("Pensión", "12%", r.e.pension) + (r.exo ? "" : row("Salud", "8,5%", r.e.salud)) + row("ARL", PCT((ARL[$("sue-arl".value] || ARL["1"]).r), r.e.arl) + row("Caja de compensación", "4%", r.e.caja) +
+    const emp = row("Pensión", "12%", r.e.pension) + (r.exo ? "" : row("Salud", "8,5%", r.e.salud)) + row("ARL", PCT((ARL[$("sue-arl").value] || ARL["1"]).r), r.e.arl) + row("Caja de compensación", "4%", r.e.caja) +
       (r.exo ? "" : row("SENA", "2%", r.e.sena) + row("ICBF", "3%", r.e.icbf));
     const prov = row("Prima de servicios", "1 mes de salario al año", r.prov.prima) + row("Cesantías", "1 mes de salario al año", r.prov.cesantias) + row("Intereses sobre cesantías", "12% de las cesantías", r.prov.intereses) + row("Vacaciones", "15 días hábiles al año", r.prov.vacaciones);
     $("sue-out").innerHTML =
@@ -1544,9 +1544,8 @@ function mensajeCobro(c, hoy) {
   lsLoad(); seedExamples(); restoreInputs(); applyPerfilUI(); applyParamsUI(); applyTheme();
   $("aj-sab").checked = !!S.settings.sabados; $("aj-upto").value = S.settings.paidThrough || ""; setDoc(S.settings.doc);
   resetCbForm(); buildHex();
-  let start = (location.hash || "").replace("#", ""); if (KEYS.indexOf(start) < 0 || start === "seo-faq") start = "inicio";
+  let start = (location.hash || "").replace("#", ""); if (KEYS.indexOf(start) < 0) start = "inicio";
   renderAll(); go(start);
-  window.scrollTo({top: 0});
   if (mq && mq.addEventListener) mq.addEventListener("change", applyTheme);
 })();
 </script>
@@ -1582,7 +1581,7 @@ function mensajeCobro(c, hoy) {
   });
   function tick() { if (!paused && !document.hidden && BLOG.length > 1 && box.offsetParent) show((cur + 1) % BLOG.length); }
   if (!still && BLOG.length > 1) timer = setInterval(tick, 7000);
-  ["mouseenter", "focusin", "touchstart"].forEach(function (ev) { box.addEventListener(ev, function () { paused = the; }, {passive: true}); });
+  ["mouseenter", "focusin", "touchstart"].forEach(function (ev) { box.addEventListener(ev, function () { paused = true; }, {passive: true}); });
   ["mouseleave", "focusout"].forEach(function (ev) { box.addEventListener(ev, function () { paused = false; }); });
   show(0, true);
 })();
