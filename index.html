@@ -1106,10 +1106,6 @@ function mensajeCobro(c, hoy) {
     const r = S.records[periodId(perVal())];
     $("pila-num").value = r ? r.planilla || "" : ""; setMoney("pila-real", r ? r.real || 0 : 0); renderPila();
   });
-  function newPeriod(per) {
-    editingId = null; $("pila-periodo").value = per || nextPila(); $("pila-hon").value = ""; $("pila-costos").value = ""; $("pila-num").value = ""; $("pila-real").value = "";
-    persistInput("pila-hon"); persistInput("pila-costos"); renderPila();
-  }
   $("pila-new").addEventListener("click", () => newPeriod());
   function editRecord(id) {
     const r = S.records[id]; if (!r) return;
@@ -1554,7 +1550,7 @@ function mensajeCobro(c, hoy) {
 })();
 </script>
 <script>
-/* Blog en Inicio: agrega aquí cada artículo nuevo (tag, título, descripción, enlace e icono). */
+/* Blog en Inicio: Artículos del blog vinculados a archivos HTML estáticos independientes. */
 (function () {
   var BLOG = [
     {tag: "Jornada laboral 2026", t: "Cómo calcular las horas extra y recargos", d: "Tarifas diurnas, nocturnas y dominicales con la jornada de 42 horas y el recargo dominical del 90%.", href: "horas-extra.html", ic: "⏱️"},
