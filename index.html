@@ -5,7 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Calculadora Laboral Colombia 2026 - Seguridad Social y Liquidación</title>
 <meta name="description" content="Calculadora PILA para independientes en Colombia, cálculo de horas extra 2026, vacaciones, liquidación laboral y seguridad social según la normativa vigente.">
-<meta name="keywords" content="calculadora laboral colombia, calcular planilla pila independientes, simulador liquidacion laboral colombia, horas extra colombia 2026">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+<link rel="canonical" href="https://TU-DOMINIO/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora Laboral Colombia 2026">
+<meta property="og:description" content="PILA para independientes, liquidación, horas extra y vacaciones.">
+<meta property="og:url" content="https://TU-DOMINIO/">
 <meta name="geo.region" content="CO">
 <meta name="geo.placename" content="Bogotá">
 <meta name="google-site-verification" content="7qdNoibKtPxOy219vOG8NfeoOgE4h0JCIF74GzXsZiI">
@@ -188,6 +193,8 @@ input[type=checkbox]{width:auto;min-height:0;accent-color:var(--accent)}
 .sumbar span{display:block;font-size:.76rem;color:var(--muted)}
 .sumbar b{font:600 1.15rem var(--mono);font-variant-numeric:tabular-nums}
 
+.blog-card:hover{border-color:var(--accent)!important}
+
 /* ============ HISTORIAL ============ */
 .hrow{display:grid;grid-template-columns:7.5rem minmax(0,1fr) 8.5rem auto;grid-template-areas:"m b a x";gap:.5rem 1rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
 .hrow .m{grid-area:m;font-weight:600;text-transform:capitalize}
@@ -219,6 +226,12 @@ td{padding:.5rem .6rem .5rem 0;border-bottom:1px solid var(--line);vertical-alig
 td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 td input{max-width:6rem;text-align:right}
 
+.guia{margin-top:1rem;padding:1.1rem 1.2rem;border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:14px;background:var(--surface)}
+.guia h3{font:700 1rem var(--display);margin-bottom:.4rem}
+.guia p{font-size:.88rem;color:var(--muted);margin:.4rem 0;max-width:80ch}
+.guia .guia-nota{font-size:.76rem;font-style:italic}
+.foot-links a{color:var(--accent);font-size:inherit}
+
 /* ============ PIE, DIÁLOGOS, TOAST ============ */
 .ad-slot{margin-top:1.4rem;padding:.8rem;min-height:3rem;background:var(--field);border:1px dashed var(--line);border-radius:12px;text-align:center;font-size:.75rem;color:var(--muted)}
 .seo-faq{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--line)}
@@ -233,6 +246,14 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
 #toast div{background:var(--ink);color:var(--bg);font-size:.85rem;padding:.6rem .95rem;border-radius:10px;max-width:30rem;box-shadow:var(--shadow)}
 #csvbox{width:100%;min-height:7rem;font:400 .78rem var(--mono);margin-top:.6rem}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"¿Cómo se calcula el aporte a salud y pensión como independiente?","acceptedAnswer":{"@type":"Answer","text":"Los independientes cotizan sobre un IBC equivalente al 40% de sus ingresos netos mensuales. Sobre ese valor se paga el 12,5% a salud y el 16% a pensión."}},
+{"@type":"Question","name":"¿Cuándo vence el pago de la PILA?","acceptedAnswer":{"@type":"Answer","text":"Depende de los dos últimos dígitos de tu cédula o NIT: va del segundo al decimosexto día hábil del mes siguiente al período cotizado, según el Decreto 1990 de 2016."}},
+{"@type":"Question","name":"¿Cómo funciona la liquidación por despido sin justa causa?","acceptedAnswer":{"@type":"Answer","text":"En contrato indefinido, 30 días de salario por el primer año y 20 por cada año adicional (si devenga menos de 10 salarios mínimos). En contrato a término fijo, los salarios faltantes para cumplir el plazo pactado."}},
+{"@type":"Question","name":"¿Qué aportes debe pagar mi empresa si soy empleado?","acceptedAnswer":{"@type":"Answer","text":"La empresa aporta pensión (12%), ARL y caja (4%), y salud (8,5%), SENA (2%) e ICBF (3%) salvo que sea persona jurídica exonerada. El empleado aporta 4% a salud y 4% a pensión."}}
+]}
+</script>
 </head>
 <body>
 
@@ -277,7 +298,7 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
       <div class="card">
         <h2>Datos del período</h2>
         <p class="hint" style="margin-bottom:1rem">Pagas mes vencido: en octubre pagas lo de septiembre.</p>
-        <div class="field"><label for="pila-periodo">Período cotizado</label><input type="month" id="pila-periodo"></div>
+        <div class="field"><label for="pila-periodo">Período cotizado</label><input type="month" id="pila-periodo" placeholder="2026-09"></div>
         <div class="field"><label for="pila-hon">Honorarios del mes (sin IVA)</label><div class="money"><span>$</span><input id="pila-hon" inputmode="numeric" autocomplete="off"></div><div id="pila-fact" class="hint"></div></div>
         <div class="field"><label for="pila-costos">Costos y gastos deducibles (opcional)</label><div class="money"><span>$</span><input id="pila-costos" inputmode="numeric" autocomplete="off"></div><span class="hint">Solo si puedes soportarlos. Se restan antes de aplicar el porcentaje.</span></div>
         <div class="field"><label for="pila-base">Porcentaje sobre el que cotizas</label><input type="number" id="pila-base" min="1" max="100" step="1"><span class="hint">La regla general es 40% de tus ingresos netos.</span></div>
@@ -297,6 +318,8 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
       </div>
       <div class="card" id="pila-out" aria-live="polite"></div>
     </div>
+  
+    <aside class="guia"><h3>Qué dice la ley para independientes</h3><p>Los trabajadores independientes y contratistas cotizan a salud (12,5%) y pensión (16%) sobre un IBC equivalente al 40% de sus ingresos netos mensuales, con piso de 1 SMMLV y tope de 25 SMMLV (Ley 100 de 1993 y Ley 1955 de 2019, art. 244). Desde 4 SMMLV se suma el Fondo de Solidaridad Pensional (Ley 797 de 2003).</p><p>La ARL es obligatoria en contratos de más de un mes. En riesgos I a III la paga el contratista, y en riesgos IV y V la paga el contratante (Decreto 723 de 2013). Los plazos de la planilla se definen por los dos últimos dígitos del documento (Decreto 1990 de 2016).</p><p>Cómo leer el resultado: el IBC es la base sobre la que se calculan todos los aportes, y el total es lo que debes pagar en tu operador PILA. La UGPP puede verificar que tu IBC sea coherente con tus ingresos reales, así que conserva tus cuentas de cobro y soportes de costos.</p><p class="guia-nota">Información de referencia: verifica la vigencia de las normas citadas antes de tomar decisiones.</p></aside>
   </section>
 
   <!-- ============ HISTORIAL ============ -->
@@ -367,6 +390,8 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
       </div>
       <div class="card" id="sue-out" aria-live="polite"></div>
     </div>
+  
+    <aside class="guia"><h3>Qué dice la ley para empleados</h3><p>El trabajador aporta 4% a salud y 4% a pensión sobre su salario (Ley 100 de 1993), más el Fondo de Solidaridad Pensional desde 4 SMMLV. El auxilio de transporte se paga a quienes ganan hasta 2 SMMLV y no hace parte del IBC (Ley 15 de 1959).</p><p>El empleador paga pensión (12%), ARL y caja de compensación (4%). Salud (8,5%), SENA (2%) e ICBF (3%) pueden estar exonerados si es persona jurídica y el trabajador gana menos de 10 SMMLV (Estatuto Tributario, art. 114-1).</p><p>Cómo leer el resultado: el neto mensual es antes de retención en la fuente (Estatuto Tributario, art. 383). Los aportes de la empresa no se descuentan de tu salario; puedes compararlos con tu planilla o certificado de aportes.</p><p class="guia-nota">Información de referencia: verifica la vigencia de las normas citadas antes de tomar decisiones.</p></aside>
   </section>
 
   <!-- ============ VACACIONES ============ -->
@@ -387,6 +412,8 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
       </div>
       <div class="card" id="vac-out" aria-live="polite"></div>
     </div>
+  
+    <aside class="guia"><h3>Qué dice la ley sobre vacaciones</h3><p>Todo trabajador tiene derecho a 15 días hábiles de vacaciones remuneradas por cada año de servicio (Código Sustantivo del Trabajo, art. 186). Se causan de forma proporcional al tiempo trabajado y se pagan con el salario ordinario, sin auxilio de transporte.</p><p>Se puede compensar en dinero hasta la mitad de las vacaciones, siempre que se disfruten las restantes (art. 189). Es posible acumular hasta dos períodos, pero solo por acuerdo y no más allá de lo que permite la ley.</p><p>Cómo leer el resultado: los días pendientes se calculan con año de 360 días, y el valor de cada día es el salario dividido entre 30. Si el cálculo de tu empresa difiere, pídele el detalle de la base salarial usada.</p><p class="guia-nota">Información de referencia: verifica la vigencia de las normas citadas antes de tomar decisiones.</p></aside>
   </section>
 
   <!-- ============ LIQUIDACIÓN ============ -->
@@ -414,6 +441,8 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
       </div>
       <div class="card" id="liq-out" aria-live="polite"></div>
     </div>
+  
+    <aside class="guia"><h3>Qué dice la ley sobre la liquidación</h3><p>Al terminar el contrato se pagan cesantías (un mes de salario por año, CST art. 249), intereses sobre cesantías del 12% anual (Ley 52 de 1975), prima de servicios (30 días por año, art. 306) y vacaciones pendientes. Cesantías y prima se calculan con el auxilio de transporte; las vacaciones no.</p><p>Si el despido es sin justa causa hay indemnización (art. 64): en contrato indefinido, 30 días por el primer año y 20 por cada año adicional para salarios inferiores a 10 SMMLV; en contrato a término fijo, el valor de los salarios del tiempo que falta para cumplir el plazo.</p><p>Cómo leer el resultado: es un estimado sin descuentos de préstamos ni retención. Si el empleador no paga al terminar el contrato, puede aplicar indemnización moratoria (art. 65). Antes de firmar una liquidación, valida las cifras con un abogado laboral o el Ministerio del Trabajo.</p><p class="guia-nota">Información de referencia: verifica la vigencia de las normas citadas antes de tomar decisiones.</p></aside>
   </section>
 
   <!-- ============ HORAS EXTRA ============ -->
@@ -423,7 +452,7 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
       <div class="card">
         <h2>Tu salario</h2>
         <div class="field" style="margin-top:.8rem"><label for="hex-sal">Salario mensual</label><div class="money"><span>$</span><input id="hex-sal" inputmode="numeric" autocomplete="off"></div></div>
-        <div class="field"><label for="hex-hm">Horas ordinarias al mes</label><input type="number" id="hex-hm" min="1" step="1"><span class="hint">Déjalo vacío para usar el valor de Ajustes (42 horas semanales × 30 days ÷ 6 = 210).</span></div>
+        <div class="field"><label for="hex-hm">Horas ordinarias al mes</label><input type="number" id="hex-hm" min="1" step="1"><span class="hint">Déjalo vacío para usar el valor de Ajustes (42 horas semanales × 30 días ÷ 6 = 210).</span></div>
         <div id="hex-base" class="meta"></div>
       </div>
       <div class="card">
@@ -433,6 +462,8 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
         <p class="hint" style="margin-top:.5rem">En los recargos (nocturno, dominical) el salario ya cubre la hora ordinaria, por eso se paga solo el porcentaje. Las horas extra se pagan completas.</p>
       </div>
     </div>
+  
+    <aside class="guia"><h3>Qué dice la ley sobre jornada y recargos</h3><p>La jornada máxima baja gradualmente a 42 horas semanales hasta julio de 2026 (Ley 2101 de 2021). El trabajo nocturno, las horas extra y el trabajo dominical o festivo se pagan con recargos sobre la hora ordinaria (CST, arts. 168 y 179): extra diurna 25%, extra nocturna 75% y nocturno ordinario 35%.</p><p>La reforma laboral (Ley 2466 de 2025) amplió el horario nocturno, que empieza a las 7 p. m., y sube el recargo dominical y festivo de forma gradual hasta el 100% en 2027. La calculadora usa el 90% vigente desde julio de 2026.</p><p>Cómo leer el resultado: en los recargos la calculadora paga solo el porcentaje adicional, porque supone que el salario mensual ya cubre la hora ordinaria; las horas extra se pagan completas. Si tu contrato o empresa liquida distinto, ajusta las horas ordinarias o los porcentajes en Ajustes.</p><p class="guia-nota">Información de referencia: verifica la vigencia de las normas citadas antes de tomar decisiones.</p></aside>
   </section>
 
   <!-- ============ CUÁNTO COBRAR ============ -->
@@ -451,6 +482,8 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
       </div>
       <div class="card" id="cob-out" aria-live="polite"></div>
     </div>
+  
+    <aside class="guia"><h3>Cómo interpretar este cálculo</h3><p>Parte de lo que quieres recibir y calcula cuánto facturar para cubrir seguridad social, costos y una reserva propia. Como independiente no recibes prima, cesantías ni vacaciones, por eso conviene separar un porcentaje de cada cobro.</p><p>El resultado está antes de IVA y de retenciones en la fuente, que dependen de tu régimen tributario y de tus contratantes. Las tarifas de seguridad social siguen las reglas de la pestaña Seguridad social.</p><p class="guia-nota">Información de referencia: verifica la vigencia de las normas citadas antes de tomar decisiones.</p></aside>
   </section>
 
   <!-- ============ AJUSTES ============ -->
@@ -474,7 +507,7 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
           <div class="field" style="margin-top:.8rem"><label for="aj-doc">Últimos 2 dígitos de tu cédula</label><input class="doc-input" id="aj-doc" inputmode="numeric" maxlength="2" autocomplete="off" placeholder="00" style="max-width:6rem;font-family:var(--mono)"></div>
           <label class="check"><input type="checkbox" id="aj-sab"><span>Contar los sábados como días hábiles</span></label>
           <p class="hint">Por defecto se cuentan de lunes a viernes, sin festivos. Confirma la fecha exacta en tu operador PILA.</p>
-          <div class="field" style="margin-top:1rem"><label for="aj-upto">Estoy al día hasta el período</label><input type="month" id="aj-upto"><span class="hint">Ese período y los anteriores cuentan como pagados. La app no puede consultar tu operador PILA: confírmalo con tu planilla o certificado de pago. Déjalo vacío si no estás seguro.</span></div>
+          <div class="field" style="margin-top:1rem"><label for="aj-upto">Estoy al día hasta el período</label><input type="month" id="aj-upto" placeholder="2026-09"><span class="hint">Ese período y los anteriores cuentan como pagados. La app no puede consultar tu operador PILA: confírmalo con tu planilla o certificado de pago. Déjalo vacío si no estás seguro.</span></div>
         </div>
         <div class="card">
           <h2>Apariencia</h2>
@@ -523,6 +556,8 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
     <div class="foot-links">
       <button type="button" data-dlg="dlg-priv">Política de Privacidad y Publicidad</button>
       <button type="button" data-dlg="dlg-terms">Términos y Condiciones / Descargo de Responsabilidad</button>
+      <button type="button" data-dlg="dlg-contact">Contacto</button>
+      <a href="horas-extra.html">Blog</a>
     </div>
   </footer>
 </main>
@@ -531,8 +566,8 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
   <h2 id="dlg-priv-t">Política de Privacidad y Publicidad</h2>
   <p class="lead" style="margin-top:.8rem">En cumplimiento de la normativa de protección de datos y de las políticas de los proveedores publicitarios, te informamos cómo se trata la información en esta plataforma.</p>
   <div class="notes" style="gap:1rem">
-    <p class="note info"><b>Datos locales:</b> Los cálculos, el historial de pagos, tus cobros y tus ajustes se guardan únicamente en el almacenamiento de tu navegador (localStorage). No se envían a ningún servidor. Si borras los datos del navegador, se pierden; usa la copia de seguridad en Ajustes para conservarlos.</p>
-    <p class="note info"><b>Cookies, Google y publicidad:</b> Este sitio puede usar tecnologías de terceros, incluidas cookies de Google y redes publicitarias (como Google AdSense). Estos proveedores usan cookies para publicar anuncios basados en tus visitas anteriores a este u otros sitios web, lo que permite ofrecer el contenido de forma gratuita.</p>
+    <p class="note info"><b>Datos locales:</b> Los cálculos, el historial de pagos, tus cobros y tus ajustes se guardan únicamente en el almacenamiento de tu navegador (localStorage). No se envían a ningún servidor propio: el sitio no tiene cuentas ni base de datos. Si borras los datos del navegador, se pierden; usa la copia de seguridad en Ajustes para conservarlos.</p>
+    <p class="note info"><b>Cookies, Google y publicidad:</b> Este sitio puede usar tecnologías de terceros, incluidas cookies de Google y redes publicitarias (como Google AdSense). Estos proveedores usan cookies para publicar anuncios basados en tus visitas anteriores a este u otros sitios web, lo que permite ofrecer el contenido de forma gratuita. Además, las tipografías se cargan desde Google Fonts, por lo que tu navegador se conecta a servidores de Google al visitar el sitio. Puedes gestionar la publicidad personalizada en adssettings.google.com. Contacto: TU-CORREO@dominio.com.</p>
   </div>
   <div style="margin-top:1.5rem;text-align:right"><button class="btn small" type="button" data-close>Cerrar</button></div>
 </dialog>
@@ -547,6 +582,16 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
   <div style="margin-top:1.5rem;text-align:right"><button class="btn small" type="button" data-close>Cerrar</button></div>
 </dialog>
 
+<dialog class="dlg" id="dlg-contact" aria-labelledby="dlg-contact-t">
+  <h2 id="dlg-contact-t">Contacto</h2>
+  <p class="lead" style="margin-top:.8rem">¿Encontraste un error, tienes una sugerencia o una duda sobre la calculadora? Escríbenos.</p>
+  <div class="notes" style="gap:1rem">
+    <p class="note info"><b>Correo:</b> <a href="mailto:TU-CORREO@dominio.com">TU-CORREO@dominio.com</a></p>
+    <p class="note info">Respondemos consultas sobre el funcionamiento del sitio. No prestamos asesoría legal ni contable individual: para tu caso concreto consulta a un abogado, a tu contador o al Ministerio del Trabajo.</p>
+  </div>
+  <div style="margin-top:1.5rem;text-align:right"><button class="btn small" type="button" data-close>Cerrar</button></div>
+</dialog>
+
 <div id="toast" aria-live="polite"></div>
 
 <script>
@@ -556,7 +601,7 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
    ========================================================================== */
 // ==CALC==
 const DEF = {
-  params: {smmlv: 1750905, aux: 249095, horasMes: 210, dominical: 90, nocturno: 35},
+  params: {v: 1, smmlv: 1750905, aux: 249095, horasMes: 210, dominical: 90, nocturno: 35},
   perfil: {basePct: 40, arl: "1", caja: "0", redondeo: true, arlContratante: true},
   doc: "", sabados: false, theme: "auto", paidThrough: "", asked: false, inputs: {}
 };
@@ -774,6 +819,7 @@ function mensajeCobro(c, hoy) {
   const NUM = (x, d) => x.toLocaleString("es-CO", {maximumFractionDigits: d == null ? 1 : d});
   const clone = o => JSON.parse(JSON.stringify(o));
   const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  const perOk = v => /^\d{4}-(0[1-9]|1[0-2])$/.test(v || "");
   const today0 = () => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), d.getDate()); };
   const row = (l, sub, v, cls) => '<li' + (cls ? ' class="' + cls + '"' : '') + '><span>' + l + (sub ? '<small>' + sub + '</small>' : '') + '</span><i class="dots"></i><b>' + COP(v) + '</b></li>';
   const sec = t => '<li class="sec">' + t + '</li>';
@@ -800,7 +846,7 @@ function mensajeCobro(c, hoy) {
   function lsLoad() {
     try {
       const j = JSON.parse(localStorage.getItem(LS) || "null");
-      if (j) { S.records = j.records || {}; S.cobros = Array.isArray(j.cobros) ? j.cobros : []; S.settings = merge(DEF, j.settings); }
+      if (j) { S.records = j.records || {}; S.cobros = Array.isArray(j.cobros) ? j.cobros : []; S.settings = merge(DEF, j.settings); if (!j.settings || !j.settings.params || j.settings.params.v !== DEF.params.v) S.settings.params = clone(DEF.params); }
     } catch (e) {}
   }
   function lsSave() {
@@ -818,7 +864,7 @@ function mensajeCobro(c, hoy) {
   };
   const amt = r => Number(r.real) || r.total || 0;
   function setPaidThrough(per) {
-    S.settings.paidThrough = per || ""; S.settings.asked = true;
+    S.settings.paidThrough = perOk(per) ? per : ""; S.settings.asked = true;
     $("aj-upto").value = S.settings.paidThrough; lsSave();
     renderPila(); renderHistory(); renderHome();
   }
@@ -937,9 +983,10 @@ function mensajeCobro(c, hoy) {
   const periodId = v => "p" + v.replace("-", "");
   const periodLabel = v => { const p = v.split("-"); return MESES[+p[1] - 1] + " " + p[0]; };
   const defaultPeriod = () => { const d = today0(); return iso(new Date(d.getFullYear(), d.getMonth() - 1, 1)).slice(0, 7); };
+  const perVal = () => { const v = $("pila-periodo").value; return perOk(v) ? v : defaultPeriod(); };
   function readPerfilFromUI() {
     const p = perfil();
-    p.basePct = nv("pila-base") || 40; p.arl = $("pila-arl").value; p.caja = $("pila-caja").value; p.redondeo = $("pila-red").checked; p.arlContratante = $("pila-arlc").checked;
+    p.basePct = Math.min(100, Math.max(1, nv("pila-base") || 40)); p.arl = $("pila-arl").value; p.caja = $("pila-caja").value; p.redondeo = $("pila-red").checked; p.arlContratante = $("pila-arlc").checked;
   }
   function applyPerfilUI() {
     const p = perfil();
@@ -962,7 +1009,7 @@ function mensajeCobro(c, hoy) {
     $("arlc-wrap").hidden = !(pf.arl === "4" || pf.arl === "5");
     const hon = mv("pila-hon"), cos = mv("pila-costos");
     const c = calcPila(hon, cos, pf, P());
-    const per = $("pila-periodo").value || defaultPeriod();
+    const per = perVal();
     const rec = S.records[periodId(per)];
     let rows = row("Salud", "12,5% del IBC", c.salud) + row("Pensión", "16% del IBC", c.pension);
     if (c.fsp) rows += row("Fondo de solidaridad pensional", PCT(c.fspRate) + " del IBC (desde 4 SMMLV)", c.fsp);
@@ -1005,14 +1052,14 @@ function mensajeCobro(c, hoy) {
   }
   $("pila-fact").addEventListener("click", e => {
     if (e.target.id !== "pila-usefact") return;
-    setMoney("pila-hon", facturadoEn($("pila-periodo").value || defaultPeriod())); persistInput("pila-hon"); renderPila();
+    setMoney("pila-hon", facturadoEn(perVal())); persistInput("pila-hon"); renderPila();
   });
   ["pila-hon", "pila-costos", "pila-base", "pila-arl", "pila-caja", "pila-red", "pila-arlc", "pila-periodo"].forEach(id => {
     const h = () => { if (id !== "pila-hon" && id !== "pila-costos" && id !== "pila-periodo") { readPerfilFromUI(); saveSoon(); } renderPila(); };
     $(id).addEventListener("input", h); $(id).addEventListener("change", h);
   });
   function savePeriod(markPaid) {
-    const per = $("pila-periodo").value || defaultPeriod(), hon = mv("pila-hon"), real = mv("pila-real");
+    const per = perVal(), hon = mv("pila-hon"), real = mv("pila-real");
     if (!hon && !real) { toast("Escribe los honorarios del período o el valor que pagaste."); return; }
     readPerfilFromUI();
     const cos = mv("pila-costos"), c = hon ? calcPila(hon, cos, perfil(), P()) : {ibc: 0, salud: 0, pension: 0, fsp: 0, arl: 0, caja: 0, total: real};
@@ -1027,7 +1074,7 @@ function mensajeCobro(c, hoy) {
   $("pila-paid").addEventListener("click", () => savePeriod(true));
   $("pila-real").addEventListener("input", renderPila);
   $("pila-periodo").addEventListener("change", () => {
-    const r = S.records[periodId($("pila-periodo").value || defaultPeriod())];
+    const r = S.records[periodId(perVal())];
     $("pila-num").value = r ? r.planilla || "" : ""; setMoney("pila-real", r ? r.real || 0 : 0); renderPila();
   });
   function newPeriod(per) {
@@ -1205,7 +1252,7 @@ function mensajeCobro(c, hoy) {
     const hon = row("Salario básico", "", sal) + (r.salBase - sal ? row("Otros pagos salariales", "", r.salBase - sal) : "") + (r.aux ? row("Auxilio de transporte", "", r.aux) : "");
     const ded = row("Salud", "4% del IBC " + COP(r.ibc), r.salud, "neg") + row("Pensión", "4% del IBC", r.pension, "neg") +
       (r.fsp ? row("Fondo de solidaridad pensional", PCT(r.fspRate) + " del IBC", r.fsp, "neg") : "") + (r.desc ? row("Otros descuentos", "", r.desc, "neg") : "");
-    const emp = row("Pensión", "12%", r.e.pension) + (r.exo ? "" : row("Salud", "8,5%", r.e.salud)) + row("ARL", PCT(ARL[$("sue-arl").value].r), r.e.arl) + row("Caja de compensación", "4%", r.e.caja) +
+    const emp = row("Pensión", "12%", r.e.pension) + (r.exo ? "" : row("Salud", "8,5%", r.e.salud)) + row("ARL", PCT((ARL[$("sue-arl").value] || ARL["1"]).r), r.e.arl) + row("Caja de compensación", "4%", r.e.caja) +
       (r.exo ? "" : row("SENA", "2%", r.e.sena) + row("ICBF", "3%", r.e.icbf));
     const prov = row("Prima de servicios", "1 mes de salario al año", r.prov.prima) + row("Cesantías", "1 mes de salario al año", r.prov.cesantias) + row("Intereses sobre cesantías", "12% de las cesantías", r.prov.intereses) + row("Vacaciones", "15 días hábiles al año", r.prov.vacaciones);
     $("sue-out").innerHTML =
@@ -1227,7 +1274,7 @@ function mensajeCobro(c, hoy) {
     if (!a || !b || b < a) { $("vac-out").innerHTML = '<p class="empty-state">Escribe fechas válidas: la fecha final debe ser igual o posterior a la inicial.</p>'; return; }
     const dias = diasInc(a, b), v = calcVac(sal, dias, nv("vac-tom")), plan = nv("vac-plan");
     $("vac-out").innerHTML =
-      '<h2>Vacaciones causadas</h2><p class="meta">' + dias + ' días trabajados (año de 360 days)</p>' +
+      '<h2>Vacaciones causadas</h2><p class="meta">' + dias + ' días trabajados (año de 360 días)</p>' +
       '<ul class="ledger">' +
       '<li><span>Días hábiles causados</span><i class="dots"></i><b>' + NUM(v.causados, 2) + '</b></li>' +
       '<li><span>Menos: ya disfrutados</span><i class="dots"></i><b>' + NUM(nv("vac-tom"), 2) + '</b></li>' +
@@ -1332,8 +1379,16 @@ function mensajeCobro(c, hoy) {
         const j = JSON.parse(fr.result);
         if (!j || typeof j !== "object" || typeof j.records !== "object" || j.records === null) throw new Error("formato");
         if (!confirm("Restaurar reemplaza los datos que tienes ahora en este navegador. ¿Continuar?")) return;
-        S.records = j.records; S.cobros = Array.isArray(j.cobros) ? j.cobros.filter(c => c && typeof c === "object").map(c => Object.assign({}, c, {id: String(c.id || newId()), valor: Number(c.valor) || 0, paid: !!c.paid})) : [];
-        S.settings = merge(DEF, j.settings); lsSave(); location.reload();
+        const okD = s => /^\d{4}-\d{2}-\d{2}$/.test(s || "") ? s : "";
+        S.records = {};
+        Object.keys(j.records).forEach(k => {
+          const r = j.records[k];
+          if (/^p\d{6}$/.test(k) && r && /^\d{4}-\d{2}$/.test(r.period)) { r.paidOn = okD(r.paidOn); S.records[k] = r; }
+        });
+        S.cobros = Array.isArray(j.cobros) ? j.cobros.filter(c => c && typeof c === "object").map(c => Object.assign({}, c, {
+          id: String(c.id || newId()).replace(/[^\w-]/g, ""), valor: Number(c.valor) || 0, paid: !!c.paid,
+          emision: okD(c.emision), vence: okD(c.vence), paidOn: okD(c.paidOn)})) : [];
+        S.settings = merge(DEF, j.settings); if (!j.settings || !j.settings.params || j.settings.params.v !== DEF.params.v) S.settings.params = clone(DEF.params); lsSave(); location.reload();
       } catch (err) { toast("No pude leer ese archivo. Elige un respaldo descargado desde esta app."); }
     };
     fr.readAsText(f);
@@ -1398,7 +1453,7 @@ function mensajeCobro(c, hoy) {
       tile("Seguridad social pagada en " + yr, COP(pagado), pagadas.length + (pagadas.length === 1 ? " planilla con detalle" : " planillas con detalle"), "var(--good)") +
       tile("Planillas guardadas sin pagar", COP(porPagar.reduce((a, r) => a + amt(r), 0)), porPagar.length + (porPagar.length === 1 ? " período" : " períodos"), "var(--warn)") +
       tile("Te deben", COP(sum(pendC)), pendC.length + (pendC.length === 1 ? " cobro pendiente" : " cobros pendientes"), "var(--accent)") +
-      tile("Cobros vencidos", COP(sum(vencC)), vencC.length ? vencC.length + (vencC.length === 1 ? " por reclamar" : " por reclamar") : "Todo al día", vencC.length ? "var(--bad)" : "var(--good)");
+      tile("Cobros vencidos", COP(sum(vencC)), vencC.length ? vencC.length + " por reclamar" : "Todo al día", vencC.length ? "var(--bad)" : "var(--good)");
 
     // calendario
     if (!docOk()) $("home-cal").innerHTML = '<p class="empty-state">Agrega tus 2 últimos dígitos de la cédula arriba para ver las fechas de los próximos meses.</p>';
@@ -1445,6 +1500,7 @@ function mensajeCobro(c, hoy) {
     };
     Object.keys(ex).forEach(id => { $(id).value = ex[id]; });
     $("pila-periodo").value = nextPila(); $("vac-fin").value = iso(t); $("liq-fin").value = iso(t);
+    $("liq-aux").checked = true; $("sue-aux").checked = true;
     hexHoras = {hed: 4, rn: 10};
   }
   function restoreInputs() {
