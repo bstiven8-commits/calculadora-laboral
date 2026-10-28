@@ -16,7 +16,7 @@ Para agregar un artículo: crea su cuerpo, añádelo a ART y a la lista PAGINAS 
 import os
 
 # ====== CONFIGURACIÓN ======
-DOMINIO = "TU-DOMINIO"   # sin https:// y sin barra final, p. ej. "calculadoralaboralcolombia.online"
+DOMINIO = "calculadoralaboralcolombia.online"   # sin https:// y sin barra final
 SALIDA = "."             # carpeta donde se escriben los archivos
 # ===========================
 
