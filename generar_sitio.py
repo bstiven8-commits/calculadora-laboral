@@ -24,6 +24,7 @@ SALIDA = "sitio"                                    # carpeta donde se escriben 
 CORREO = os.environ.get("CORREO", "")               # correo público de contacto (obligatorio)
 MARCA = "Calculadora Laboral Colombia"
 ADS_CLIENT = "ca-pub-3761150056608968"
+GA_ID = os.environ.get("GA_ID", "GTM-MPSK8MKB")   # etiqueta de Google (GTM-… o G-…); vacío = sin analítica
 ACTUALIZADO = "noviembre de 2026"
 REVISADO = "25 de noviembre de 2026"                # fecha de la última revisión de cifras y normas (actualízala al revisar)
 # ===========================
@@ -76,6 +77,7 @@ TPL = r'''<!doctype html>
 <meta name="theme-color" content="#101B3B">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
 @ADS@
+@GA@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Spline+Sans+Mono:wght@400..700&display=swap">
 @JSONLD@
 <style>
@@ -146,6 +148,18 @@ footer b{color:var(--on-ink)}
 </body></html>'''
 
 ADS = f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADS_CLIENT}" crossorigin="anonymous"></script>'
+
+if GA_ID.startswith("GTM-"):      # fragmento tal como lo entrega Google al instalar manualmente la etiqueta
+    GA = (f'<script async src="https://www.googletagmanager.com/gtm.js?id={GA_ID}"></script>'
+          '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());</script>')
+elif GA_ID:
+    GA = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>'
+          f'<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag("js",new Date());gtag("config","{GA_ID}");</script>')
+else:
+    GA = ""
+ANALITICA = ('<h2>Analítica de visitas (Google Analytics)</h2>'
+             '<p>Usamos Google Analytics para conocer, de forma agregada, qué páginas se visitan, desde qué países o dispositivos y desde qué enlaces llegan los visitantes. Google Analytics usa cookies y recibe información técnica de tu navegador. Los datos se usan solo con fines estadísticos y para mejorar las guías. Los valores que escribes en la calculadora no se envían a Google Analytics. '
+             'Puedes impedir la medición con el <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener" target="_blank">complemento de inhabilitación de Google Analytics</a> o bloqueando las cookies en tu navegador.</p>') if GA_ID else ""
 
 # ====== utilidades de contenido ======
 def tabla(cabeceras, filas, numericas=()):
@@ -1001,7 +1015,7 @@ PRIVACIDAD = f'''<p class="lead">Esta política explica qué información se tra
 <li>Puedes inhabilitar la publicidad personalizada en la <a href="https://adssettings.google.com" rel="noopener" target="_blank">configuración de anuncios de Google</a>.</li>
 <li>También puedes consultar <a href="https://www.aboutads.info" rel="noopener" target="_blank">aboutads.info</a> para inhabilitar cookies de proveedores externos y conocer cómo <a href="https://policies.google.com/technologies/partner-sites" rel="noopener" target="_blank">Google usa los datos de los sitios que usan sus servicios</a>.</li>
 </ul>
-<h2>Tipografías de Google Fonts</h2>
+{ANALITICA}<h2>Tipografías de Google Fonts</h2>
 <p>Las tipografías se cargan desde Google Fonts. Al visitar el sitio, tu navegador se conecta a servidores de Google, que pueden registrar tu dirección IP como parte del servicio.</p>
 <h2>Datos que nos envías por correo</h2>
 <p>Si nos escribes, usamos tu correo y el contenido de tu mensaje solo para responderte y mejorar el sitio. No los vendemos ni los compartimos con terceros.</p>
@@ -1070,7 +1084,7 @@ def render(file, title, desc, h1, tag, body, calc="index.html#inicio", resumen=N
     more = ""
     if more_from:
         more = '<h2>Sigue leyendo</h2>' + cards(more_from) + '<p><a href="blog.html">← Ver todas las guías</a> · <a href="index.html#inicio">Volver a la calculadora</a></p>'
-    out = (TPL.replace("@ADS@", ADS if article else "").replace("@JSONLD@", jsonld).replace("@METALINE@", metaline).replace("@CTA@", cta).replace("@DISC@", disc)
+    out = (TPL.replace("@ADS@", ADS if article else "").replace("@GA@", GA).replace("@JSONLD@", jsonld).replace("@METALINE@", metaline).replace("@CTA@", cta).replace("@DISC@", disc)
               .replace("@RESUMEN@", res).replace("@TOC@", toc).replace("@BODY@", body).replace("@FAQ@", fq).replace("@FUENTES@", fuentes_html(fuentes) if fuentes else "")
               .replace("@MORE@", more).replace("@FOOTGUIAS@", FOOT + '<a href="blog.html">Ver todas las guías</a>')
               .replace("@TITLE@", esc(title)).replace("@DESC@", esc(desc)).replace("@FILE@", file).replace("@DOM@", DOMINIO)
