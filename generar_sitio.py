@@ -25,6 +25,7 @@ CORREO = os.environ.get("CORREO", "")               # correo público de contact
 MARCA = "Calculadora Laboral Colombia"
 ADS_CLIENT = "ca-pub-3761150056608968"
 ACTUALIZADO = "noviembre de 2026"
+REVISADO = "25 de noviembre de 2026"                # fecha de la última revisión de cifras y normas (actualízala al revisar)
 # ===========================
 
 if not CORREO or "@" not in CORREO:
@@ -184,7 +185,7 @@ def faq_html(faq):
 def fuentes_html(fu):
     if not fu: return ""
     li = "".join(f'<li>{t if not u else f"""<a href="{u}" rel="noopener" target="_blank">{t}</a>"""}</li>' for t, u in fu)
-    return f'<h2>Normas y fuentes de referencia</h2><ul class="fuentes">{li}</ul><p class="meta">Las normas pueden cambiar: confirma su vigencia en el Gestor Normativo de la Función Pública o en la entidad competente.</p>'
+    return f'<h2 id="fuentes">Normas y fuentes de referencia</h2><ul class="fuentes">{li}</ul><p class="meta">Las normas pueden cambiar: confirma su vigencia en el Gestor Normativo de la Función Pública o en la entidad competente.</p>'
 
 
 # enlaces oficiales (solo dominios raíz verificables)
@@ -363,7 +364,7 @@ fsp_tab = tabla(["IBC (en SMMLV)", "Aporte al Fondo de Solidaridad"], [["Menos d
 
 PILA = f'''<p class="lead">Si trabajas por cuenta propia o con contrato de prestación de servicios, eres tú quien paga cada mes tu salud, tu pensión y tus riesgos laborales mediante la planilla PILA. Esta guía explica cómo se calcula cada aporte, cuándo se paga y qué errores evitar, con ejemplos con los valores de 2026: salario mínimo (SMMLV) de {f(S)}.</p>
 <h2>Quién debe cotizar como independiente</h2>
-<p>Deben cotizar los independientes y contratistas con ingresos mensuales iguales o superiores a 1 SMMLV. Si tus ingresos netos son menores, la ley no te obliga a cotizar como independiente, aunque puedes consultar con tu EPS o un contador otras opciones de afiliación, como el servicio social complementario BEPS para pensión.</p>
+<p>Deben cotizar los independientes y contratistas con ingresos mensuales iguales o superiores a 1 SMMLV. Si tus ingresos netos son menores y trabajas por días o semanas, desde septiembre de 2026 puedes cotizar pensión de forma proporcional con el <a href="pila-por-semanas-cotizante-76.html">tipo de cotizante 76</a>. También puedes consultar con tu EPS o un contador otras opciones, como el servicio social complementario BEPS para pensión.</p>
 <h2>Paso 1: calcula tus ingresos netos del mes</h2>
 <p>Parte de lo que facturaste o cobraste en el mes, sin IVA. Si tienes costos y gastos directamente relacionados con tu actividad y puedes soportarlos (arriendo de un local de trabajo, insumos, subcontratistas), se restan antes de seguir. La UGPP puede pedirte los soportes en una fiscalización, por eso conviene guardar facturas y cuentas de cobro por varios años.</p>
 <h2>Paso 2: obtén tu IBC (el 40%)</h2>
@@ -416,13 +417,98 @@ ARTICULOS.append(dict(
              "La fecha límite depende de los dos últimos dígitos de tu cédula o NIT."],
     body=PILA,
     faq=[("¿Cuánto debo pagar de seguridad social como independiente?", f"Sobre un IBC del 40% de tus ingresos netos pagas 12,5% de salud y 16% de pensión, más ARL. Con honorarios de {f(5_000_000)} el total de la planilla es {f(e1['total'])} con ARL riesgo I."),
-         ("¿Qué pasa si mis ingresos son menores a un salario mínimo?", "La ley no te obliga a cotizar como independiente. Puedes consultar con tu EPS o un contador otras opciones de afiliación."),
+         ("¿Qué pasa si mis ingresos son menores a un salario mínimo?", "La ley no te obliga a cotizar como independiente. Si trabajas por días o semanas, desde septiembre de 2026 puedes cotizar pensión de forma proporcional con el tipo de cotizante 76 (hay una guía en este sitio). También puedes consultar con tu EPS o un contador otras opciones de afiliación."),
          ("¿Cuándo debo pagar la PILA?", "Mes vencido, entre el día hábil 2 y el 16 del mes siguiente, según los dos últimos dígitos de tu cédula o NIT."),
          ("¿Puedo restar mis gastos antes de calcular el IBC?", "Sí, los costos y gastos directamente relacionados con tu actividad, siempre que puedas soportarlos ante la UGPP."),
          ("¿Quién paga la ARL si soy contratista?", "En riesgos I a III normalmente la paga el contratista y en riesgos IV y V la paga el contratante, que debe afiliarte.")],
     fuentes=[("Ley 100 de 1993 (Sistema de Seguridad Social Integral)", None), ("Ley 797 de 2003 (Fondo de Solidaridad Pensional)", None),
              ("Ley 1955 de 2019, art. 244 (IBC de independientes)", None), ("Decreto 723 de 2013 (afiliación de contratistas a la ARL)", None),
              ("Decreto 1990 de 2016 (plazos de pago de aportes)", None), F_UGPP, F_GN]))
+
+# ------------------------------------------------------------------ PILA POR SEMANAS (COTIZANTE 76)
+sem = []
+for k, (rd, nm) in enumerate([("1 a 7", "1 semana"), ("8 a 14", "2 semanas"), ("15 a 21", "3 semanas"), ("22 a 30", "4 semanas")], 1):
+    ibc_k = math.ceil(S * k / 4)
+    sem.append([rd, nm, f"{k}/4", f(ibc_k), f(up(ibc_k * .16))])
+tabla_sem = tabla(["Días trabajados en el mes", "Semanas", "Fracción del mínimo", "IBC de pensión", "Aporte a pensión (16%)"], sem, numericas=(3, 4))
+arl76 = up(S * 0.00522)
+ej_pen = up(math.ceil(S * 2 / 4) * .16)
+ej_tot = ej_pen + arl76
+ord_piso = pila(S)
+ej76 = tabla(["Concepto", "Valor"], [["Pensión: 2 semanas, IBC de " + f(math.ceil(S * 2 / 4)) + " × 16%", f(ej_pen)],
+                                      ["ARL riesgo I: 0,522% sobre 1 SMMLV (" + f(S) + ")", f(arl76)],
+                                      ["Salud", "$ 0 (no se liquida en este tipo de cotizante)"],
+                                      ["<b>Total de la planilla</b>", f"<b>{f(ej_tot)}</b>"]], numericas=(1,))
+
+C76 = f'''<p class="lead">Si trabajas por días o por semanas y tus ingresos del mes no llegan a un salario mínimo, hasta hace poco tu opción de cotizar a pensión era pagar sobre un mínimo completo. Desde septiembre de 2026 la planilla PILA tiene el tipo de cotizante 76, "Trabajador de tiempo parcial independiente", que permite cotizar a pensión de forma proporcional a lo que trabajaste. Esta guía explica cómo funciona, cuánto se paga con el salario mínimo de 2026 ({f(S)}) y qué conviene confirmar antes de usarlo.</p>
+<div class="box"><p><b>Qué está confirmado y qué conviene verificar</b></p><ul>
+<li><b>Confirmado en el texto oficial:</b> la Resolución 1529 del 24 de julio de 2026 del Ministerio de Salud (Diario Oficial 53.566) crea el tipo "76. Trabajador de tiempo parcial Independiente", con base en el parágrafo 4 del artículo 34 de la Ley 2466 de 2025. En riesgos laborales se reportan 30 días con un salario mínimo de base, y la caja de compensación es voluntaria (0,6% o 2%).</li>
+<li><b>Según la UGPP y la prensa especializada:</b> aplica para ingresos mensuales inferiores a 1 SMMLV, y los operadores deben habilitarlo para pagos desde el 1 de septiembre de 2026 (período de pensión de agosto). La fórmula del IBC por semanas está en el anexo técnico; los valores de la tabla siguen las cifras que han publicado esas fuentes y pueden diferir en pesos por redondeo.</li>
+<li><b>Verifica siempre</b> con tu operador PILA que el tipo 76 esté habilitado para tu período y con tu EPS cómo queda tu salud.</li></ul></div>
+<h2>Qué es el cotizante 76</h2>
+<p>Es una forma de reportar tus aportes en la PILA cuando eres independiente, trabajas solo algunos días o semanas del mes y ganas menos de un salario mínimo. Antes de esta resolución, ese tipo de ingresos se reportaba con el tipo 51, pensado para trabajadores dependientes de tiempo parcial. La idea de la reforma laboral (Ley 2466 de 2025) es que puedas aportar a pensión en proporción a lo que realmente trabajas, sin pagar un mínimo completo cada mes.</p>
+<p>La ley dice que los independientes "podrán" hacer cotizaciones proporcionales: es una opción, no una obligación general.</p>
+<h2>Quién puede usarlo</h2>
+<ul>
+<li>Eres trabajador independiente de verdad, no un empleado con subordinación.</li>
+<li>Trabajas por días o semanas, sin completar el mes.</li>
+<li>Tus ingresos mensuales son inferiores a 1 SMMLV ({f(S)}).</li>
+</ul>
+<p>Según la UGPP, citada por la prensa, quedan por fuera los contratistas por prestación de servicios. Si firmas ese tipo de contrato, confirma tu caso con tu operador PILA o con la UGPP antes de elegir este tipo de cotizante. Si tus ingresos son de 1 SMMLV o más, sigues las reglas ordinarias de la <a href="guia-pila-2026.html">guía de PILA para independientes</a>.</p>
+<h2>Cuánto se paga en pensión</h2>
+<p>El IBC de pensión es una fracción del salario mínimo según las semanas que trabajaste en el mes, y el aporte es el 16% de ese IBC. Cada semana equivale a un cuarto del mínimo:</p>
+{tabla_sem}
+<p class="meta">Cálculo con el salario mínimo de 2026. La PILA redondea cada aporte hacia arriba al múltiplo de $100.</p>
+<h2>Riesgos laborales (ARL)</h2>
+<p>La ARL no es proporcional. Se reportan siempre 30 días y un IBC de 1 SMMLV, así que con riesgo I (0,522%) pagas {f(arl76)} al mes. La paga el trabajador.</p>
+<h2>Salud y caja de compensación</h2>
+<ul>
+<li><b>Salud:</b> el texto oficial de este cotizante solo menciona pensión y riesgos laborales, y la prensa especializada indica que no se liquida aporte de salud. Eso no significa que quedes sin cobertura: debes tener tu afiliación por otra vía (por ejemplo, régimen subsidiado o como beneficiario de otra persona). Pregunta a tu EPS cuál es tu caso.</li>
+<li><b>Caja de compensación:</b> es voluntaria, con tarifa de 0,6% o 2%.</li>
+</ul>
+<h2>Ejemplo: dos semanas de trabajo</h2>
+<p>Trabajaste 12 días en el mes y recibiste unos $ 900.000, menos de un salario mínimo. Tus días caen en el rango de 8 a 14 días, es decir, dos semanas. Con ARL de riesgo I y sin caja de compensación:</p>
+{ej76}
+<p>Como referencia, si cotizaras como independiente ordinario sobre el mínimo (salud, pensión y ARL riesgo I), la planilla sería de {f(ord_piso["total"])}. La diferencia sale de pagar pensión solo por dos semanas y no liquidar salud.</p>
+<h2>Cuándo conviene y cuándo no</h2>
+<ul>
+<li><b>Conviene</b> si trabajas pocos días, tus ingresos no llegan al mínimo y quieres seguir sumando semanas de pensión sin pagar un mes completo.</li>
+<li><b>Mira bien</b> que el aporte es proporcional: al pagar menos, lo que acumulas para tu pensión también es menor. Pregunta a tu fondo de pensiones cómo se te cuentan esas semanas y compara con el servicio social complementario BEPS.</li>
+<li><b>No aplica</b> si tus ingresos del mes alcanzan o superan 1 SMMLV.</li>
+</ul>
+<h2>Paso a paso para pagarlo</h2>
+<ol>
+<li>Cuenta los días que trabajaste en el mes y ubícalos en el rango de la tabla.</li>
+<li>Confirma con tu operador PILA que el tipo de cotizante 76 está habilitado.</li>
+<li>Reporta la novedad de ingreso y, cuando termines, la de retiro: en este tipo de cotizante son obligatorias.</li>
+<li>Conserva los soportes de tus ingresos, los días trabajados y tu afiliación a salud, por si la UGPP te los pide.</li>
+</ol>
+<h2>Errores frecuentes</h2>
+<ul>
+<li>Usar el tipo 76 cuando tus ingresos del mes llegan o superan 1 SMMLV.</li>
+<li>Elegirlo siendo contratista por prestación de servicios sin confirmarlo antes.</li>
+<li>Reportar la ARL en proporción a los días: se reporta con 30 días y 1 SMMLV.</li>
+<li>Olvidar las novedades de ingreso y retiro, que son obligatorias.</li>
+<li>Asumir que queda cubierta tu salud sin revisar tu afiliación con la EPS.</li>
+</ul>'''
+
+ARTICULOS.append(dict(
+    file="pila-por-semanas-cotizante-76.html", tag="Seguridad social", calc="index.html#pila",
+    h1="PILA por días o semanas para independientes (cotizante 76): cuánto se paga en 2026",
+    title="PILA por semanas: cotizante 76 para independientes 2026 | Calculadora Laboral",
+    desc="Cómo cotizar pensión por días o semanas como independiente con ingresos menores a un salario mínimo: tipo 76, tabla de aportes 2026, ARL, salud y un ejemplo.",
+    card="Tipo 76 de la PILA: cotiza pensión por semanas si ganas menos de un mínimo, con tabla de aportes 2026.",
+    resumen=["Desde el 1 de septiembre de 2026 existe el tipo de cotizante 76 para independientes que trabajan por días o semanas y ganan menos de 1 SMMLV.",
+             "La pensión se paga sobre 1/4, 2/4, 3/4 o 4/4 del mínimo según las semanas trabajadas; la ARL se paga siempre sobre 1 SMMLV.",
+             "Confirma con tu operador PILA y tu EPS antes de usarlo, sobre todo si eres contratista por prestación de servicios."],
+    body=C76,
+    faq=[("¿Qué es el cotizante 76 en la PILA?", "Es el tipo \"Trabajador de tiempo parcial independiente\", creado por la Resolución 1529 de 2026 del Ministerio de Salud para quienes trabajan por días o semanas y ganan menos de un salario mínimo."),
+         ("¿Cuánto pago de pensión si trabajé dos semanas?", f"Con el salario mínimo de 2026, el IBC es de {f(math.ceil(S * 2 / 4))} y el aporte del 16% es de {f(ej_pen)}, más la ARL, que se paga siempre sobre un salario mínimo."),
+         ("¿Pago salud con el cotizante 76?", "El texto oficial solo menciona pensión y riesgos laborales, y no se liquida aporte de salud. Debes mantener tu afiliación por otra vía; consulta a tu EPS."),
+         ("¿Lo puedo usar si soy contratista por prestación de servicios?", "Según la UGPP, citada por la prensa, los contratistas por prestación de servicios quedan excluidos. Confirma tu caso con tu operador PILA o con la UGPP."),
+         ("¿Desde cuándo se puede pagar?", "Los operadores de PILA deben habilitarlo para pagos desde el 1 de septiembre de 2026, correspondientes al período de pensión de agosto.")],
+    fuentes=[("Resolución 1529 de 2026 del Ministerio de Salud (texto en el normograma de la Cancillería)", "https://cancilleria.gov.co/normograma/compilacion/docs/resolucion_minsaludps_1529_2026.htm"),
+             ("Ley 2466 de 2025 (reforma laboral), art. 34, parágrafo 4", None), ("Ley 100 de 1993 (Sistema de Seguridad Social Integral)", None), F_UGPP, F_GN]))
 
 # ------------------------------------------------------------------ LIQUIDACIÓN
 bc = SAL + AUX; ces = bc * 180 / 360; inte = ces * 180 * .12 / 360; pr = bc * 180 / 360; vac = SAL / 30 * 7.5; tot1 = ces + inte + pr + vac
@@ -847,18 +933,19 @@ gl = [("AFP", "Administradora de Fondos de Pensiones. Entidad privada que admini
       ("Salario integral", "Salario que incluye el factor prestacional. Se puede pactar desde 13 SMMLV y no genera cesantías ni prima por separado."),
       ("SMMLV", "Salario Mínimo Mensual Legal Vigente."),
       ("UGPP", "Unidad de Gestión Pensional y Parafiscales. Entidad que fiscaliza el pago de aportes a seguridad social."),
+      ("Cotizante 76", "Tipo de cotizante de la PILA para independientes que trabajan por días o semanas y ganan menos de 1 SMMLV. Permite cotizar pensión de forma proporcional (Resolución 1529 de 2026)."),
       ("Paz y salvo", "Documento en que el trabajador declara que no se le adeuda nada. Conviene firmarlo solo después de verificar la liquidación."),
       ("Preaviso", "Aviso previo de terminación de un contrato a término fijo, de al menos 30 días.")]
 GLO = '<p class="lead">Los términos laborales y de seguridad social suelen confundir. Aquí tienes las definiciones más usadas en las guías de este sitio, con enlaces a la explicación completa cuando existe.</p>' + \
       tabla(["Término", "Definición"], [[f"<b>{a}</b>", b] for a, b in sorted(gl, key=lambda x: x[0].lower())]) + \
-      '<h2>Guías relacionadas</h2><ul><li><a href="guia-pila-2026.html">PILA para independientes</a></li><li><a href="como-se-calcula-la-liquidacion.html">Liquidación laboral</a></li><li><a href="cesantias-e-intereses.html">Cesantías e intereses</a></li><li><a href="horas-extra.html">Horas extra y recargos</a></li></ul>'
+      '<h2>Guías relacionadas</h2><ul><li><a href="guia-pila-2026.html">PILA para independientes</a></li><li><a href="pila-por-semanas-cotizante-76.html">PILA por semanas (cotizante 76)</a></li><li><a href="como-se-calcula-la-liquidacion.html">Liquidación laboral</a></li><li><a href="cesantias-e-intereses.html">Cesantías e intereses</a></li><li><a href="horas-extra.html">Horas extra y recargos</a></li></ul>'
 
 ARTICULOS.append(dict(
     file="glosario-laboral.html", tag="Glosario", calc="index.html#inicio",
     h1="Glosario laboral colombiano: términos de seguridad social y nómina",
     title="Glosario laboral de Colombia: IBC, PILA, ARL, cesantías y más | Calculadora Laboral",
     desc="Definiciones claras de los términos laborales más usados en Colombia: IBC, PILA, ARL, UGPP, cesantías, prima, recargo, salario integral y más.",
-    card="22 términos laborales y de seguridad social explicados con claridad.",
+    card="23 términos laborales y de seguridad social explicados con claridad.",
     resumen=None, body=GLO, faq=None,
     fuentes=[("Código Sustantivo del Trabajo", None), F_CST, F_UGPP, F_GN]))
 
@@ -975,7 +1062,8 @@ def render(file, title, desc, h1, tag, body, calc="index.html#inicio", resumen=N
                    "author": {"@type": "Organization", "name": MARCA}, "publisher": {"@type": "Organization", "name": MARCA}})
     if fq_ld: ld.append(fq_ld)
     jsonld = "".join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld)
-    metaline = (f'<p class="meta">Actualizado en {ACTUALIZADO} · {mins} min de lectura · Elaborado por el equipo editorial de {MARCA} (<a href="sobre-nosotros.html">cómo trabajamos</a>)</p>' if article
+    norma = (f' · Norma base: {fuentes[0][0]} (<a href="#fuentes">ver fuentes</a>)' if fuentes else "")
+    metaline = (f'<p class="meta">Revisado el {REVISADO}{norma} · {mins} min de lectura · Elaborado por el equipo editorial de {MARCA} (<a href="sobre-nosotros.html">cómo trabajamos</a>)</p>' if article
                 else f'<p class="meta">Actualizado en {ACTUALIZADO}</p>')
     cta = (f'<div class="cta"><p><b>¿Quieres calcularlo con tus propios valores?</b></p><a class="btn" href="{calc}">Abrir la calculadora interactiva</a></div>' if article else "")
     disc = ('<p class="meta">Información de referencia basada en la normativa vigente en 2026. Es una estimación orientativa y no reemplaza la asesoría de un contador o abogado laboral. Verifica los valores en tu operador PILA, ante la UGPP o el Ministerio del Trabajo.</p>' if article else "")
