@@ -14,11 +14,11 @@
 <meta name="geo.region" content="CO">
 <meta name="geo.placename" content="Bogotá">
 <meta name="google-site-verification" content="7qdNoibKtPxOy219vOG8NfeoOgE4h0JCIF74GzXsZiI">
-<meta name="theme-color" content="#4338CA">
+<meta name="theme-color" content="#101B3B">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3761150056608968" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..700&family=JetBrains+Mono:wght@400..600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Spline+Sans+Mono:wght@400..700&display=swap">
 <script>
 /* Aplica el tema guardado antes de pintar para evitar el parpadeo. */
 try{var t=(JSON.parse(localStorage.getItem("mipila.v1")||"null")||{}).settings;t=t&&t.theme;if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}
@@ -27,7 +27,7 @@ try{var t=(JSON.parse(localStorage.getItem("mipila.v1")||"null")||{}).settings;t
 /* ============ TOKENS ============ */
 :root{
   --bg:#F3F1FA; --surface:#FFFFFF; --field:#F7F6FC; --ink:#171437; --muted:#5E5B80; --line:#E2DFF0;
-  --accent:#4338CA; --accent-ink:#FFFFFF; --accent-soft:#E8E6FB;
+  --accent:#101B3B; --accent-ink:#FFFFFF; --accent-soft:#E8E6FB;
   --good:#0F7B54; --good-soft:#D8F3E7; --warn:#8A5200; --warn-soft:#FCEBC8; --bad:#B42318; --bad-soft:#FDE2DF;
   --hero-a:#3B2FD9; --hero-b:#7B3FE4; --hero-c:#C42C77;
   --display:"Bricolage Grotesque","Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -38,8 +38,8 @@ try{var t=(JSON.parse(localStorage.getItem("mipila.v1")||"null")||{}).settings;t
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0E0C20; --surface:#171433; --field:#110F28; --ink:#ECEAFB; --muted:#9E9BC4; --line:#2B2850;
-    --accent:#9C93FF; --accent-ink:#0E0C20; --accent-soft:#25214F;
+    --bg:#0D1424; --surface:#171433; --field:#110F28; --ink:#ECEAFB; --muted:#9E9BC4; --line:#2B2850;
+    --accent:#9C93FF; --accent-ink:#0D1424; --accent-soft:#25214F;
     --good:#4ADE9F; --good-soft:#0F3326; --warn:#F5B94D; --warn-soft:#3A2A0C; --bad:#FF8F85; --bad-soft:#3E1714;
     --hero-a:#2B22A8; --hero-b:#5B2BB8; --hero-c:#A2276B;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.6);
@@ -47,8 +47,8 @@ try{var t=(JSON.parse(localStorage.getItem("mipila.v1")||"null")||{}).settings;t
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0E0C20; --surface:#171433; --field:#110F28; --ink:#ECEAFB; --muted:#9E9BC4; --line:#2B2850;
-  --accent:#9C93FF; --accent-ink:#0E0C20; --accent-soft:#25214F;
+  --bg:#0D1424; --surface:#171433; --field:#110F28; --ink:#ECEAFB; --muted:#9E9BC4; --line:#2B2850;
+  --accent:#9C93FF; --accent-ink:#0D1424; --accent-soft:#25214F;
   --good:#4ADE9F; --good-soft:#0F3326; --warn:#F5B94D; --warn-soft:#3A2A0C; --bad:#FF8F85; --bad-soft:#3E1714;
   --hero-a:#2B22A8; --hero-b:#5B2BB8; --hero-c:#A2276B;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.6);
@@ -279,6 +279,84 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
 .gh-list li{margin:.3rem 0}
 .guias-home a{color:var(--accent)}
 </style>
+<style id="identidad-colilla">
+/* ===== Identidad "colilla de pago": papel contable, tinta azul, marcador amarillo ===== */
+:root{
+  --bg:#E5EDE2; --surface:#FAFBF7; --field:#F1F5EC; --ink:#101B3B; --muted:#4F5B73; --line:#C3D0BE;
+  --accent:#1B45C9; --accent-ink:#FFFFFF; --accent-soft:#DCE5FA;
+  --good:#17623F; --good-soft:#D6EBDD; --warn:#7A4A00; --warn-soft:#F6E7B8; --bad:#B3261E; --bad-soft:#F7DAD6;
+  --hero-a:#101B3B; --hero-b:#101B3B; --hero-c:#1B45C9; --mark:#F5D547; --on-ink:#FAFBF7;
+  --display:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif; --sans:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Spline Sans Mono",ui-monospace,SFMono-Regular,Menlo,monospace; --shadow:none;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1424; --surface:#151E33; --field:#101829; --ink:#E8ECF7; --muted:#9AA6C2; --line:#2A3552;
+    --accent:#8FA8FF; --accent-ink:#0D1424; --accent-soft:#1E2B52;
+    --good:#5FD39A; --good-soft:#12301F; --warn:#F2C060; --warn-soft:#33270D; --bad:#FF9188; --bad-soft:#3A1713;
+    --hero-a:#E8ECF7; --hero-b:#E8ECF7; --hero-c:#8FA8FF; --mark:#E7C94A; --on-ink:#0D1424; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1424; --surface:#151E33; --field:#101829; --ink:#E8ECF7; --muted:#9AA6C2; --line:#2A3552;
+  --accent:#8FA8FF; --accent-ink:#0D1424; --accent-soft:#1E2B52;
+  --good:#5FD39A; --good-soft:#12301F; --warn:#F2C060; --warn-soft:#33270D; --bad:#FF9188; --bad-soft:#3A1713;
+  --hero-a:#E8ECF7; --hero-b:#E8ECF7; --hero-c:#8FA8FF; --mark:#E7C94A; --on-ink:#0D1424; --shadow:none;
+}
+body{font-size:15.5px}
+h2{font-weight:800;font-stretch:108%;letter-spacing:-.01em}
+.top{background:color-mix(in srgb,var(--bg) 92%,transparent)}
+.logo{border-radius:5px;background:var(--ink);color:var(--on-ink)}
+.brand h1{font-weight:800;font-stretch:112%}
+.brand small,.tag,.kicker,th,.ledger li.sec,.tip b{text-transform:none;letter-spacing:0}
+.brand small{font-size:.72rem}
+.icon-btn{border-radius:6px}
+.tabs button{border-radius:5px}
+.tabs button:hover{background:var(--surface)}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--on-ink)}
+.card,.tile,.guia,.quick button,.bh-list button,.note,.tip,dialog.dlg,.seg,.ad-slot{border-radius:6px}
+.card,.tile{box-shadow:none}
+.tile::before{width:4px}
+.tile b{font-weight:600}
+.btn,input,select,textarea{border-radius:6px}
+.btn{font-weight:700}
+.btn.light{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.glass{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.glass:hover{background:var(--accent-soft)}
+.seg button{border-radius:4px}
+.chip{border-radius:4px}
+.bar,.bar i{border-radius:2px}
+.bar i{background:var(--accent)}
+/* Portada: la tarjeta principal es una colilla con borde inferior perforado */
+.hero{border-radius:6px 6px 0 0;padding:1.5rem 1.5rem 2.1rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--accent);border-bottom:0;box-shadow:none}
+.hero::before{display:none}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;top:auto;width:auto;height:10px;border-radius:0;background:radial-gradient(circle at 8px 10px,var(--bg) 5px,transparent 5.5px) 0 0/16px 10px repeat-x}
+.hero.warn{border-left-color:var(--warn)}
+.hero.bad{border-left-color:var(--bad)}
+.hero.done{border-left-color:var(--good)}
+.hero h2{font-weight:800;font-stretch:116%;letter-spacing:-.018em;line-height:1.06}
+.hero p{opacity:1;color:var(--muted)}
+.count{border-radius:4px;background:var(--mark);color:#101B3B;border:0;backdrop-filter:none;-webkit-backdrop-filter:none}
+.count b{font-family:var(--mono);font-weight:600}
+.count span{opacity:1}
+.hero-form input{border:1px solid var(--ink);background:var(--field);color:var(--ink)}
+/* Recibo: puntos guía y total con marcador */
+.ledger .dots{border-bottom:2px dotted color-mix(in srgb,var(--ink) 40%,transparent)}
+.total{border-top:2px solid var(--ink)}
+.total strong{background:linear-gradient(transparent 58%,color-mix(in srgb,var(--mark) 75%,transparent) 58%);padding:0 .15rem}
+th{border-bottom:2px solid var(--ink)}
+td{border-bottom:1px dotted color-mix(in srgb,var(--ink) 40%,transparent)}
+.cal li,.hrow,.cobro{border-bottom-color:color-mix(in srgb,var(--ink) 25%,transparent)}
+.guia{border-left:4px solid var(--ink)}
+.bh-preview{border-radius:6px;background:var(--ink);color:var(--on-ink)}
+.bh-preview .tag{color:var(--on-ink)}
+.bh-list button[aria-selected="true"]{background:var(--accent-soft);border-color:var(--ink)}
+.guias-home h2{padding-top:1rem;border-top:2px solid var(--ink)}
+dialog.dlg::backdrop{background:rgba(13,20,36,.65)}
+.bh-body{align-items:start}
+.bh-preview{min-height:16rem}
+@media (min-width:721px){.bh-list{max-height:16rem;overflow-y:auto;padding-right:.2rem}}
+</style>
 </head>
 <body>
 
@@ -304,11 +382,11 @@ dialog.dlg::backdrop{background:rgba(10,8,30,.6)}
 
     <section class="card blog-home" id="blog-home" aria-label="Artículos del blog">
       <div class="bh-head">
-        <div><span class="tag">Blog · Guías laborales</span><h2>Aprende tus derechos</h2></div>
-        <a class="btn ghost small" href="blog.html">Ver todas las guías →</a>
+        <div><span class="tag">Guías laborales</span><h2>Aprende tus derechos</h2></div>
+        <a class="btn ghost small" href="blog.html">Ver todas las guías</a>
       </div>
       <div class="bh-body">
-        <a class="bh-preview" id="bh-preview" href="#"><span class="bh-ic" id="bh-ic" aria-hidden="true"></span><span class="tag" id="bh-tag"></span><strong id="bh-title"></strong><span id="bh-desc"></span><em>Leer artículo →</em></a>
+        <a class="bh-preview" id="bh-preview" href="#"><span class="bh-ic" id="bh-ic" aria-hidden="true"></span><span class="tag" id="bh-tag"></span><strong id="bh-title"></strong><span id="bh-desc"></span><em>Leer la guía</em></a>
         <div class="bh-list" id="bh-list" role="tablist" aria-label="Temas del blog"></div>
       </div>
     </section>
@@ -1008,7 +1086,7 @@ function mensajeCobro(c, hoy) {
   function applyTheme() {
     const t = S.settings.theme, root = document.documentElement;
     if (t === "light" || t === "dark") root.setAttribute("data-theme", t); else root.removeAttribute("data-theme");
-    const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = isDark() ? "#0E0C20" : "#4338CA";
+    const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = isDark() ? "#0D1424" : "#101B3B";
     $("aj-tema").value = t;
   }
   $("theme-btn").addEventListener("click", () => { S.settings.theme = isDark() ? "light" : "dark"; applyTheme(); lsSave(); });
