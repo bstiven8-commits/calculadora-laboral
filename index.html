@@ -432,7 +432,20 @@ dialog.dlg::backdrop{background:rgba(13,20,36,.65)}
       </div>
       <div class="card" id="pila-out" aria-live="polite"></div>
     </div>
-  
+
+    <div class="card" id="p76-card" style="margin-top:1rem">
+      <h2>¿Trabajas por días o semanas? Cotizante 76</h2>
+      <p class="hint" style="margin-bottom:1rem">Para independientes que trabajan solo algunos días del mes y ganan menos de 1 salario mínimo. Calcula la pensión proporcional y la ARL; en este tipo de cotizante no se liquida salud. <a href="pila-por-semanas-cotizante-76.html">Lee la guía completa</a>.</p>
+      <div class="grid2">
+        <div>
+          <div class="field"><label for="p76-dias">Días que trabajaste en el mes</label><input type="number" id="p76-dias" min="1" max="30" step="1" value="12" inputmode="numeric"></div>
+          <div class="field"><label for="p76-ing">Ingresos del mes (opcional)</label><div class="money"><span>$</span><input id="p76-ing" inputmode="numeric" autocomplete="off"></div><span class="hint">Solo para avisarte si superas 1 salario mínimo, caso en que no aplica.</span></div>
+          <div class="field"><label for="p76-arl">ARL</label><select id="p76-arl"></select></div>
+        </div>
+        <div id="p76-out" aria-live="polite"></div>
+      </div>
+    </div>
+
     <aside class="guia"><h3>Qué dice la ley para independientes</h3><p>Los trabajadores independientes y contratistas cotizan a salud (12,5%) y pensión (16%) sobre un IBC equivalente al 40% de sus ingresos netos mensuales, con piso de 1 SMMLV y tope de 25 SMMLV (Ley 100 de 1993 y Ley 1955 de 2019, art. 244). Desde 4 SMMLV se suma el Fondo de Solidaridad Pensional (Ley 797 de 2003).</p><p>La ARL es obligatoria en contratos de más de un mes. En riesgos I a III la paga el contratista, y en riesgos IV y V la paga el contratante (Decreto 723 de 2013). Los plazos de la planilla se definen por los dos últimos dígitos del documento (Decreto 1990 de 2016).</p><p>Cómo leer el resultado: el IBC es la base sobre la que se calculan todos los aportes, y el total es lo que debes pagar en tu operador PILA. La UGPP puede verificar que tu IBC sea coherente con tus ingresos reales, así que conserva tus cuentas de cobro y soportes de costos.</p><p class="guia-nota">Información de referencia: verifica la vigencia de las normas citadas antes de tomar decisiones.</p></aside>
   </section>
 
@@ -944,6 +957,18 @@ function mensajeCobro(c, hoy) {
   if (v) { const d = diffDays(hoy, v); cuando = d < 0 ? ", que venció el " + fechaCorta(v) : ", con fecha prevista del " + fechaCorta(v); }
   return saludo + " Te escribo para hacer seguimiento a " + que + " por " + COP(c.valor) + cuando + ". ¿Me confirmas cuándo se realizará? Quedo atento, y gracias por tu ayuda.";
 }
+// Cotizante 76 (Resolución 1529 de 2026): pensión proporcional por semanas + ARL sobre 1 SMMLV; sin salud.
+function calcPila76(dias, arlKey, P, redondeo) {
+  const d = Math.max(1, Math.min(30, Math.round(dias) || 1));
+  const semanas = d <= 7 ? 1 : d <= 14 ? 2 : d <= 21 ? 3 : 4;
+  const r = x => redondeo ? up100(x) : Math.round(x);
+  const ibc = Math.ceil(P.smmlv * semanas / 4);
+  const pension = r(ibc * 0.16);
+  const ar = ARL[arlKey] ? ARL[arlKey].r : 0;
+  const arl = ar ? r(P.smmlv * ar) : 0;
+  const ord = calcPila(P.smmlv, 0, {basePct: 100, arl: arlKey, caja: "0", redondeo: redondeo, arlContratante: false}, P);
+  return {dias: d, semanas, ibc, pension, arlRate: ar, arl, total: pension + arl, ordinario: ord.total};
+}
 // ==END==
 
 /* ==========================================================================
@@ -1164,7 +1189,7 @@ function mensajeCobro(c, hoy) {
     }
     if (c.piso) notes += '<p class="note">El 40% de tus ingresos netos (' + COP(c.ibcBruto) + ') queda por debajo de 1 salario mínimo. Se aplicó el piso de ' + COP(P().smmlv) + '.</p>';
     if (c.tope) notes += '<p class="note">Tu IBC supera 25 salarios mínimos. Se aplicó el tope de ' + COP(25 * P().smmlv) + '.</p>';
-    if (c.bajoMinimo && hon > 0) notes += '<p class="note info">Con ingresos netos menores a 1 salario mínimo la ley no te obliga a cotizar como independiente. Consulta las opciones con tu EPS o contador.</p>';
+    if (c.bajoMinimo && hon > 0) notes += '<p class="note info">Con ingresos netos menores a 1 salario mínimo la ley no te obliga a cotizar como independiente. Si trabajas por días o semanas, mira más abajo la calculadora del cotizante 76, o consulta las opciones con tu EPS o contador.</p>';
     if (pf.arl === "0") notes += '<p class="note info">La ARL es obligatoria si tu contrato dura más de un mes y es de riesgo I a III, o si tu actividad es de riesgo IV o V.</p>';
     const real = mv("pila-real");
     if (real && hon && real !== c.total) notes += '<p class="note info">Pagaste <b>' + COP(real) + '</b> y la calculadora estima ' + COP(c.total) + ' (diferencia de ' + COP(Math.abs(real - c.total)) + '). Puede deberse a tu IBC real, a los días cotizados o al redondeo. En el historial cuenta lo que pagaste.</p>';
@@ -1184,9 +1209,32 @@ function mensajeCobro(c, hoy) {
     $("pila-paid").hidden = isPaid(per, rec);
     const fact = facturadoEn(per);
     $("pila-fact").innerHTML = fact && fact !== hon
-      ? 'En Me deben tienes <b>' + COP(fact) + '</b> facturados en ' + esc(periodLabel(per)) + '. <button class="btn ghost small" type="button" id="pila-usefact">Usar هذا valor</button>' : "";
+      ? 'En Me deben tienes <b>' + COP(fact) + '</b> facturados en ' + esc(periodLabel(per)) + '. <button class="btn ghost small" type="button" id="pila-usefact">Usar este valor</button>' : "";
     return c;
   }
+  function renderP76() {
+    const sel = $("p76-arl");
+    if (!sel.options.length) {
+      sel.innerHTML = ["1", "2", "3", "4", "5"].map(k => '<option value="' + k + '">' + esc(ARL[k].n + " · " + ARL[k].d) + '</option>').join("");
+    }
+    const dias = parseInt($("p76-dias").value, 10), ing = mv("p76-ing");
+    if (!(dias >= 1)) { $("p76-out").innerHTML = '<p class="note info">Escribe cuántos días trabajaste en el mes (de 1 a 30).</p>'; return; }
+    const pf = perfil(), p = P();
+    const c = calcPila76(dias, sel.value, p, pf.redondeo);
+    let notes = "";
+    if (dias > 30) notes += '<p class="note">Se calculó con 30 días, el máximo del mes.</p>';
+    if (ing >= p.smmlv) notes += '<p class="note bad"><b>No aplica:</b> con ingresos de 1 salario mínimo o más cotizas como independiente ordinario (calculadora de arriba).</p>';
+    if (c.semanas === 4) notes += '<p class="note">Con más de 21 días la pensión se calcula sobre 1 salario mínimo completo, igual que en la cotización ordinaria; la diferencia es que no se liquida salud.</p>';
+    notes += '<p class="note info">Caja de compensación: es voluntaria (0,6% o 2%); pide el valor a tu operador PILA. Confirma con tu operador que el tipo 76 esté habilitado y con tu EPS cómo queda tu salud. Si eres contratista por prestación de servicios, confirma antes si aplica.</p>';
+    $("p76-out").innerHTML =
+      '<p class="meta">Trabajaste <b>' + c.dias + (c.dias === 1 ? " día" : " días") + '</b>: se cotizan <b>' + c.semanas + (c.semanas === 1 ? " semana" : " semanas") + '</b> (' + c.semanas + '/4 del mínimo). IBC de pensión: <b>' + COP(c.ibc) + '</b></p>' +
+      '<ul class="ledger">' + row("Pensión", "16% del IBC", c.pension) + row("ARL " + ARL[sel.value].n, PCT(c.arlRate) + " sobre 1 salario mínimo", c.arl) + row("Salud", "No se liquida en este tipo", 0, "sub") + '</ul>' +
+      '<div class="total"><span>Total a liquidar</span><strong>' + COP(c.total) + '</strong></div>' +
+      '<p class="meta">Como independiente ordinario sobre el mínimo (salud, pensión y ARL) serían <b>' + COP(c.ordinario) + '</b>.</p>' +
+      '<div class="notes">' + notes + '</div>';
+  }
+  ["p76-dias", "p76-ing", "p76-arl"].forEach(id => $(id).addEventListener("input", renderP76));
+  $("p76-arl").addEventListener("change", renderP76);
   $("pila-fact").addEventListener("click", e => {
     if (e.target.id !== "pila-usefact") return;
     setMoney("pila-hon", facturadoEn(perVal())); persistInput("pila-hon"); renderPila();
@@ -1647,7 +1695,7 @@ function mensajeCobro(c, hoy) {
     if ("sue-aux" in inp) sueAuxTouched = true;
     if (inp.hexHoras) { try { hexHoras = JSON.parse(inp.hexHoras) || {}; } catch (e) {} }
   }
-  function renderAll() { renderPila(); renderHistory(); renderCobros(); renderSueldo(); renderVac(); renderLiq(); updateHex(); renderCobrar(); renderParRates(); renderHome(); }
+  function renderAll() { renderPila(); renderP76(); renderHistory(); renderCobros(); renderSueldo(); renderVac(); renderLiq(); updateHex(); renderCobrar(); renderParRates(); renderHome(); }
 
   lsLoad(); seedExamples(); restoreInputs(); applyPerfilUI(); applyParamsUI(); applyTheme();
   $("aj-sab").checked = !!S.settings.sabados; $("aj-upto").value = S.settings.paidThrough || ""; setDoc(S.settings.doc);
