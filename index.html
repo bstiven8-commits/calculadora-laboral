@@ -353,6 +353,13 @@ td{border-bottom:1px dotted color-mix(in srgb,var(--ink) 40%,transparent)}
 .bh-preview{border-radius:6px;background:var(--ink);color:var(--on-ink)}
 .bh-preview .tag{color:var(--on-ink)}
 .bh-list button[aria-selected="true"]{background:var(--accent-soft);border-color:var(--ink)}
+/* Modo oscuro: la tarjeta destacada deja de invertirse (antes era un bloque claro) */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .bh-preview{background:#1B2745;color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--accent)}
+  :root:not([data-theme="light"]) .bh-preview .tag{color:var(--accent)}
+}
+:root[data-theme="dark"] .bh-preview{background:#1B2745;color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--accent)}
+:root[data-theme="dark"] .bh-preview .tag{color:var(--accent)}
 .guias-home h2{padding-top:1rem;border-top:2px solid var(--ink)}
 dialog.dlg::backdrop{background:rgba(13,20,36,.65)}
 .bh-body{align-items:start}
